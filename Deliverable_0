@@ -1,9 +1,12 @@
-Team 7 Deliverable 0
+CMPT 370 - Team 7
+Deliverable 0
 
-Part 1
-Team name: Lucky #7
+***Part 1***
+
+Team name:
+Lucky Number Seven
+
 Team members:
-
 Hilderman, Lucas, ldh029@usask.ca
 Long, Austin, xil570@usask.ca
 Morrice, Woody, wam553@usask.ca
@@ -12,8 +15,6 @@ Wang, Hongshen, how791@usask.ca
 Xia, Jeffrey, xix695@usask.ca
 Bunarov, Bojan, bob419@usask.ca
 
-Part 2
+***Part 2***
 
-Rough ideas:
-Our product will be an employee management system for a small to medium company. A website where the employees can communicate with themselves, where the owner can add and remove members (employees) and edit their information. Look at employees schedule, payroll, etc.
-This product can be used by any company that has employees, for example: supermarkets, liquor stores, boutiques, etc. 
+Our product will be an employee management system designed to cater to the needs of small to medium-sized businesses. It will be a web-based platform that facilitates seamless communication among employees, streamlines administrative tasks for management, and provides valuable insights into employee schedules and payroll. Our product will allow companies to manage their workforce efficiently and effortlessly by centralizing employee data, enhancing communication, and simplifying administrative tasks, all within a single user-friendly platform.  While there are existing employee management solutions, our product will set itself apart through its user-friendliness and flexibility. It will be designed to be an accessible, scalable, and cost-efficient choice. Our stakeholder is Mark Diakiw, manager of SaskMade Marketplace, a local gourmet grocery store located on 8th Street. Our project will be developed using a combination of Django Web Framework for Python, HTML, CSS, and SQL.
