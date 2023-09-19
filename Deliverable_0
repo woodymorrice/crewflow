@@ -17,13 +17,22 @@ Bunarov, Bojan, bob419@usask.ca
 
 ***Part 2***
 
+*Product Description*
 Our product will be an employee management system designed to cater to the needs of small to
 medium-sized businesses. It will be a web-based platform that facilitates seamless communication 
 among employees, streamlines administrative tasks for management, and provides valuable insights 
-into employee schedules and payroll. Our product will allow companies to manage their workforce 
+into employee schedules and payroll.
+
+*Needs and Value*
+Our product will allow companies to manage their workforce 
 efficiently and effortlessly by centralizing employee data, enhancing communication, and simplifying 
 administrative tasks, all within a single user-friendly platform.  While there are existing employee 
 management solutions, our product will set itself apart through its user-friendliness and flexibility. 
-It will be designed to be an accessible, scalable, and cost-efficient choice. Our stakeholder is Mark 
-Diakiw, manager of SaskMade Marketplace, a local gourmet grocery store located on 8th Street. Our 
-project will be developed using a combination of Django Web Framework for Python, HTML, CSS, and SQL.
+It will be designed to be an accessible, scalable, and cost-efficient choice. 
+
+*Stakeholder*
+Our stakeholder is Mark 
+Diakiw, manager of SaskMade Marketplace, a local gourmet grocery store located on 8th Street. 
+
+*Tech Requirements*
+Our project will be developed using a combination of Django Web Framework for Python, HTML, CSS, and SQL.
