@@ -1,0 +1,17 @@
+<!--This page will define the base template for the
+entire project and should include any element that
+should appear on every page. All(or most) other
+pages will inherit from this template.-->
+
+<p>
+  <a href="{% url 'main:index' %}">Crewflow</a> 
+  {% if user.is_authenticated %}
+    Hello, {{ user.username }}. 
+    <a href="{% url 'account:logout' %}">Logout</a>
+  {% else %}
+  <a href="{% url 'account:login' %}">Login</a>
+  {% endif %}
+</p>
+
+
+{% block content %}{% endblock content %}

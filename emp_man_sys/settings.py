@@ -31,6 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
+    # Employee Management System apps
+    'main',
+    'account',
+
+    # External Apps
+
+    # Default apps - DONT TOUCH    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
