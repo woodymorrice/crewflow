@@ -4,13 +4,15 @@ should appear on every page. All(or most) other
 pages will inherit from this template.-->
 
 <p>
-  <a href="{% url 'main:index' %}">Crewflow</a> 
+  <a href="{% url 'main:index' %}">Main</a>
+
   {% if user.is_authenticated %}
     Hello, {{ user.username }}. 
     <a href="{% url 'account:logout' %}">Logout</a>
   {% else %}
   <a href="{% url 'account:login' %}">Login</a>
   {% endif %}
+
 </p>
 
 
