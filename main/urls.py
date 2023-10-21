@@ -6,5 +6,6 @@ app_name = 'main'
 urlpatterns = [
         # homepage
         path('', views.index, name='index'),
+        path('announcement/', views.announcement, name='announcement'),
         path('announcement/<int:announcement_id>/', views.announcement_detail, name='announcement_detail'),
 ]

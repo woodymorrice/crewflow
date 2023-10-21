@@ -5,6 +5,7 @@ pages will inherit from this template.-->
 
 <p>
   <a href="{% url 'main:index' %}">Main</a>
+    <a href="{% url 'main:announcement' %}">Announcement</a>
 
   {% if user.is_authenticated %}
     Hello, {{ user.username }}. 

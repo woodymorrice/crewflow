@@ -11,12 +11,4 @@ is a block named "content" -->
     this is mean page
 <p>
 
-<ul>
-    {% for announcement in announcements %}
-        <li>
-            <a href="{% url 'main:announcement_detail' announcement.id %}">{{ announcement.title }}</a>
-        </li>
-    {% endfor %}
-</ul>
-
 {% endblock content %}

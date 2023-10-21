@@ -2,9 +2,14 @@ from django.shortcuts import render
 from .models import Announcement
 
 def index(request):
+    """Landing page for the main app
+        of the project"""
+    return render(request, 'main/index.html')
+
+def announcement(request):
     """Landing page for the main app of the project"""
     announcements = Announcement.objects.all()
-    return render(request, 'main/index.html', {'announcements': announcements})
+    return render(request, 'main/announcement.html', {'announcements': announcements})
 
 
 def announcement_detail(request, announcement_id):

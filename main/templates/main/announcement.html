@@ -1,0 +1,22 @@
+<!-- Pages inherit from the base template by
+declaring extends "base" like this: -->
+{% extends "main/base.html" %}
+
+<!-- Content unique to this page lives inside a
+block like this one. Multiple blocks can be created
+in the base template for different things. This one
+is a block named "content" -->
+{% block content %}
+<p>
+    <h1>Announcement</h1>
+<p>
+
+<ul>
+    {% for announcement in announcements %}
+        <li>
+            <a href="{% url 'main:announcement_detail' announcement.id %}">{{ announcement.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
