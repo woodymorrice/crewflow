@@ -1,20 +1,25 @@
-<!--This page will define the base template for the
-entire project and should include any element that
-should appear on every page. All(or most) other
-pages will inherit from this template.-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Page Title</title>
+    <!-- Include your external CSS file here -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <p>
+        <a href="{% url 'main:index' %}">Main</a>
+        <a href="{% url 'main:announcement' %}">Announcement</a>
 
-<p>
-  <a href="{% url 'main:index' %}">Main</a>
-    <a href="{% url 'main:announcement' %}">Announcement</a>
+        {% if user.is_authenticated %}
+            Hello, {{ user.username }}.
+            <a href="{% url 'account:logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'account:login' %}">Login</a>
+        {% endif %}
+    </p>
 
-  {% if user.is_authenticated %}
-    Hello, {{ user.username }}. 
-    <a href="{% url 'account:logout' %}">Logout</a>
-  {% else %}
-  <a href="{% url 'account:login' %}">Login</a>
-  {% endif %}
-
-</p>
-
-
-{% block content %}{% endblock content %}
+    {% block content %}{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* styles.css */
+.announcement-list {
+  list-style-type: none; /* Remove bullet points */
+}
+
+.announcement {
+    background-color: AliceBlue;  /* Set the background color to light blue */
+    border: 1px solid black;     /* Add a black border with a 1px width */
+    padding: 10px;               /* Add some padding to the div to create space inside */
+}
+
+.announcement.unread::before {
+    content: "";
+    background-color: green;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+}

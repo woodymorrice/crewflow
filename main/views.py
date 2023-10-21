@@ -8,7 +8,9 @@ def index(request):
 
 def announcement(request):
     """Landing page for the main app of the project"""
-    announcements = Announcement.objects.all()
+    sort_by = request.GET.get('sort_by', 'date_added')  # Default to sorting by date
+    announcements = Announcement.objects.all().order_by(sort_by)
+    #announcements = Announcement.objects.all()
     return render(request, 'main/announcement.html', {'announcements': announcements})
 
 

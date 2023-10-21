@@ -1,21 +1,25 @@
-<!-- Pages inherit from the base template by
-declaring extends "base" like this: -->
 {% extends "main/base.html" %}
 
-<!-- Content unique to this page lives inside a
-block like this one. Multiple blocks can be created
-in the base template for different things. This one
-is a block named "content" -->
 {% block content %}
-<p>
-    <h1>Announcement</h1>
-<p>
+<h1>Announcement</h1>
 
-<ul>
+<ul class="announcement-list">
     {% for announcement in announcements %}
-        <li>
-            <a href="{% url 'main:announcement_detail' announcement.id %}">{{ announcement.title }}</a>
-        </li>
+        <div class="announcement {% if not announcement.read %}unread{% endif %}">
+            <li>
+                <a href="{% url 'main:announcement_detail' announcement.id %}">
+                    {{ announcement.title }}
+                </a>
+                <p>Date: {{ announcement.date_added | date:"F j, Y" }}</p>
+                <p>
+                    {% if announcement.content|length > 100 %}
+                        Preview: {{ announcement.content|slice:":100" }}...
+                    {% else %}
+                        Preview: {{ announcement.content }}
+                    {% endif %}
+                </p>
+            </li>
+        </div>
     {% endfor %}
 </ul>
 
