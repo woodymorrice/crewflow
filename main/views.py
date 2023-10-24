@@ -14,8 +14,6 @@ def announcement(request):
     # Retrieve announcements based on sorting and search
     announcements = Announcement.objects.filter(title__icontains=search).order_by(sort_by)
 
-    #announcements = Announcement.objects.all().order_by(sort_by)
-    #announcements = Announcement.objects.all()
     return render(request, 'main/announcement.html', {'announcements': announcements})
 
 
