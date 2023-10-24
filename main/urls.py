@@ -6,4 +6,5 @@ app_name = 'main'
 urlpatterns = [
         # homepage
         path('', views.index, name='index'),
+        path('', views.addEmployee, name='addEmployee')
 ]

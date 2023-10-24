@@ -7,3 +7,7 @@ def index(request):
     """Landing page for the main app
         of the project"""
     return render(request, 'main/index.html')
+
+
+def addEmployee(request):
+    return render(request, 'main/addEmployee.html')
