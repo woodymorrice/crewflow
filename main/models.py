@@ -14,3 +14,15 @@ class Announcement(models.Model):
         return self.title
 
 
+
+class Person(models.Model):
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+    email = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    dateOfEmployment = models.DateField(auto_now=False, auto_now_add=False)
+    postalCode = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name

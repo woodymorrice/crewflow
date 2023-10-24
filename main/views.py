@@ -25,3 +25,6 @@ def announcement_detail(request, announcement_id):
     announcement.save()
 
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
+
+def addEmployee(request):
+    return render(request, 'main/addEmployee.html')
