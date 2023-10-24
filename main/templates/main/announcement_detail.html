@@ -1,14 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Announcement Detail</title>
+    <title>{{ announcement.title }}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Include your CSS file -->
 </head>
 <body>
-    <h1>{{ announcement.title }}</h1>
-    <p>Author: {{ announcement.author }}</p>
-    <p>Date: {{ announcement.date_added }}</p>
-    <p>{{ announcement.content }}</p>
-
+    <div class="announcement-detail">
+        <h1>{{ announcement.title }}</h1>
+        <p class="author">Author: {{ announcement.author }}</p>
+        <p class="date">Date: {{ announcement.date_added | date:"F j, Y" }}</p>
+        <div class="content">{{ announcement.content|safe }}</div>
+    </div>
+    <div class="center-text">
+        <a href="{% url 'main:announcement' %}">Back to Announcements</a>
+    </div>
 </body>
 </html>

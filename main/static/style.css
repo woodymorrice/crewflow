@@ -1,22 +1,86 @@
 /* styles.css */
+
+/* Styles for the Announcement List Page */
 .announcement-list {
-  list-style-type: none; /* Remove bullet points */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .announcement {
-    background-color: AliceBlue;  /* Set the background color to light blue */
-    border: 1px solid black;     /* Add a black border with a 1px width */
-    padding: 10px;               /* Add some padding to the div to create space inside */
+    background-color: AliceBlue;
+    border: 1px solid black;
+    padding: 10px;
+    width: 80%;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.announcement.unread::before {
-    content: "";
-    background-color: green;
-    width: 10px;
-    height: 10px;
+.announcement-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.read-status {
+    display: inline;
+    margin-left: 10px;
+}
+
+.unread-circle {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #00FF00;
     border-radius: 50%;
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translate(0, -50%);
+    margin-right: 5px;
+}
+
+.announcement-date, .announcement-content {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.announcement-content {
+    line-height: 1.5;
+}
+
+.announcement-heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* Styles for the Announcement Detail Page */
+.announcement-detail {
+    width: 80%;
+    margin: 20px auto 0;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.author, .date {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.content {
+    font-size: 16px;
+    color: #333;
+    margin-top: 20px;
+    line-height: 1.5;
 }
