@@ -56,7 +56,26 @@
 .center-text {
     text-align: center;
 }
+/*Styles for filter */
+.announcement-filter {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.announcement-filter form {
+    display: flex;
+    align-items: center;
+}
+
+.announcement-filter label, .announcement-filter select, .announcement-filter input, .announcement-filter input[type="submit"] {
+    margin-right: 10px;
+}
 /* Styles for the Announcement Detail Page */
 .announcement-detail {
     width: 80%;

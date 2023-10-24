@@ -1,6 +1,22 @@
 {% extends "main/base.html" %}
 
 {% block content %}
+<div class="announcement-filter">
+    <form method="get" action="{% url 'main:announcement' %}">
+        <label for="sort_by">Sort by:</label>
+        <select name="sort_by" id="sort_by">
+            <option value="-date_added">Newest</option>
+            <option value="date_added">Oldest</option>
+            <!-- Add more sorting options if needed -->
+        </select>
+
+        <label for="search">Search:</label>
+        <input type="text" name="search" id="search" placeholder="Search announcements">
+
+        <input type="submit" value="Apply">
+    </form>
+</div>
+
 <div class="announcement-list">
     <h1 class="announcement-heading">Announcement</h1>
 
