@@ -5,6 +5,8 @@ from django.contrib import admin
 
 # Import the model
 from .models import Announcement
+from .models import Person
 
 # and register it using this function
 admin.site.register(Announcement)
+admin.site.register(Person)
