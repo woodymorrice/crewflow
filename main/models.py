@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Models/Classes
 class Announcement(models.Model):
@@ -14,7 +15,6 @@ class Announcement(models.Model):
         return self.title
 
 
-
 class Person(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
@@ -26,3 +26,18 @@ class Person(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Employee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE);
+#    first_name = models.CharField(max_length=24);
+#    last_name = models.CharField(max_length=24);
+#    email = models.CharField(max_length=32);
+
+#    def __str__(self):
+#        return self.first_name + self.last_name
+    pass
+
+class Manager(Employee):
+    pass
+
