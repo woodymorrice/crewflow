@@ -19,7 +19,7 @@
 
 <div class="announcement-list">
     <h1 class="announcement-heading">Announcement</h1>
-
+{% if announcements %}
     {% for announcement in announcements %}
     <div class="announcement">
         <a href="{% url 'main:announcement_detail' announcement.id %}" class="announcement-title">{{ announcement.title }}</a>
@@ -38,5 +38,8 @@
         </p>
     </div>
     {% endfor %}
+{% else %}
+    <p>No announcements available.</p>
+{% endif %}
 </div>
 {% endblock content %}
