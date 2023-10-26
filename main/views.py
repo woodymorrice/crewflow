@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Announcement
+from .forms import BlogPostForm
+from .models import BlogPost
+from django.shortcuts import render, redirect
 
 def index(request):
     """Landing page for the main app
@@ -28,3 +31,19 @@ def announcement_detail(request, announcement_id):
 
 def addEmployee(request):
     return render(request, 'main/addEmployee.html')
+
+def blog_list(request):
+    blog_posts = BlogPost.objects.all()
+    return render(request, './main/blog_list.html', {'blog_posts': blog_posts})
+
+
+def create_blog_post(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST)  # Use the form to handle data submission
+        if form.is_valid():
+            form.save()  # Save the new blog post to the database
+            return redirect('blog_list')  # Redirect to the list of blog posts
+    else:
+        form = BlogPostForm()  # Create an empty form for a GET request
+
+    return render(request, './main/addBlog.html', {'form': form})
