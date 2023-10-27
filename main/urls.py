@@ -13,4 +13,7 @@ urlpatterns = [
         path('blog/blog_list/', views.blog_list, name='blog_list'),
 
         path('blog/create/', views.create_blog_post, name='create_blog_post'),
+
+        # profile viewing page
+        path('payroll/', views.employee_payroll, name='payroll'),
 ]
