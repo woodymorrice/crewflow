@@ -29,8 +29,15 @@ def announcement_detail(request, announcement_id):
 
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
 
-def addEmployee(request):
-    return render(request, 'main/addEmployee.html')
+
+def add_employee(request):
+    if request.method == "POST":
+        form = AddEmployee(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            form = AddEmployee()
+    return render(request, 'main/addEmployee.html', {'form': form})
 
 def blog_list(request):
     blog_posts = BlogPost.objects.all()

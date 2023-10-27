@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-
 {% extends "main/base.html" %}
-<html lang="en">
+{% block content %}
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Add Employee</title>
+    <title> Add Employee </title>
 </head>
-<body>
+<style>
+    fieldset {
+        max-width: fit-content;
+    }
 
-    <textarea> Name: </textarea>
+</style>
 
-</body>
+<div class="add_employee">
+    <form method="POST" action="{% url 'main:addEmployee' %}">
+        <fieldset>
+            <legend>Add Employee</legend>
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-primary"> Add Employee to Database </button>
+        </fieldset>
+    </form>
+</div>
 </html>
+
+{% endblock content %}
