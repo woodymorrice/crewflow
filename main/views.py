@@ -3,6 +3,7 @@ from .models import Announcement
 from .forms import BlogPostForm
 from .models import BlogPost
 from django.shortcuts import render, redirect
+from .forms import AddEmployee
 
 def index(request):
     """Landing page for the main app
