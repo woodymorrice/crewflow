@@ -30,7 +30,8 @@ class Employee(models.Model):
 #    email = models.CharField(max_length=32);
 
     def __str__(self):
-        return self.first_name + self.last_name
+        return self.name
+        #return self.first_name + self.last_name
 
 class Manager(Employee):
     pass

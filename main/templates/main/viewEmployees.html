@@ -36,7 +36,21 @@
     </header>
 
     <main>
-
+        <div class="viewEmployees">
+            <table>
+                {% for item in employee_list %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.address }}</td>
+                    <td>{{ item.phone }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.position }}</td>
+                    <td>{{ item.dateOfEmployment }}</td>
+                    <td>{{ item.postalCode }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </main>
 
 </body>

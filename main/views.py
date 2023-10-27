@@ -5,6 +5,7 @@ from .models import BlogPost
 from django.shortcuts import render, redirect
 from .forms import AddEmployee
 from datetime import datetime, date
+from .models import Employee
 
 def index(request):
     """Landing page for the main app
@@ -41,7 +42,9 @@ def add_employee(request):
             form = AddEmployee()
     return render(request, 'main/addEmployee.html', {'form': form})
 
-
+def viewEmployees(request):
+    employee_list = Employee.objects.all()
+    return render(request, 'main/viewEmployees.html', {'employee_list': employee_list})
 
 def blog_list(request):
     blog_posts = BlogPost.objects.all()
