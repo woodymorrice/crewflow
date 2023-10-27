@@ -13,14 +13,16 @@ class AddEmployee(forms.ModelForm):
     class Meta:
         model = Employee
 
-        fields = ["name",
+        fields = ["first_name",
+                  "last_name",
                   "address",
                   "phone",
                   "email",
                   "position",
                   "dateOfEmployment",
                   "postalCode"]
-        labels = {'name': "Employee Full Name",
+        labels = {'first_name': "First Name",
+                  'last_name': "Last_Name",
                   'address': "Employee Home Address",
                   'phone': "Employee Phone Number",
                   'email': "Employee Email Address",

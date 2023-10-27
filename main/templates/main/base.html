@@ -3,14 +3,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Your Page Title</title>
+    <title>Crewflow</title>
     <!-- Include your external CSS file here -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <p>
         <a href="{% url 'main:index' %}">Main</a>
-        <a href="{% url 'main:announcement' %}">Announcement</a>
+        <a href="{% url 'main:announcement' %}">Announcements</a>
+        <a href="{% url 'main:payroll' %}">Payroll</a>
+        <a href="{% url 'main:blog_list' %}">Blogs</a>
 
         {% if user.is_authenticated %}
             Hello, {{ user.username }}.

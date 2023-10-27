@@ -1,9 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Announcement
-from .forms import BlogPostForm
-from .models import BlogPost
-from django.shortcuts import render, redirect
-from .forms import AddEmployee
+from .models import Announcement, BlogPost
+from .forms import BlogPostForm, AddEmployee
+from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from .models import Employee
 
@@ -13,7 +10,7 @@ def index(request):
     return render(request, 'main/index.html')
 
 def announcement(request):
-    """Landing page for the main app of the project"""
+    """Announcement overview"""
     sort_by = request.GET.get('sort_by', '-date_added')  # Default to sorting by date
     search = request.GET.get('search', '')
 
@@ -42,9 +39,11 @@ def add_employee(request):
             form = AddEmployee()
     return render(request, 'main/addEmployee.html', {'form': form})
 
+
 def viewEmployees(request):
     employee_list = Employee.objects.all()
     return render(request, 'main/viewEmployees.html', {'employee_list': employee_list})
+
 
 def blog_list(request):
     blog_posts = BlogPost.objects.all()
@@ -61,6 +60,7 @@ def create_blog_post(request):
         form = BlogPostForm()  # Create an empty form for a GET request
 
     return render(request, './main/addBlog.html', {'form': form})
+
 
 def employee_payroll(request):
     """
@@ -126,5 +126,4 @@ def employee_payroll(request):
     }
 
     return render(request, 'main/payroll.html', context)
-
 
