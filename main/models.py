@@ -15,7 +15,10 @@ class Announcement(models.Model):
         return self.title
 
 
-class Person(models.Model):
+class Employee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE);
+    first_name = models.CharField(max_length=24);
+    last_name = models.CharField(max_length=24);
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
@@ -24,19 +27,12 @@ class Person(models.Model):
     dateOfEmployment = models.DateField(auto_now=False, auto_now_add=False)
     postalCode = models.CharField(max_length=10)
 
-    def __str__(self):
-        return self.name
-
-
-class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE);
 #    first_name = models.CharField(max_length=24);
 #    last_name = models.CharField(max_length=24);
 #    email = models.CharField(max_length=32);
 
-#    def __str__(self):
-#        return self.first_name + self.last_name
-    pass
+    def __str__(self):
+        return self.first_name + self.last_name
 
 class Manager(Employee):
     pass

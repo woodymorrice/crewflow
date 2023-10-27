@@ -41,6 +41,8 @@ def add_employee(request):
             form = AddEmployee()
     return render(request, 'main/addEmployee.html', {'form': form})
 
+
+
 def blog_list(request):
     blog_posts = BlogPost.objects.all()
     return render(request, './main/blog_list.html', {'blog_posts': blog_posts})
@@ -56,3 +58,4 @@ def create_blog_post(request):
         form = BlogPostForm()  # Create an empty form for a GET request
 
     return render(request, './main/addBlog.html', {'form': form})
+
