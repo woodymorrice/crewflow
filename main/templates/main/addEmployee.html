@@ -3,26 +3,26 @@
 {% block content %}
 
 <html>
-<head>
-    <title> Add Employee </title>
-</head>
-<style>
-    fieldset {
-        max-width: fit-content;
-    }
+    <head>
+        <title> Add Employee </title>
+    </head>
+    <style>
+        fieldset {
+            max-width: fit-content;
+        }
 
-</style>
+    </style>
 
-<div class="add_employee">
-    <form method="POST" action="{% url 'main:addEmployee' %}">
-        <fieldset>
-            <legend>Add Employee</legend>
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-primary"> Add Employee to Database </button>
-        </fieldset>
-    </form>
-</div>
+    <div class="add_employee">
+        <form method="POST" action="{% url 'main:addEmployee' %}">
+            <fieldset>
+                <legend>Add Employee</legend>
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary"> Add Employee to Database </button>
+            </fieldset>
+        </form>
+    </div>
 </html>
 
 {% endblock content %}
