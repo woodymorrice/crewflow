@@ -1,6 +1,6 @@
 from django import forms
 from .models import BlogPost
-from .models import Person
+from .models import Employee
 
 
 class BlogPostForm(forms.ModelForm):
@@ -11,7 +11,7 @@ class BlogPostForm(forms.ModelForm):
 
 class AddEmployee(forms.ModelForm):
     class Meta:
-        model = Person
+        model = Employee
 
         fields = ["name",
                   "address",

@@ -17,8 +17,6 @@ class Announcement(models.Model):
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE);
-    first_name = models.CharField(max_length=24);
-    last_name = models.CharField(max_length=24);
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
