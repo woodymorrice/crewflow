@@ -4,6 +4,7 @@ from .forms import BlogPostForm
 from .models import BlogPost
 from django.shortcuts import render, redirect
 from .forms import AddEmployee
+from datetime import datetime, date
 
 def index(request):
     """Landing page for the main app
@@ -36,8 +37,8 @@ def add_employee(request):
         form = AddEmployee(request.POST)
         if form.is_valid():
             form.save()
-    else:
-        form = AddEmployee()
+        else:
+            form = AddEmployee()
     return render(request, 'main/addEmployee.html', {'form': form})
 
 def blog_list(request):

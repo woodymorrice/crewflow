@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payroll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table th, table td {
+            text-align: left;
+            padding: 10px;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .complete-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .complete-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Employee Payroll Management</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Payroll Information</h2>
+            <table>
+                <tr>
+                    <th>Total Payroll Expenses:</th>
+                    <th>Total Deductions:</th>
+                    <th>Net Payments:</th>
+                    <th>Number of Employees:</th>
+                    <th>Average Salary:</th>
+                    <th>Total Bonus Payments:</th>
+                    <th>Payroll Period:</th>
+                    <th>Payroll Status:</th>
+                </tr>
+                <tr>
+                    <td>${{ total_payroll_expenses }}</td>
+                    <td>${{ total_deductions }}</td>
+                    <td>${{ total_net_payments }}</td>
+                    <td>{{ number_of_employees }}</td>
+                    <td>${{ average_salary }}</td>
+                    <td>${{ total_bonus_payments }}</td>
+                    <td>{{ payroll_period }}</td>
+                    <td>
+                        <span class="status">
+                            {% if payroll_status == 'Completed' %}
+                                Completed
+                            {% elif payroll_status == 'Pending Manager Approval' %}
+                                Pending Manager Approval
+                                    <button>Approve Payroll</button>
+                                {% endif %}
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Payroll Analysis</h2>
+            <canvas id="payrollChart"></canvas> <!-- Add charts here using JavaScript or external libraries -->
+        </section>
+    </main>
+</body>
+</html>
