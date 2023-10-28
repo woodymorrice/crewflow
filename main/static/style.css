@@ -1,6 +1,6 @@
 /* styles.css */
 
-/* Styles for the Announcement List Page */
+/* Styles for the Announcement Page */
 .announcement-list {
     margin: 10px auto;
     display: flex;
@@ -13,7 +13,7 @@
     background-color: AliceBlue;
     border: 1px solid black;
     padding: 10px;
-    width: 80%;
+    width: 1000px;
     margin: 10px auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -23,7 +23,6 @@
     font-weight: bold;
     text-decoration: none;
     color: #333;
-    margin-left: 10px;
 }
 
 .read-status {
@@ -62,9 +61,9 @@
 }
 /*Styles for filter */
 .announcement-filter {
-    position: absolute;
-    top: 10px; /* Adjust the top position as needed */
-    right: 10px; /* Adjust the right position as needed */
+    position: fixed; /* Position the div relative to the viewport */
+    top: 20px; /* Adjust the distance from the bottom as needed */
+    right: 20px; /* Adjust the distance from the right as needed */
     background-color: lightsteelblue;
     border: 1px solid #ddd;
     padding: 10px;
@@ -116,6 +115,9 @@ h1 {
     width: 200px; /* Adjust the width as needed */
     float: right; /* Position the div to the right */
     text-align: right; /* Right-align the text inside the div */
+    position: fixed; /* Position the div relative to the viewport */
+    bottom: 20px; /* Adjust the distance from the bottom as needed */
+    right: 20px; /* Adjust the distance from the right as needed */
 }
 
 .addLink a {
@@ -130,6 +132,3 @@ h1 {
 .addLink a:hover {
     background-color: lightblue;
 }
-
-
-

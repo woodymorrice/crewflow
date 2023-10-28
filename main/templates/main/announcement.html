@@ -16,10 +16,6 @@
         <input type="submit" value="Apply">
     </form>
 </div>
-    
-<div class="addLink">
-    <a href="{% url 'main:add_announcement' %}" >Add announcement</a>
-</div>
 
 
 <div class="announcement-list">
@@ -27,12 +23,13 @@
 {% if announcements %}
     {% for announcement in announcements %}
     <div class="announcement">
-        <a href="{% url 'main:announcement_detail' announcement.id %}" class="announcement-title">{{ announcement.title }}</a>
         <div class="read-status">
             {% if not announcement.read %}
                 <span class="unread-circle"></span>
             {% endif %}
         </div>
+        <a href="{% url 'main:announcement_detail' announcement.id %}" class="announcement-title">{{ announcement.title }}</a>
+
         <p class="announcement-date">Date: {{ announcement.date_added | date:"F j, Y" }}</p>
         <p class="announcement-content">
             {% if announcement.content|length > 100 %}
@@ -42,6 +39,13 @@
             {% endif %}
         </p>
     </div>
+
+        {% if user.is_staff %}
+<div class="addLink">
+        <a href="{% url 'main:add_announcement' %}">Add announcement</a>
+</div>
+ {% endif %}
+
     {% endfor %}
 {% else %}
     <p>No announcements available.</p>

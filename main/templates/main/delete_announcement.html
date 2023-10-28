@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<div class="confirmation-message">
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the announcement "{{ announcement.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</div>
+{% endblock content %}
