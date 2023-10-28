@@ -23,6 +23,6 @@ urlpatterns = [
 
         # Add Employees
         path('addEmployee/', views.add_employee, name='addEmployee'),
-        path('viewEmployees', views.viewEmployees, name='viewEmployees'),
+        path('view_employees', views.view_employees, name='viewEmployees'),
 
 ]

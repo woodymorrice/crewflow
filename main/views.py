@@ -59,9 +59,9 @@ def add_employee(request):
 
 
 @login_required(login_url='account/login/')
-def viewEmployees(request):
+def view_employees(request):
     employee_list = Employee.objects.all()
-    return render(request, 'main/viewEmployees.html', {'employee_list': employee_list})
+    return render(request, 'main/view_employees.html', {'employee_list': employee_list})
 
 
 @login_required(login_url='account/login/')
