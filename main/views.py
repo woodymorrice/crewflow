@@ -1,14 +1,18 @@
-from .models import Announcement, BlogPost
+from django.contrib.auth.decorators import login_required
+from .models import Announcement, BlogPost, Employee
 from .forms import BlogPostForm, AddEmployee
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
-from .models import Employee
 
+
+@login_required(login_url='account/login/')
 def index(request):
     """Landing page for the main app
         of the project"""
     return render(request, 'main/index.html')
 
+
+@login_required(login_url='account/login/')
 def announcement(request):
     """Announcement overview"""
     sort_by = request.GET.get('sort_by', '-date_added')  # Default to sorting by date
@@ -20,6 +24,7 @@ def announcement(request):
     return render(request, 'main/announcement.html', {'announcements': announcements})
 
 
+@login_required(login_url='account/login/')
 def announcement_detail(request, announcement_id):
     announcement = get_object_or_404(Announcement, pk=announcement_id)
 
@@ -30,26 +35,30 @@ def announcement_detail(request, announcement_id):
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
 
 
+@login_required(login_url='account/login/')
 def add_employee(request):
     if request.method == "POST":
         form = AddEmployee(request.POST)
         if form.is_valid():
             form.save()
-        else:
-            form = AddEmployee()
+    else:
+        form = AddEmployee()
     return render(request, 'main/addEmployee.html', {'form': form})
 
 
+@login_required(login_url='account/login/')
 def viewEmployees(request):
     employee_list = Employee.objects.all()
     return render(request, 'main/viewEmployees.html', {'employee_list': employee_list})
 
 
+@login_required(login_url='account/login/')
 def blog_list(request):
     blog_posts = BlogPost.objects.all()
     return render(request, './main/blog_list.html', {'blog_posts': blog_posts})
 
 
+@login_required(login_url='account/login/')
 def create_blog_post(request):
     if request.method == 'POST':
         form = BlogPostForm(request.POST)  # Use the form to handle data submission
@@ -62,6 +71,7 @@ def create_blog_post(request):
     return render(request, './main/addBlog.html', {'form': form})
 
 
+@login_required(login_url='account/login/')
 def employee_payroll(request):
     """
     page for view employee profile

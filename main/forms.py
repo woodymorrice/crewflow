@@ -19,7 +19,6 @@ class AddEmployee(forms.ModelForm):
                   "phone",
                   "email",
                   "position",
-                  "dateOfEmployment",
                   "postalCode"]
         labels = {'first_name': "First Name",
                   'last_name': "Last_Name",
@@ -27,6 +26,5 @@ class AddEmployee(forms.ModelForm):
                   'phone': "Employee Phone Number",
                   'email': "Employee Email Address",
                   'position': "Position of Employee",
-                  'dateOfEmployment': "Date of Employment",
                   'postalCode': "Employee Postal Code"}
 

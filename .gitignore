@@ -71,4 +71,7 @@ ENV/
 env.bak/
 venv.bak/
 
-
+# Project Specific
+main/migrations/__pycache__/*
+account/migrations/__pycache__/*
+emp_man_sys/__pycache__/*

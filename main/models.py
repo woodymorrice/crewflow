@@ -23,7 +23,7 @@ class Employee(models.Model):
     phone = models.CharField(max_length=20)
     email = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
-    dateOfEmployment = models.DateField(auto_now=False, auto_now_add=False)
+    dateOfEmployment = models.DateTimeField(auto_now_add=True)
     postalCode = models.CharField(max_length=10)
 
 #    first_name = models.CharField(max_length=24);
@@ -31,8 +31,7 @@ class Employee(models.Model):
 #    email = models.CharField(max_length=32);
 
     def __str__(self):
-        return self.name
-        #return self.first_name + self.last_name
+        return self.first_name + self.last_name
 
 class Manager(Employee):
     pass
@@ -43,3 +42,4 @@ class BlogPost(models.Model):
     content = models.TextField()
     author = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+
