@@ -34,7 +34,7 @@
 
         input[type="text"],
         textarea {
-            width: 100%;
+            width: 96.5%;
             padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
@@ -44,9 +44,11 @@
 
         textarea {
             height: 150px;
+            resize: none; /* This line prevents textarea resizing */
         }
 
         input[type="submit"] {
+            float: right;
             background-color: #007BFF;
             color: #fff;
             border: none;
@@ -54,11 +56,28 @@
             font-size: 18px;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: 10px; /* Add margin-top to create some space */
         }
 
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        input[type="button"] {
+            background-color: orangered;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px; /* Add margin-top to create some space */
+        }
+
+        input[type="button"]:hover {
+            background-color: red;
+        }
+
     </style>
 </head>
 
@@ -70,9 +89,13 @@
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" required>
 
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author">
+
             <label for="content">Content:</label>
             <textarea name="content" id="content" required></textarea>
 
+            <input type="button" value="Cancel" onclick="location.href='{% url 'main:announcement' %}'">
             <input type="submit" value="Create Announcement">
         </form>
     </div>
