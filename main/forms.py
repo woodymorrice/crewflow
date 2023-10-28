@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogPost
+from .models import BlogPost, Announcement
 from .models import Employee
 
 
@@ -28,3 +28,7 @@ class AddEmployee(forms.ModelForm):
                   'position': "Position of Employee",
                   'postalCode': "Employee Postal Code"}
 
+class AnnouncementForm(forms.ModelForm):
+    class Meta:
+        model = Announcement
+        fields = ['title', 'content']

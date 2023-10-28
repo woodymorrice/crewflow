@@ -10,6 +10,7 @@ urlpatterns = [
         # Announcements
         path('announcement/', views.announcement, name='announcement'),
         path('announcement/<int:announcement_id>/', views.announcement_detail, name='announcement_detail'),
+        path('add_announcement/', views.add_announcement, name='add_announcement'),
 
         # Blogs
         path('blog/blog_list/', views.blog_list, name='blog_list'),

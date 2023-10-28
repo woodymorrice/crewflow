@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from .models import Announcement, BlogPost, Employee
-from .forms import BlogPostForm, AddEmployee
+from .forms import BlogPostForm, AddEmployee, AnnouncementForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 
@@ -33,6 +33,18 @@ def announcement_detail(request, announcement_id):
     announcement.save()
 
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
+
+@login_required(login_url='account/login/')
+def add_announcement(request):
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST)
+        if form.is_valid():
+            announcement = form.save()  # This will create a new Announcement object
+            return redirect('main:announcement_detail', announcement.id)  # Redirect to the announcement detail page
+    else:
+        form = AnnouncementForm()
+
+    return render(request, 'main/add_announcement.html', {'form': form})
 
 
 @login_required(login_url='account/login/')

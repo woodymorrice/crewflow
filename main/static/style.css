@@ -2,8 +2,10 @@
 
 /* Styles for the Announcement List Page */
 .announcement-list {
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -12,7 +14,7 @@
     border: 1px solid black;
     padding: 10px;
     width: 80%;
-    margin: 10px 0;
+    margin: 10px auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,6 +43,7 @@
     font-size: 14px;
     color: #666;
     margin: 5px 0;
+    margin-left: 10px;
 }
 
 .announcement-content {
@@ -61,7 +64,7 @@
     position: absolute;
     top: 10px; /* Adjust the top position as needed */
     right: 10px; /* Adjust the right position as needed */
-    background-color: #f0f0f0;
+    background-color: lightsteelblue;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
@@ -76,6 +79,7 @@
 .announcement-filter label, .announcement-filter select, .announcement-filter input, .announcement-filter input[type="submit"] {
     margin-right: 10px;
 }
+
 /* Styles for the Announcement Detail Page */
 .announcement-detail {
     width: 80%;
@@ -103,3 +107,28 @@ h1 {
     margin-top: 20px;
     line-height: 1.5;
 }
+
+/* Styles for the add announcement link */
+
+.addLink {
+    display: inline-block;
+    width: 200px; /* Adjust the width as needed */
+    float: right; /* Position the div to the right */
+    text-align: right; /* Right-align the text inside the div */
+}
+
+.addLink a {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: lightsteelblue;
+    color: black;
+    border-radius: 40px;
+    text-decoration: none;
+}
+
+.addLink a:hover {
+    background-color: lightblue;
+}
+
+
+
