@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from .models import Announcement, BlogPost, Employee
-from .forms import BlogPostForm, AddEmployee, AnnouncementForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
@@ -70,12 +70,13 @@ def delete_announcement(request, announcement_id):
 @login_required(login_url='account/login/')
 def add_employee(request):
     if request.method == "POST":
-        form = AddEmployee(request.POST)
+        form = AddEmployeeForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_user = form.save()
+            return redirect('main:employee_list')
     else:
-        form = AddEmployee()
-    return render(request, 'main/addEmployee.html', {'form': form})
+        form = AddEmployeeForm()
+    return render(request, 'main/add_employee.html', {'form': form})
 
 
 @login_required(login_url='account/login/')

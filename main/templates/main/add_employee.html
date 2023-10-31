@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends "main/base.html" %}
+{% block content %}
+
+<html>
+    <head>
+        <title> Add Employee </title>
+    </head>
+    <style>
+        fieldset {
+            max-width: fit-content;
+        }
+
+    </style>
+
+    <div class="add_employee">
+        <form method="POST" action="{% url 'main:add_employee' %}">
+            <fieldset>
+                <legend>Add Employee</legend>
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary"> Add Employee to Database </button>
+            </fieldset>
+        </form>
+    </div>
+</html>
+
+{% endblock content %}
