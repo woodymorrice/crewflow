@@ -39,8 +39,10 @@ def announcement_detail(request, announcement_id):
 def add_announcement(request):
     if request.method == 'POST':
         form = AnnouncementForm(request.POST)
-        if form.is_valid():
-            announcement = form.save()  # This will create a new Announcement object
+        if request.user.is_authenticated:
+            announcement = form.save(commit=False)
+            announcement.author = request.user
+            announcement.save()
             return redirect('main:announcement_detail', announcement.id)  # Redirect to the announcement detail page
     else:
         form = AnnouncementForm()
@@ -64,7 +66,7 @@ def delete_announcement(request, announcement_id):
         messages.success(request, "Announcement deleted successfully.")
         return redirect('main:announcement')
 
-    return render(request, 'main/delete_confirmation.html', {'announcement': announcement})
+    return render(request, 'main/delete_announcement.html', {'announcement': announcement})
 
 
 @login_required(login_url='account/login/')
