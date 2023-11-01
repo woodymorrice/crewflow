@@ -4,7 +4,12 @@ from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 
+
+def is_admin(user):
+    """Defined user permission"""
+    return user.is_authenticated and user.is_staff
 
 @login_required(login_url='account/login/')
 def index(request):
@@ -36,6 +41,7 @@ def announcement_detail(request, announcement_id):
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
 
 @login_required(login_url='account/login/')
+@user_passes_test(is_admin, login_url='main:announcement')
 def add_announcement(request):
     if request.method == 'POST':
         form = AnnouncementForm(request.POST)
