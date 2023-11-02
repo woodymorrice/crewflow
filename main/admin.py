@@ -1,12 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
+from account.models import User
 
 # Here we define what models can be
 # managed by the administrator
 
 # Import the model
-#from .models import Announcement, Employee, Manager, Person
 from .models import Announcement, Employee, Manager
 
 # These models allow the extra user information
@@ -22,5 +21,4 @@ class UserAdmin(BaseUserAdmin):
 
 # register the model using this function
 admin.site.register(Announcement)
-admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

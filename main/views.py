@@ -1,10 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from .models import Announcement, BlogPost, Employee
-from .forms import BlogPostForm, AddEmployee, AnnouncementForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 
+
+def is_admin(user):
+    """Defined user permission"""
+    return user.is_authenticated and user.is_staff
 
 @login_required(login_url='account/login/')
 def index(request):
@@ -36,11 +41,14 @@ def announcement_detail(request, announcement_id):
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
 
 @login_required(login_url='account/login/')
+@user_passes_test(is_admin, login_url='main:announcement')
 def add_announcement(request):
     if request.method == 'POST':
         form = AnnouncementForm(request.POST)
-        if form.is_valid():
-            announcement = form.save()  # This will create a new Announcement object
+        if request.user.is_authenticated:
+            announcement = form.save(commit=False)
+            announcement.author = request.user
+            announcement.save()
             return redirect('main:announcement_detail', announcement.id)  # Redirect to the announcement detail page
     else:
         form = AnnouncementForm()
@@ -64,18 +72,19 @@ def delete_announcement(request, announcement_id):
         messages.success(request, "Announcement deleted successfully.")
         return redirect('main:announcement')
 
-    return render(request, 'main/delete_confirmation.html', {'announcement': announcement})
+    return render(request, 'main/delete_announcement.html', {'announcement': announcement})
 
 
 @login_required(login_url='account/login/')
 def add_employee(request):
     if request.method == "POST":
-        form = AddEmployee(request.POST)
+        form = AddEmployeeForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_user = form.save()
+            return redirect('main:employee_list')
     else:
-        form = AddEmployee()
-    return render(request, 'main/addEmployee.html', {'form': form})
+        form = AddEmployeeForm()
+    return render(request, 'main/add_employee.html', {'form': form})
 
 
 @login_required(login_url='account/login/')

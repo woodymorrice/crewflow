@@ -1,6 +1,13 @@
 {% extends "main/base.html" %}
 
+
 {% block content %}
+     {% if user.is_staff %}
+<div class="addLink">
+        <a href="{% url 'main:add_announcement' %}">Add announcement</a>
+</div>
+ {% endif %}
+
 <div class="announcement-filter">
     <form method="get" action="{% url 'main:announcement' %}">
         <label for="sort_by">Sort by:</label>
@@ -39,14 +46,8 @@
             {% endif %}
         </p>
     </div>
-
-        {% if user.is_staff %}
-<div class="addLink">
-        <a href="{% url 'main:add_announcement' %}">Add announcement</a>
-</div>
- {% endif %}
-
     {% endfor %}
+
 {% else %}
     <p>No announcements available.</p>
 {% endif %}

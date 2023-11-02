@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+from account.models import User
 
 # Models/Classes
 class Announcement(models.Model):
     title = models.CharField(max_length=255)
     # update this to reflect the user who created it
-    author = models.CharField(max_length=255, default="Management")
+    author = models.ForeignKey(User, on_delete=models.RESTRICT)
     # auto_now_add records date+time when created
     date_added = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
@@ -15,23 +15,20 @@ class Announcement(models.Model):
         return self.title
 
 
-class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE);
-    first_name = models.CharField(max_length=24)
-    last_name = models.CharField(max_length=24)
+class Employee(User):
+    #user = models.OneToOneField(User, on_delete=models.CASCADE);
+    #first_name = models.CharField(max_length=24)
+    #last_name = models.CharField(max_length=24)
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
-    email = models.CharField(max_length=255)
+    #email = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
-    dateOfEmployment = models.DateTimeField(auto_now_add=True)
-    postalCode = models.CharField(max_length=10)
-
-#    first_name = models.CharField(max_length=24);
-#    last_name = models.CharField(max_length=24);
-#    email = models.CharField(max_length=32);
+    date_of_employment = models.DateTimeField(auto_now_add=True)
+    postal_code = models.CharField(max_length=10)
 
     def __str__(self):
         return self.first_name + self.last_name
+
 
 class Manager(Employee):
     pass
@@ -39,7 +36,7 @@ class Manager(Employee):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
+    author = models.ForeignKey(User, on_delete=models.RESTRICT)
     content = models.TextField()
-    author = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
 

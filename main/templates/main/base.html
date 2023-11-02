@@ -9,10 +9,14 @@
 </head>
 <body>
     <p>
-        <a href="{% url 'main:index' %}">Main</a>
+        <a href="{% url 'main:index' %}">Home</a>
         <a href="{% url 'main:announcement' %}">Announcements</a>
-        <a href="{% url 'main:payroll' %}">Payroll</a>
         <a href="{% url 'main:blog_list' %}">Blogs</a>
+        {% if user.role == MANAGER %}
+        <a href="{% url 'main:payroll' %}">Payroll</a>
+        <a href="{% url 'main:view_employees' %}">Payroll</a>
+        {% endif %}
+
 
         {% if user.is_authenticated %}
             Hello, {{ user.username }}.

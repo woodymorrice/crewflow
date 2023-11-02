@@ -23,7 +23,7 @@ urlpatterns = [
         # Manager pages #
 
         # Add Employees
-        path('addEmployee/', views.add_employee, name='addEmployee'),
-        path('view_employees', views.view_employees, name='viewEmployees'),
+        path('add_employee/', views.add_employee, name='add_employee'),
+        path('view_employees', views.view_employees, name='view_employees'),
 
 ]

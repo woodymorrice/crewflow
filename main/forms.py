@@ -1,6 +1,6 @@
 from django import forms
-from .models import BlogPost, Announcement
-from .models import Employee
+from django.contrib.auth.forms import UserCreationForm
+from .models import Announcement, BlogPost, Employee
 
 
 class BlogPostForm(forms.ModelForm):
@@ -9,24 +9,21 @@ class BlogPostForm(forms.ModelForm):
         fields = ['title', 'content']
 
 
-class AddEmployee(forms.ModelForm):
+class AddEmployeeForm(UserCreationForm):
     class Meta:
         model = Employee
-
         fields = ["first_name",
                   "last_name",
                   "address",
                   "phone",
                   "email",
-                  "position",
-                  "postalCode"]
+                  "postal_code"]
         labels = {'first_name': "First Name",
-                  'last_name': "Last_Name",
-                  'address': "Employee Home Address",
-                  'phone': "Employee Phone Number",
-                  'email': "Employee Email Address",
-                  'position': "Position of Employee",
-                  'postalCode': "Employee Postal Code"}
+                  'last_name': "Last Name",
+                  'address': "Home Address",
+                  'phone': "Phone Number",
+                  'email': "Email Address",
+                  'postal_code': "Postal Code"}
 
 class AnnouncementForm(forms.ModelForm):
     class Meta:
