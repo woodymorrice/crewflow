@@ -66,11 +66,10 @@
             margin-top: 10px;
             cursor: pointer;
         }
-
-        button.cancel {
-            background-color: #ccc;
-        }
     </style>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <header>
@@ -78,27 +77,27 @@
 </header>
 <nav>
     <a href="/">Home</a>
-    <a href="/blog">Blog List</a>
+    <a href="/blog/blog_list">Blog List</a>
 </nav>
 <div class="container">
     <h2>Add a New Blog</h2>
-    <form action="http://localhost:8000/api/blog/add/" method="post">
+
+    <form id="blog_form" method="POST" action="{% url 'main:create_blog_post' %}">
         <label for="title">Blog Title</label>
         <label>
-            <input name="title" type="text">
+            <input id="title" name="title" type="text">
         </label>
         <label for="contents">Blog Contents</label>
         <label>
-            <textarea style="height: 150px" name="content"></textarea>
+            <textarea id="content" style="height: 150px" name="content"></textarea>
         </label>
-        <label for="author">Author</label>
-        <label>
-            <input name="author" type="text">
-        </label>
+       {% csrf_token %}
         <button type="submit">Post</button>
-        <a href="http://127.0.0.1:8000/api/blog/list/">View All Blogs</a>
     </form>
-
 </div>
+
+
 </body>
 </html>
+
+

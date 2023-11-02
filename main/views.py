@@ -93,12 +93,15 @@ def blog_list(request):
 @login_required(login_url='account/login/')
 def create_blog_post(request):
     if request.method == 'POST':
-        form = BlogPostForm(request.POST)  # Use the form to handle data submission
+        form = BlogPostForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the new blog post to the database
-            return redirect('blog_list')  # Redirect to the list of blog posts
+            new_blog_post = form.save(commit=False)
+            # Set the author to the currently logged-in user's username
+            new_blog_post.author = request.user.username
+            # Save the blog post with the author
+            new_blog_post.save()
     else:
-        form = BlogPostForm()  # Create an empty form for a GET request
+        form = BlogPostForm()
 
     return render(request, './main/addBlog.html', {'form': form})
 

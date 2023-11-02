@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     # External Apps
 
+
     # Default apps - DONT TOUCH    
     'django.contrib.admin',
     'django.contrib.auth',
