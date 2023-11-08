@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'account',
 
     # External Apps
-
+    'bootstrap5',
 
     # Default apps - DONT TOUCH    
     'django.contrib.admin',
@@ -137,4 +137,4 @@ LOGIN_REDIRECT_URL='account:login'
 LOGOUT_REDIRECT_URL = 'account:login'
 
 #
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'account.Employee'

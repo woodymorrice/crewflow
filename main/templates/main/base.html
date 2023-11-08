@@ -1,31 +1,108 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crewflow</title>
-    <!-- Include your external CSS file here -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> -->
+    <!-- Bootstrap Font Icon CSS -->
+    <link rel="stylesheet"
+     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
 </head>
 <body>
-    <p>
-        <a href="{% url 'main:index' %}">Home</a>
-        <a href="{% url 'main:announcement' %}">Announcements</a>
-        <a href="{% url 'main:blog_list' %}">Blogs</a>
-        {% if user.role == MANAGER %}
-        <a href="{% url 'main:payroll' %}">Payroll</a>
-        <a href="{% url 'main:view_employees' %}">Payroll</a>
-        {% endif %}
-
-
-        {% if user.is_authenticated %}
-            Hello, {{ user.username }}.
-            <a href="{% url 'account:logout' %}">Logout</a>
-        {% else %}
-            <a href="{% url 'account:login' %}">Login</a>
-        {% endif %}
-    </p>
-
-    {% block content %}{% endblock content %}
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-sm-auto bg-light sticky-top">
+            <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light
+                align-items-center sticky-top">
+                <a href="/" class="d-block p-3 link-dark text-decoration-none"
+                 title="" data-bs-toggle="tooltip" data-bs-placement="right"
+                 data-bs-original-title="Icon-only">
+                    <img src="{% static 'main/media/crewflow_small.jpg' %}"
+                     class="img-fluid" alt="Crewflow">
+                </a>
+                <ul class="nav nav-pills nav-flush flex-sm-column flex-row
+                 flex-nowrap mb-auto mx-auto text-center align-items-start">
+                    <li class="nav-item">
+                      <a href="{% url 'main:index'  %}"
+                         class="nav-link py-3 px-2" title="Home"
+                         data-bs-toggle="tooltip" data-bs-placement="right"
+                         data-bs-original-title="Home">
+                            <i class="bi-house fs-5"> Home</i>
+                        </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'main:announcement' %}"
+                         class="nav-link py-3 px-2" title="Announcements"
+                         data-bs-toggle="tooltip" data-bs-placement="right"
+                         data-bs-original-title="Announcements">
+                            <i class="bi-megaphone fs-5"> Announcements</i>
+                        </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'main:blog_list' %}"
+                         class="nav-link py-3 px-2" title="Blogs"
+                         data-bs-toggle="tooltip" data-bs-placement="right"
+                         data-bs-original-title="Blogs">
+                            <i class="bi-journal-text fs-5"> Blogs</i>
+                        </a>
+                    </li>
+                    {% if request.user.role != EMPLOYEE %}
+                    <li>
+                        <a href="{% url 'main:view_employees' %}"
+                         class="nav-link py-3 px-2" title="Employees"
+                         data-bs-toggle="tooltip" data-bs-placement="right"
+                         data-bs-original-title="Employees">
+                            <i class="bi-people fs-5"> Employees</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'main:payroll' %}"
+                         class="nav-link py-3 px-2" title="Payroll"
+                         data-bs-toggle="tooltip" data-bs-placement="right"
+                         data-bs-original-title="Payroll">
+                            <i class="bi-bank fs-5"> Payroll</i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center
+                     justify-content-center p-3 link-dark text-decoration-none
+                     dropdown-toggle" id="dropdownUser3"
+                     data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi-person-circle h4"> {{ user.username }} </i>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow"
+                        aria-labelledby="dropdownUser3">
+                        {% if user.is_authenticated %}
+                        <li><a class="dropdown-item"
+                             href="{% url 'account:logout' %}">Log Out</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item"
+                               href="{% url 'account:login' %}">Log In</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item"
+                                href="#">Profile</a></li>
+                        {% if request.user.role == ADMINISTRATOR %}
+                        <li><a class="dropdown-item"
+                               href="{% url 'admin:index' %}">Admin</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm p-3 min-vh-100">
+          <!-- content -->
+          {% block content %}{% endblock content %}
+        </div>
+    </div>
+</div>
 </body>
 </html>

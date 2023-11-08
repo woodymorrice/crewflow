@@ -2,7 +2,15 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-class User(AbstractUser):
+class Employee(AbstractUser):
+    address = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+    position = models.CharField(max_length=255)
+    date_of_employment = models.DateTimeField(auto_now_add=True)
+    postal_code = models.CharField(max_length=10)
+    can_announce = models.BooleanField(default=False)
+    can_blog = models.BooleanField(default=False)
+
     class Role(models.TextChoices):
         ADMIN = "ADMIN", 'Admin'
         MANAGER = "MANAGER", 'Manager'

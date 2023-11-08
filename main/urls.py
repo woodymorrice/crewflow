@@ -1,3 +1,4 @@
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 from . import views
 
@@ -27,3 +28,4 @@ urlpatterns = [
         path('view_employees', views.view_employees, name='view_employees'),
 
 ]
+urlpatterns += staticfiles_urlpatterns()

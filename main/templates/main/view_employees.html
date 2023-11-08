@@ -24,7 +24,6 @@
         tr {
             text-align: center;
         }
-
         tr:hover {
             background-color: red;
         }
@@ -51,6 +50,8 @@
         }
     </style>
 </head>
+{% extends "main/base.html" %}
+{% block content %}
 <body>
     <header>
         <h1>View Employee(s)</h1>
@@ -86,4 +87,5 @@
     </main>
 
 </body>
+{% endblock content %}
 </html>

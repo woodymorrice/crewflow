@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from .models import Announcement, BlogPost, Employee
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import Announcement, BlogPost
+from account.models import Employee
 
 
 class BlogPostForm(forms.ModelForm):
@@ -12,18 +13,47 @@ class BlogPostForm(forms.ModelForm):
 class AddEmployeeForm(UserCreationForm):
     class Meta:
         model = Employee
-        fields = ["first_name",
+        fields = ["username",
+                  "first_name",
                   "last_name",
+                  "email",
                   "address",
                   "phone",
-                  "email",
-                  "postal_code"]
-        labels = {'first_name': "First Name",
+                  "postal_code",
+                  "can_announce",
+                  "can_blog",
+                  ]
+        labels = {'username': "Username",
+                  'email': "Email",
+                  'first_name': "First Name",
                   'last_name': "Last Name",
                   'address': "Home Address",
                   'phone': "Phone Number",
-                  'email': "Email Address",
+                  'postal_code': "Postal Code",
+                  'can_announce': "Post Announcements?",
+                  'can_blog': "Post Blogs?",
+                  }
+
+
+class ChangeEmployeeForm(UserChangeForm):
+    class Meta:
+        model = Employee
+        fields = ["username",
+                  "first_name",
+                  "last_name",
+                  "email",
+                  "address",
+                  "phone",
+                  "postal_code",
+                  ]
+        labels = {'username': "Username",
+                  'email': "Email",
+                  'first_name': "First Name",
+                  'last_name': "Last Name",
+                  'address': "Home Address",
+                  'phone': "Phone Number",
                   'postal_code': "Postal Code"}
+
 
 class AnnouncementForm(forms.ModelForm):
     class Meta:

@@ -1,10 +1,10 @@
-from django.contrib.auth.decorators import login_required
-from .models import Announcement, BlogPost, Employee
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import Announcement, BlogPost
+from account.models import Employee
 from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
-from django.contrib.auth.decorators import user_passes_test
 
 
 def is_admin(user):
@@ -81,7 +81,7 @@ def add_employee(request):
         form = AddEmployeeForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            return redirect('main:employee_list')
+            return redirect('main:view_employees')
     else:
         form = AddEmployeeForm()
     return render(request, 'main/add_employee.html', {'form': form})
@@ -106,7 +106,7 @@ def create_blog_post(request):
         if form.is_valid():
             new_blog_post = form.save(commit=False)
             # Set the author to the currently logged-in user's username
-            new_blog_post.author = request.user.username
+            new_blog_post.author = request.user
             # Save the blog post with the author
             new_blog_post.save()
     else:
