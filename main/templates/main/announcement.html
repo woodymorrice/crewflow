@@ -1,5 +1,10 @@
 {% extends "main/base.html" %}
 
+{% block head %}
+    {% load static %}
+    <!-- Add custom stylesheets, meta tags, etc. specific to this page -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock head%}
 
 {% block content %}
      {% if user.is_staff %}
