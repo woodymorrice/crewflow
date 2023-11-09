@@ -62,7 +62,7 @@
 /*Styles for filter */
 .announcement-filter {
     position: fixed; /* Position the div relative to the viewport */
-    top: 20px; /* Adjust the distance from the bottom as needed */
+    bottom: 30px; /* Adjust the distance from the bottom as needed */
     right: 20px; /* Adjust the distance from the right as needed */
     background-color: lightsteelblue;
     border: 1px solid #ddd;
@@ -113,11 +113,11 @@ h1 {
 .addLink {
     display: inline-block;
     width: 200px; /* Adjust the width as needed */
-    float: right; /* Position the div to the right */
+    float: left; /* Position the div to the left */
     text-align: right; /* Right-align the text inside the div */
     position: fixed; /* Position the div relative to the viewport */
-    bottom: 20px; /* Adjust the distance from the bottom as needed */
-    right: 20px; /* Adjust the distance from the right as needed */
+    bottom: 30px; /* Adjust the distance from the bottom as needed */
+    left: 220px; /* Adjust the distance from the left as needed */
 }
 
 .addLink a {
