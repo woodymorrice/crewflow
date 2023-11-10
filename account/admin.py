@@ -28,6 +28,7 @@ class EmployeeAdmin(UserAdmin):
                     "phone",
                     "address",
                     "postal_code",
+                    "salary",
                 ),
             },
         ),

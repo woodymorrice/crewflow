@@ -139,6 +139,6 @@ LOGOUT_REDIRECT_URL = 'account:login'
 #
 AUTH_USER_MODEL = 'account.Employee'
 
-# Heroku settings
-import django_heroku
-django_heroku.settings(locals())
+# # Heroku settings
+# import django_heroku
+# django_heroku.settings(locals())
