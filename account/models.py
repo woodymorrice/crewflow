@@ -24,4 +24,4 @@ class Employee(AbstractUser):
     def save(self, *arg, **kwargs):
         if not self.pk:
             self.role = self.base_role
-            return super().save(*arg, **kwargs)
+        return super().save(*arg, **kwargs)
