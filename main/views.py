@@ -37,7 +37,6 @@ def announcement_detail(request, announcement_id):
     announcement = get_object_or_404(Announcement, pk=announcement_id)
 
     # Mark the announcement as read
-    # Mark the announcement as read
     AnnouncementReadStatus.objects.get_or_create(user=request.user, announcement=announcement, defaults={'read': True})
 
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
