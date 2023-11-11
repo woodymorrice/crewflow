@@ -32,11 +32,13 @@
 {% if announcements %}
     {% for announcement in announcements %}
     <div class="announcement">
+
         <div class="read-status">
             {% if not announcement.read %}
                 <span class="unread-circle"></span>
             {% endif %}
         </div>
+
         <a href="{% url 'main:announcement_detail' announcement.id %}" class="announcement-title">{{ announcement.title }}</a>
 
         <p class="announcement-date">Date: {{ announcement.date_added | date:"F j, Y" }}</p>

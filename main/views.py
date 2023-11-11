@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Announcement, BlogPost
+from .models import Announcement, BlogPost, AnnouncementReadStatus
 from account.models import Employee
 from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm
 from django.shortcuts import render, redirect, get_object_or_404
@@ -26,6 +26,8 @@ def announcement(request):
 
     # Retrieve announcements based on sorting and search
     announcements = Announcement.objects.filter(title__icontains=search).order_by(sort_by)
+    for announcement in announcements:
+        announcement.read = AnnouncementReadStatus.objects.filter(user=request.user, announcement=announcement).exists()
 
     return render(request, 'main/announcement.html', {'announcements': announcements})
 
@@ -35,8 +37,8 @@ def announcement_detail(request, announcement_id):
     announcement = get_object_or_404(Announcement, pk=announcement_id)
 
     # Mark the announcement as read
-    announcement.read = True
-    announcement.save()
+    # Mark the announcement as read
+    AnnouncementReadStatus.objects.get_or_create(user=request.user, announcement=announcement, defaults={'read': True})
 
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
 

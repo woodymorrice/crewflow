@@ -9,11 +9,17 @@ class Announcement(models.Model):
     # auto_now_add records date+time when created
     date_added = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
-    read = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
 
+class AnnouncementReadStatus(models.Model):
+    user = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE)
+    read = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('user', 'announcement')
 
 #class Employee(models.Model):
     #address = models.CharField(max_length=255)
