@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Announcement, BlogPost, AnnouncementReadStatus
+from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport
 from account.models import Employee
-from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
@@ -182,3 +182,32 @@ def employee_payroll(request):
 
     return render(request, 'main/payroll.html', context)
 
+#expense report
+@login_required(login_url='account/login/')
+def expense_reports(request):
+    if request.user.is_staff:
+        reports = ExpenseReport.objects.all()
+    else:
+        reports = ExpenseReport.objects.filter(requester=request.user)
+    return render(request, 'main/expense_reports.html', {'reports': reports})
+
+@login_required(login_url='account/login/')
+def add_report(request):
+    if request.method == 'POST':
+        form = ExpenseReportForm(request.POST, request.FILES)
+        if form.is_valid():
+            report = form.save(commit=False)
+            report.requester = request.user
+            report.save()
+            return redirect('main:expense_reports')
+    else:
+        form = ExpenseReportForm()
+    return render(request, 'main/add_report.html', {'form': form})
+
+@login_required(login_url='account/login/')
+def report_detail(request, report_id):
+    report = get_object_or_404(ExpenseReport, pk=report_id)
+    if request.method == 'POST' and  request.user.is_staff:
+        report.status = request.POST.get('status')
+        report.save()
+    return render(request, 'main/report_detail.html', {'report': report})

@@ -42,3 +42,21 @@ class BlogPost(models.Model):
     content = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
 
+
+class ExpenseReport(models.Model):
+    requester = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    detail = models.TextField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    photo = models.ImageField(upload_to='expense_reports/')
+    date_submitted = models.DateTimeField(auto_now_add=True)
+
+    class Status(models.TextChoices):
+        IN_PROCESS = "IN_PROCESS", 'In Process'
+        APPROVED = "APPROVED", 'Approved'
+        DECLINED = "DECLINED", 'Declined'
+
+    status = models.CharField(max_length=24, choices=Status.choices, default=Status.IN_PROCESS)
+
+    def __str__(self):
+        return f'{self.requester.username} - {self.date_submitted}'
+

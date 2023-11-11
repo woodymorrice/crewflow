@@ -1,6 +1,10 @@
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
+
+from emp_man_sys import settings
 from . import views
+
+from django.conf.urls.static import static
 
 # Define url patterns for the main app here
 app_name = 'main'
@@ -27,5 +31,12 @@ urlpatterns = [
         path('add_employee/', views.add_employee, name='add_employee'),
         path('view_employees', views.view_employees, name='view_employees'),
 
+        # expense report
+        path('report_detail/<int:report_id>/', views.report_detail, name='report_detail'),
+        path('expense_reports/', views.expense_reports, name='expense_reports'),
+        path('add_report/', views.add_report, name='add_report'),
+
 ]
 urlpatterns += staticfiles_urlpatterns()
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

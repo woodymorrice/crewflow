@@ -8,7 +8,7 @@ in the base template for different things. This one
 is a block named "content" -->
 {% block content %}
 <p>
-    this is mean page
+    this is home page
 <p>
-
+<a href="{% url 'main:expense_reports'%}">Expense report</a>
 {% endblock content %}

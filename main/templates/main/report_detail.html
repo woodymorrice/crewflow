@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<div>
+    <h2>{{ report.requester.username }}</h2>
+    <p>{{ report.detail }}</p>
+    <img src="{{ report.photo.url }}" alt="Expense photo">
+    <p>Status: {{ report.get_status_display }}</p>
+    {% if request.user.is_staff %}
+        <form method="post">
+            {% csrf_token %}
+
+            <label>
+                <select name="status">
+                    <option value="IN_PROCESS">In Process</option>
+                    <option value="APPROVED">Approved</option>
+                    <option value="DECLINED">Declined</option>
+                </select>
+            </label>
+
+
+            <button type="submit">Update Status</button>
+        </form>
+    {% endif %}
+</div>
+
+    <a href="{% url 'main:expense_reports'%}">Back to Expense Report</a>
+
+{% endblock content %}

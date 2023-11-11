@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "main/base.html" %}
+
+{% block content %}
+    <div>
+    <a href="{% url 'main:add_report'%}">Add report</a>
+    </div>
+
+{% if reports %}
+    {% for report in reports %}
+    <div>
+        <h2>{{ report.requester.username }}</h2>
+        <p>{{ report.detail }}</p>
+        <p>Status: {{ report.get_status_display }}</p>
+        <a href="{% url 'main:report_detail' report.id %}">View Details</a>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <p>No report available.</p>
+{% endif %}
+
+{% endblock content %}
