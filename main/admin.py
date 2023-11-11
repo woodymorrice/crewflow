@@ -8,7 +8,7 @@ from .forms import AddEmployeeForm, ChangeEmployeeForm
 # managed by the administrator
 
 # Import the model
-from .models import Announcement
+from .models import Announcement, ExpenseReport
 
 # These models allow the extra user information
 # to be viewable from the admin panel
@@ -26,5 +26,6 @@ from .models import Announcement
 #    model = Employee
 
 # register the model using this function
-admin.site.register(Announcement)
+#admin.site.register(Announcement)
+#admin.site.register(ExpenseReport)
 #admin.site.register(Employee, EmployeeAdmin)

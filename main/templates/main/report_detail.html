@@ -5,6 +5,7 @@
 <div>
     <h2>{{ report.requester.username }}</h2>
     <p>{{ report.detail }}</p>
+    <p>Amount: ${{report.amount }}</p>
     <img src="{{ report.photo.url }}" alt="Expense photo">
     <p>Status: {{ report.get_status_display }}</p>
     {% if request.user.is_staff %}
