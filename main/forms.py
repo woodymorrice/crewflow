@@ -20,6 +20,7 @@ class AddEmployeeForm(UserCreationForm):
                   "address",
                   "phone",
                   "postal_code",
+                  "salary",
                   "can_announce",
                   "can_blog",
                   ]
@@ -30,8 +31,9 @@ class AddEmployeeForm(UserCreationForm):
                   'address': "Home Address",
                   'phone': "Phone Number",
                   'postal_code': "Postal Code",
+                  'salary': "Salary",
                   'can_announce': "Post Announcements?",
-                  'can_blog': "Post Blogs?",
+                  'can_blog': "Post Blogs?"
                   }
 
 
@@ -45,6 +47,9 @@ class ChangeEmployeeForm(UserChangeForm):
                   "address",
                   "phone",
                   "postal_code",
+                  "salary",
+                  "can_announce",
+                  "can_blog",
                   ]
         labels = {'username': "Username",
                   'email': "Email",
@@ -52,7 +57,11 @@ class ChangeEmployeeForm(UserChangeForm):
                   'last_name': "Last Name",
                   'address': "Home Address",
                   'phone': "Phone Number",
-                  'postal_code': "Postal Code"}
+                  'postal_code': "Postal Code"
+                  'salary': "Salary",
+                  'can_announce': "Post Announcements?",
+                  'can_blog': "Post Blogs?"
+                  }
 
 
 class AnnouncementForm(forms.ModelForm):
