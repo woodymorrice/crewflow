@@ -4,6 +4,7 @@
     {% load static %}
     <!-- Add custom stylesheets, meta tags, etc. specific to this page -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
+
      {% if user.is_staff %}
 <div class="addLink">
         <a href="{% url 'main:add_announcement' %}">Add announcement</a>
@@ -12,19 +13,27 @@
 
 <div class="announcement-filter">
     <form method="get" action="{% url 'main:announcement' %}">
-        <label for="sort_by">Sort by:</label>
-        <select name="sort_by" id="sort_by">
-            <option value="-date_added">Newest</option>
-            <option value="date_added">Oldest</option>
-            <!-- Add more sorting options if needed -->
-        </select>
+        <div>
+            <label for="sort_by">Sort by:</label>
+            <select name="sort_by" id="sort_by">
+                <option value="-date_added">Newest</option>
+                <option value="date_added">Oldest</option>
+                <!-- Add more sorting options if needed -->
+            </select>
+        </div>
 
-        <label for="search">Search:</label>
-        <input type="text" name="search" id="search" placeholder="Search announcements">
+        <div>
+            <label for="search"></label>
+            <input type="text" name="search" id="search" placeholder="Search announcements">
+        </div>
 
-        <input type="submit" value="Apply">
+        <div>
+            <input type="submit" value="Apply">
+        </div>
+
     </form>
 </div>
+
 
 
 <div class="announcement-list">
