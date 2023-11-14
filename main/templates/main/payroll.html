@@ -73,21 +73,15 @@
             <table>
                 <tr>
                     <th>Total Payroll Expenses:</th>
-                    <th>Total Deductions:</th>
                     <th>Net Payments:</th>
                     <th>Number of Employees:</th>
-                    <th>Average Salary:</th>
-                    <th>Total Bonus Payments:</th>
                     <th>Payroll Period:</th>
                     <th>Payroll Status:</th>
                 </tr>
                 <tr>
                     <td>${{ total_payroll_expenses }}</td>
-                    <td>${{ total_deductions }}</td>
-                    <td>${{ total_net_payments }}</td>
+                    <td>${{ total_payroll_expenses }}</td>
                     <td>{{ number_of_employees }}</td>
-                    <td>${{ average_salary }}</td>
-                    <td>${{ total_bonus_payments }}</td>
                     <td>{{ payroll_period }}</td>
                     <td>
                         <span class="status">
@@ -105,7 +99,7 @@
 
         <section>
             <h2>Payroll Analysis</h2>
-            <canvas id="payrollChart"></canvas> <!-- Add charts here using JavaScript or external libraries -->
+            <canvas id="payrollChart"></canvas>
         </section>
     </main>
 </body>
