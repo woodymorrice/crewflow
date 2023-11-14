@@ -1,22 +1,84 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-    <div>
-    <a href="{% url 'main:add_report'%}">Add report</a>
+    <div class="report-list">
+        {% if reports %}
+            {% for report in reports %}
+                <div class="report-item">
+                    <h2>{{ report.requester.username }}</h2>
+                    <p class="report-detail">{{ report.detail }}</p>
+                    <p class="report-status">Status: {{ report.get_status_display }}</p>
+                    <a class="view-details-link" href="{% url 'main:report_detail' report.id %}">View Details</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No report available.</p>
+        {% endif %}
     </div>
 
-{% if reports %}
-    {% for report in reports %}
-    <div>
-        <h2>{{ report.requester.username }}</h2>
-        <p>{{ report.detail }}</p>
-        <p>Status: {{ report.get_status_display }}</p>
-        <a href="{% url 'main:report_detail' report.id %}">View Details</a>
+    <div class="add-report-button">
+        <a href="{% url 'main:add_report'%}">Add Report</a>
     </div>
-    {% endfor %}
 
-    {% else %}
-    <p>No report available.</p>
-{% endif %}
+    <style>
+    /* Place this CSS in your external stylesheet or within a <style> tag in the head of your HTML document */
 
+.report-list {
+    display: grid;
+    gap: 20px;
+}
+
+.report-item {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.report-detail {
+    color: #555;
+}
+
+.report-status {
+    color: #007BFF;
+}
+
+.view-details-link {
+    display: inline-block;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.view-details-link:hover {
+    background-color: #0056b3;
+}
+
+.add-report-button {
+    margin-top: 20px;
+}
+
+.add-report-button a {
+    display: inline-block;
+    background-color: #28a745;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.add-report-button a:hover {
+    background-color: #218838;
+}
+
+    </style>
 {% endblock content %}
