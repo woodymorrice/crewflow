@@ -4,6 +4,7 @@
 
 <div class="expense-report-details">
     <h2>{{ report.requester.username }}</h2>
+    <p class="report-detail">Date: {{ report.date_submitted | date:"F j, Y, g:i a" }}</p>
     <p>{{ report.detail }}</p>
     <p>Amount: ${{report.amount }}</p>
     <div class="expense-photo">

@@ -50,7 +50,7 @@
         <p class="announcement-title"> {{ announcement.title }} </p>
         </div>
 
-        <p class="announcement-date">Date: {{ announcement.date_added | date:"F j, Y" }}</p>
+        <p class="announcement-date">Date: {{ announcement.date_added | date:"F j, Y, g:i a" }}</p>
         <p class="announcement-content">
             {% if announcement.content|length > 100 %}
                 {{ announcement.content|slice:":100" }}...

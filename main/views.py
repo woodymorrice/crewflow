@@ -64,19 +64,13 @@ def delete_announcement(request, announcement_id):
     # Get the announcement object to be deleted
     announcement = get_object_or_404(Announcement, pk=announcement_id)
 
-    # Check if the user is an admin (staff member)
-    if not request.user.is_staff:
-        # Redirect the user to the announcement detail page
-        messages.error(request, "You do not have permission to delete this announcement.")
-        return redirect('main:announcement_detail', announcement_id)
-
     if request.method == 'POST':
         # Delete the announcement
         announcement.delete()
         messages.success(request, "Announcement deleted successfully.")
         return redirect('main:announcement')
 
-    return render(request, 'main/delete_announcement.html', {'announcement': announcement})
+    return render(request, 'main/announcement.html', {'announcement': announcement})
 
 
 @login_required(login_url='account/login/')
