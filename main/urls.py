@@ -35,6 +35,7 @@ urlpatterns = [
         path('report_detail/<int:report_id>/', views.report_detail, name='report_detail'),
         path('expense_reports/', views.expense_reports, name='expense_reports'),
         path('add_report/', views.add_report, name='add_report'),
+        path('delete_report/<int:report_id>/', views.delete_report, name='delete_report'),
 
 ]
 urlpatterns += staticfiles_urlpatterns()

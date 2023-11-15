@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport
 from account.models import Employee
@@ -5,11 +7,12 @@ from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseRepor
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
+from django.conf import settings
 
 
-def is_admin(user):
+def can_anno(user):
     """Defined user permission"""
-    return user.is_authenticated and user.is_staff
+    return user.is_staff or user.can_announce
 
 @login_required(login_url='account/login/')
 def index(request):
@@ -42,7 +45,7 @@ def announcement_detail(request, announcement_id):
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
 
 @login_required(login_url='account/login/')
-@user_passes_test(is_admin, login_url='main:announcement')
+@user_passes_test(can_anno, login_url='main:announcement')
 def add_announcement(request):
     if request.method == 'POST':
         form = AnnouncementForm(request.POST)
@@ -179,3 +182,22 @@ def report_detail(request, report_id):
         report.status = request.POST.get('status')
         report.save()
     return render(request, 'main/report_detail.html', {'report': report})
+
+
+@login_required(login_url='account/login/')
+def delete_report(request, report_id):
+    report = get_object_or_404(ExpenseReport, pk=report_id)
+
+    # Check if the current user has permission to delete this report
+    if request.user.is_staff or request.user == report.requester:
+        if request.method == 'POST':
+            # Delete the associated photo file
+            if report.photo:
+                # Get the path to the photo file and delete it from the storage
+                photo_path = os.path.join(settings.MEDIA_ROOT, str(report.photo))
+                if os.path.exists(photo_path):
+                    os.remove(photo_path)
+
+            # Delete the expense report
+            report.delete()
+            return redirect('main:expense_reports')

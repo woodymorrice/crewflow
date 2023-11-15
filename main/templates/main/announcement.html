@@ -5,7 +5,7 @@
     <!-- Add custom stylesheets, meta tags, etc. specific to this page -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 
-     {% if user.is_staff %}
+     {% if user.is_staff or user.can_announce %}
 <div class="addLink">
         <a href="{% url 'main:add_announcement' %}">Add announcement</a>
 </div>

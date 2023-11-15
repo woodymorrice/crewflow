@@ -20,7 +20,7 @@
         <a href="{% url 'main:announcement' %}">Back to Announcements</a>
     </div>
 
-{% if user.is_staff %}
+{% if user.is_staff or user.can_announce%}
     <div class="center-text">
         <form method="post" action="{% url 'main:delete_announcement' announcement.id %}">
             {% csrf_token %}
