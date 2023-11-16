@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Announcement, BlogPost, ExpenseReport
+from .models import Announcement, BlogPost, ExpenseReport, Comment
 from account.models import Employee
 
 
@@ -9,6 +9,10 @@ class BlogPostForm(forms.ModelForm):
         model = BlogPost
         fields = ['title', 'content']
 
+class BlogCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
 
 class AddEmployeeForm(UserCreationForm):
     class Meta:

@@ -91,10 +91,29 @@ def view_employees(request):
     return render(request, 'main/view_employees.html', {'employee_list': employee_list})
 
 
+
 @login_required(login_url='account/login/')
 def blog_list(request):
     blog_posts = BlogPost.objects.all()
     return render(request, './main/blog_list.html', {'blog_posts': blog_posts})
+
+
+@login_required(login_url='account/login/')
+def view_blog_details(request, post_id):
+    blog_post = get_object_or_404(BlogPost, pk=post_id)
+    if request.method == 'POST':
+        form = BlogCommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.author = request.user
+            new_comment.post = blog_post
+            new_comment.to_reply = post_id
+            new_comment.save()
+    else:
+        form = BlogCommentForm()
+    comments = Comment.objects.filter(to_reply=post_id)
+    return render(request, './main/view_blog_details.html',
+                  {'blog_post': blog_post, 'form': form, 'comments': comments})
 
 
 @login_required(login_url='account/login/')
@@ -111,6 +130,44 @@ def create_blog_post(request):
         form = BlogPostForm()
 
     return render(request, './main/addBlog.html', {'form': form})
+
+
+def editCommentView(request, commentID):
+    comment = Comment.objects.get(id=commentID)
+    if request.method == 'POST':
+        comment.content = request.POST.get("editCommentView")
+        comment.save()
+        return redirect('main:view_blog_details', post_id=comment.to_reply)
+    context = {
+        'comment': comment,
+    }
+    return render(request, 'main/editComment.html', context)
+
+
+def delete_comment(request, commentID):
+    comment = Comment.objects.get(id=commentID)
+    x = comment.to_reply
+    Comment.objects.get(id=commentID).delete()
+    return redirect('main:view_blog_details', post_id=x)
+
+
+def edit_blog_post(request, post_id):
+    blog = BlogPost.objects.get(id=post_id)
+    if request.method == 'POST':
+        blog.content = request.POST.get("edit_blog_post")
+        blog.save()
+        return redirect('main:blog_list')
+    context = {
+        'blog': blog,
+    }
+    return render(request, 'main/editBlog.html', context)
+
+
+def delete_blog(request, post_id):
+    blog = BlogPost.objects.get(id=post_id)
+    BlogPost.objects.get(id=blog.id).delete()
+    return redirect('main:blog_list')
+
 
 
 @login_required(login_url='account/login/')

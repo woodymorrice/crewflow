@@ -1,5 +1,6 @@
 from django.db import models
 from account.models import Employee
+from account.models import User
 
 # Models/Classes
 class Announcement(models.Model):
@@ -38,10 +39,21 @@ class AnnouncementReadStatus(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
-    author = models.ForeignKey(Employee, on_delete=models.RESTRICT)
     content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.RESTRICT)
     date_added = models.DateTimeField(auto_now_add=True)
+    thumbs_up = models.IntegerField(default=0)
+    thumbs_down = models.IntegerField(default=0)
 
+class Comment(models.Model):
+    to_reply = models.IntegerField(null=True, blank=True)
+    content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.RESTRICT)
+    date_added = models.DateTimeField(auto_now_add=True)
+    thumbs_up = models.IntegerField(default=0)
+    thumbs_down = models.IntegerField(default=0)
+    def __str__(self):
+        return f"Comment by {self.author} on Post {self.to_reply or 'main post'}"
 
 class ExpenseReport(models.Model):
     requester = models.ForeignKey(Employee, on_delete=models.CASCADE)
