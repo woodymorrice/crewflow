@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.db import models
 from account.models import Employee
+
 
 # Models/Classes
 class Announcement(models.Model):
@@ -13,6 +15,7 @@ class Announcement(models.Model):
     def __str__(self):
         return self.title
 
+
 class AnnouncementReadStatus(models.Model):
     user = models.ForeignKey(Employee, on_delete=models.CASCADE)
     announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE)
@@ -21,19 +24,20 @@ class AnnouncementReadStatus(models.Model):
     class Meta:
         unique_together = ('user', 'announcement')
 
-#class Employee(models.Model):
-    #address = models.CharField(max_length=255)
-    #phone = models.CharField(max_length=20)
-    #position = models.CharField(max_length=255)
-    #date_of_employment = models.DateTimeField(auto_now_add=True)
-    #postal_code = models.CharField(max_length=10)
 
-    #def __str__(self):
-        #return self.first_name + self.last_name
+# class Employee(models.Model):
+# address = models.CharField(max_length=255)
+# phone = models.CharField(max_length=20)
+# position = models.CharField(max_length=255)
+# date_of_employment = models.DateTimeField(auto_now_add=True)
+# postal_code = models.CharField(max_length=10)
+
+# def __str__(self):
+# return self.first_name + self.last_name
 
 
-#class Manager(Employee):
-    #pass
+# class Manager(Employee):
+# pass
 
 
 class BlogPost(models.Model):
@@ -61,4 +65,31 @@ class ExpenseReport(models.Model):
         return f'{self.requester.username} - {self.date_submitted}'
 
 
+class TimeOffRequest(models.Model):
+    # Fields necessary for the request form
+    employee = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='time_off_requests'
+    )
+    start_date = models.DateField()
+    end_date = models.DateField()
+    reason = models.CharField(max_length=200)
+    details = models.TextField()
 
+    # The status of the Request
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('denied', 'Denied')
+    ]
+
+    # Set the default status to pending
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
+
+    def __str__(self):
+        return f"{self.employee}'s time-off request from {self.start_date} to {self.end_date}"
