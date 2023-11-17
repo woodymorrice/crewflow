@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
 from django.conf import settings
+from django.http import HttpResponseRedirect
 
 
 def can_anno(user):
@@ -273,7 +274,7 @@ def request_time_off(request):
             time_off_request.save()
             messages.success(request,
                              'Your time off request has been submitted and is pending approval')
-            return redirect('main:timeoff_request')
+            return HttpResponseRedirect(request.path_info)
     else:
         form = TimeOffRequestForm()
 
@@ -283,5 +284,4 @@ def request_time_off(request):
         'form': form,
         'requests': requests,
     }
-
-    return render(request, 'timeoff_request.html', context)
+    return render(request, 'main/timeoff_request.html', context)
