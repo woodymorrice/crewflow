@@ -38,6 +38,7 @@ urlpatterns = [
         # Add Employees
         path('add_employee/', views.add_employee, name='add_employee'),
         path('view_employees', views.view_employees, name='view_employees'),
+        path('edit_employee', views.edit_employee, name='edit_employee'),
 
         # expense report
         path('report_detail/<int:report_id>/', views.report_detail, name='report_detail'),

@@ -1,9 +1,9 @@
 import os
 
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment
+from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest
 from account.models import Employee
-from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, BlogCommentForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
@@ -90,8 +90,16 @@ def view_employees(request):
     employee_list = Employee.objects.all()
     return render(request, 'main/view_employees.html', {'employee_list': employee_list})
 
-
-
+@login_required(login_url='account/login/')
+def edit_employee(request):
+    if request.method == "POST":
+        form = ChangeEmployeeForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return redirect('main:view_employees')
+    else:
+        form = ChangeEmployeeForm()
+    return render(request, 'main/edit_employee.html', {'form': form})
 
 @login_required(login_url='account/login/')
 def blog_list(request):
@@ -168,7 +176,6 @@ def delete_blog(request, post_id):
     blog = BlogPost.objects.get(id=post_id)
     BlogPost.objects.get(id=blog.id).delete()
     return redirect('main:blog_list')
-
 
 
 
@@ -255,7 +262,6 @@ def delete_report(request, report_id):
             report.delete()
             return redirect('main:expense_reports')
 
-
 @login_required(login_url='account/login/')
 def request_time_off(request):
     if request.method == 'POST':
@@ -278,4 +284,4 @@ def request_time_off(request):
         'requests': requests,
     }
 
-    return render(request, 'main/timeoff_request.html', context)
+    return render(request, 'timeoff_request.html', context)

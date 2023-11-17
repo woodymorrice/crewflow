@@ -40,8 +40,20 @@
             border-bottom: 5px solid #dddddd;
         }
 
-        main {
+        .button {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 20px 34px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
 
+        main {
             max-width: max-content;
             margin: 20px auto;
             padding: 20px;
@@ -56,6 +68,12 @@
     <header>
         <h1>View Employee(s)</h1>
     </header>
+
+    <div style="text-align: center">
+        <button type="button" class="button">
+            <a href="{% url 'main:add_employee' %}">Add a New Employee</a>
+        </button>
+    </div>
 
     <main>
         <div class="view_employees">
