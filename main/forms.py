@@ -28,7 +28,6 @@ class AddEmployeeForm(UserCreationForm):
                   "postal_code",
                   "can_announce",
                   "can_blog",
-                  "can_schedule",
                   "salary",
                   "role",
                   ]
@@ -41,7 +40,6 @@ class AddEmployeeForm(UserCreationForm):
                   'postal_code': "Postal Code",
                   'can_announce': "Post Announcements?",
                   'can_blog': "Post Blogs?",
-                  'can_schedule': "Can Schedule",
                   'salary': "Salary",
                   'role': "Role",
                   }
@@ -59,7 +57,6 @@ class ChangeEmployeeForm(UserChangeForm):
                   "postal_code",
                   "can_announce",
                   "can_blog",
-                  "can_schedule",
                   "salary",
                   ]
         labels = {'username': "Username",
@@ -71,7 +68,6 @@ class ChangeEmployeeForm(UserChangeForm):
                   'postal_code': "Postal Code",
                   'can_announce': "Post Announcements?",
                   'can_blog': "Post Blogs?",
-                  'can_schedule': "Can Schedule",
                   'salary': "Salary",
                   }
 
