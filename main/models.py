@@ -46,6 +46,15 @@ class BlogPost(models.Model):
     content = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
 
+class Comment(models.Model):
+    to_reply = models.IntegerField(null=True, blank=True)
+    content = models.TextField()
+    author = models.ForeignKey(Employee, on_delete=models.RESTRICT)
+    date_added = models.DateTimeField(auto_now_add=True)
+    thumbs_up = models.IntegerField(default=0)
+    thumbs_down = models.IntegerField(default=0)
+    def __str__(self):
+        return f"Comment by {self.author} on Post {self.to_reply or 'main post'}"
 
 class ExpenseReport(models.Model):
     requester = models.ForeignKey(Employee, on_delete=models.CASCADE)
