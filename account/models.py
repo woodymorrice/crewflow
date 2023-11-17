@@ -10,6 +10,7 @@ class Employee(AbstractUser):
     postal_code = models.CharField(max_length=10)
     can_announce = models.BooleanField(default=False)
     can_blog = models.BooleanField(default=False)
+    can_schedule = models.BooleanField(default=False)
     salary = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
     class Role(models.TextChoices):
