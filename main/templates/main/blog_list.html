@@ -3,56 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <title>Blog List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Define the style for the blog post boxes */
         .blog-post {
             border: 1px solid #ccc;
             padding: 10px;
             margin: 10px 0;
             position: relative;
+
         }
 
-        /* Define the style for the reply button */
-        .reply-button {
-            display: none;
-        }
-
-        /* Define the style for the buttons when hovering over the blog post */
-        .blog-post:hover .reply-button {
+        .blog-post:hover {
             display: block;
         }
 
-        .create-blog-link {
+        .create-blog-link, .Home {
             position: absolute;
             top: 10px;
             right: 10px;
         }
+
+        .Home {
+            margin-right: 120px;
+        }
+
+        .action-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: none;
+        }
+
+        .blog-post:hover .action-buttons {
+            display: block;
+        }
+
+        .action-buttons  a {
+            margin-right: 20px;
+        }
+        .like-counter, .dislike-counter{
+
+            margin-right: 20px;
+
+        }
+
     </style>
 </head>
-{% extends "main/base.html" %}
-{% block content %}
 <body>
 
 <h1>Blog Posts</h1>
-
-<a class="create-blog-link" href={% url 'main:create_blog_post' %}>Create a Blog</a>
-
-
+<a class="create-blog-link" href="{% url 'main:create_blog_post' %}">Create a Blog</a>
+<a class="Home" href="{% url 'main:index' %}">Home</a>
 
 <ul>
     {% for post in blog_posts %}
+
         <ul>
-            <div class="blog-post">
-                <h2>{{ post.title }}</h2>
-                <p>Author: {{ post.author }}</p>
-                <p>Created at: {{ post.created_at }}</p>
-                <button class="reply-button">Reply</button>
+              <div class="blog-post">
+
+                <div class="action-buttons">
+
+                    <i class="like-icon far fa-thumbs-up"></i>
+                   <span class="like-counter">{{ post.thumbs_up }}</span>
+                   <i class="dislike-icon far fa-thumbs-down"></i>
+                   <span class="dislike-counter">{{ post.thumbs_down }}</span>
+
+                    <a href="{% url 'main:view_blog_details' post.id %}">Reply</a>
+                    {% if user.is_authenticated and user == post.author%}
+                    <a href="{% url 'main:edit_blog_post' post.id %}">Edit</a>
+                    <a href="{% url 'main:delete_blog' post.id %}">Delete</a>
+                    {% endif %}
+                </div>
+
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content }}</p>
+                <p>Created by: {{ post.author }}</p>
+                <p>Created at: {{ post.date_added }}</p>
             </div>
         </ul>
     {% endfor %}
 </ul>
 
 </body>
-{% endblock content %}
 </html>
-

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .blog-details {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .blog-content {
+            margin-top: 10px;
+        }
+
+        .blog-author,
+        .blog-date {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .like-dislike-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .like-icon,
+        .dislike-icon {
+            font-size: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .like-counter,
+        .dislike-counter {
+            margin-right: 15px;
+        }
+
+        .comment {
+            border-top: 1px solid #ddd;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        .comment p {
+            margin: 0;
+        }
+
+        .edit-link {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .comment-form {
+            margin-top: 20px;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="blog-details">
+    <h1 class="blog-title">{{ blog_post.title }}</h1>
+    <p class="blog-content">{{ blog_post.content }}</p>
+    <p class="blog-author">Author: {{ blog_post.author }}</p>
+    <p class="blog-date">Created at: {{ blog_post.date_added }}</p>
+
+{#    <!-- Like, dislike, and reply buttons -->#}
+{#    <div class="like-dislike-container">#}
+{#        <i class="like-icon far fa-thumbs-up" onclick="likeBlogPost()"></i>#}
+{#        <span class="like-counter">{{ blog_post.thumbs_up }}</span>#}
+{#        <i class="dislike-icon far fa-thumbs-down" onclick="dislikeBlogPost()"></i>#}
+{#        <span class="dislike-counter">{{ blog_post.thumbs_down }}</span>#}
+{#    </div>#}
+
+       <!-- Comment form -->
+    <form method="post" class="comment-form">
+        {% csrf_token %}
+        <label>
+            <input type="text" name="content" placeholder="Your comment" required>
+             <input type="hidden" name="thumbs_up" id="thumbsUpCount" value="0">
+             <input type="hidden" name="thumbs_down" id="thumbsDownCount" value="0">
+        </label>
+        <button type="submit">Submit Comment</button>
+    </form>
+
+    <!-- Back to blog list link -->
+    <a class="back-link" href="{% url 'main:blog_list' %}">Back to Blog List</a>
+
+    <!-- Display comments -->
+    {% for comment in comments reversed %}
+        <div class="comment">
+            <p>{{ comment.content }}</p>
+            <p>Author: {{ comment.author.username }}</p>
+
+           <p>Created at: {{ comment.date_added }}
+            {% if user.is_authenticated and user == comment.author%}
+                <a class="edit-link" href="{% url 'main:editCommentView' commentID=comment.id %}">Edit</a>
+                <a class="delete-link" href="{% url 'main:deleteComment' commentID=comment.id %}">Delete</a>
+            {% endif %}
+        </p>
+
+           <div class="like-dislike-container">
+        <i class="like-icon far fa-thumbs-up" onclick="likeBlogPost()"></i>
+        <span class="like-counter">{{ comment.thumbs_up }}</span>
+        <i class="dislike-icon far fa-thumbs-down" onclick="dislikeBlogPost()"></i>
+        <span class="dislike-counter">{{ comment.thumbs_down }}</span>
+    </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+<script>
+    // Initialize like and dislike counters
+    let likeCount = 0;
+    let dislikeCount = 0;
+
+
+    function showReplyForm() {
+        document.getElementById("replyForm").style.display = "block";
+    }
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
