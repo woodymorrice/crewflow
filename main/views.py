@@ -1,9 +1,9 @@
 import os
 
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport
+from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest
 from account.models import Employee
-from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
@@ -195,3 +195,27 @@ def delete_report(request, report_id):
             # Delete the expense report
             report.delete()
             return redirect('main:expense_reports')
+
+@login_required(login_url='account/login/')
+def request_time_off(request):
+    if request.method == 'POST':
+        form = TimeOffRequestForm(request.POST)
+        if form.is_valid():
+            time_off_request = form.save(commit=False)
+            time_off_request.employee = request.user
+            time_off_request.status = 'pending'
+            time_off_request.save()
+            messages.success(request,
+                             'Your time off request has been submitted and is pending approval')
+            return redirect('main:timeoff_request')
+    else:
+        form = TimeOffRequestForm()
+
+    requests = TimeOffRequest.objects.filter(employee=request.user)
+
+    context = {
+        'form': form,
+        'requests': requests,
+    }
+
+    return render(request, 'timeoff_request.html', context)

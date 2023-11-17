@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Announcement, BlogPost, ExpenseReport
+from .models import Announcement, BlogPost, ExpenseReport, TimeOffRequest
 from account.models import Employee
 
 
@@ -50,6 +50,7 @@ class ChangeEmployeeForm(UserChangeForm):
                   "can_announce",
                   "can_blog",
                   "salary",
+                  "timeoff_request"
                   ]
         labels = {'username': "Username",
                   'email': "Email",
@@ -61,6 +62,7 @@ class ChangeEmployeeForm(UserChangeForm):
                   'can_announce': "Post Announcements?",
                   'can_blog': "Post Blogs?",
                   'salary': "Salary",
+                  'timeoff_request': "Time Off Request"
                   }
 
 
@@ -73,3 +75,16 @@ class ExpenseReportForm(forms.ModelForm):
     class Meta:
         model = ExpenseReport
         fields = ['detail', 'amount', 'photo']
+
+class TimeOffRequestForm(forms.ModelForm):
+    class Meta:
+        model = TimeOffRequest
+        fields = ['start_date',
+                  'end_date',
+                  'reason',
+                  'details',]
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+            'reason': forms.Select(choices=TimeOffRequest.STATUS_CHOICES)
+        }

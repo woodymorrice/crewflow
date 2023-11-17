@@ -1,5 +1,6 @@
 from django.db import models
 from account.models import Employee
+from django.conf import settings
 
 # Models/Classes
 class Announcement(models.Model):
@@ -60,3 +61,33 @@ class ExpenseReport(models.Model):
     def __str__(self):
         return f'{self.requester.username} - {self.date_submitted}'
 
+
+class TimeOffRequest(models.Model):
+    # Fields necessary for the request form
+    employee = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='time_off_requests'
+    )
+    start_date = models.DateField()
+    end_date = models.DateField()
+    reason = models.CharField(max_length=200)
+    details = models.TextField()
+
+    # The status of the Request
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('denied', 'Denied')
+    ]
+
+    # Set the default status to pending
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
+
+    def __str__(self):
+        return (f"{self.employee}'s time-off request from {self.start_date} to "
+                f"{self.end_date}")
