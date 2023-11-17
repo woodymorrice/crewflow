@@ -44,7 +44,7 @@ urlpatterns = [
         path('delete_report/<int:report_id>/', views.delete_report, name='delete_report'),
 
         # Time Off Request
-        path('request-time-off/', views.request_time_off, name='request_time_off')
+        path('request_time_off/', views.request_time_off, name='request_time_off')
 
 ]
 urlpatterns += staticfiles_urlpatterns()

@@ -253,6 +253,7 @@ def delete_report(request, report_id):
             report.delete()
             return redirect('main:expense_reports')
 
+
 @login_required(login_url='account/login/')
 def request_time_off(request):
     if request.method == 'POST':
@@ -275,4 +276,4 @@ def request_time_off(request):
         'requests': requests,
     }
 
-    return render(request, 'timeoff_request.html', context)
+    return render(request, 'main/timeoff_request.html', context)
