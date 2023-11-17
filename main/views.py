@@ -1,9 +1,9 @@
 import os
 
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest
+from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment
 from account.models import Employee
-from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, BlogCommentForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
@@ -92,6 +92,7 @@ def view_employees(request):
 
 
 
+
 @login_required(login_url='account/login/')
 def blog_list(request):
     blog_posts = BlogPost.objects.all()
@@ -167,6 +168,7 @@ def delete_blog(request, post_id):
     blog = BlogPost.objects.get(id=post_id)
     BlogPost.objects.get(id=blog.id).delete()
     return redirect('main:blog_list')
+
 
 
 

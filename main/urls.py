@@ -20,6 +20,7 @@ urlpatterns = [
         path('delete_announcement/<int:announcement_id>/', views.delete_announcement, name='delete_announcement'),
 
         # Blogs
+
         path('blog/blog_list/', views.blog_list, name='blog_list'),
         path('blog/create/', views.create_blog_post, name='create_blog_post'),
         path('blog/<int:post_id>/', views.view_blog_details, name='view_blog_details'),
@@ -27,6 +28,7 @@ urlpatterns = [
         path("blog/deletecomment/<int:commentID>", views.delete_comment, name="deleteComment"),
         path('blog/edit_blog_post/<int:post_id>/', views.edit_blog_post, name='edit_blog_post'),
         path("blog/deleteBlog/<int:post_id>", views.delete_blog, name="delete_blog"),
+
 
         # Payroll
         path('payroll/', views.employee_payroll, name='payroll'),
