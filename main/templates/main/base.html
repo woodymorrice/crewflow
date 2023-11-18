@@ -52,7 +52,27 @@
                          data-bs-original-title="Schedule">
                             <i class="bi-calendar2-week fs-5"> Schedule</i>
                         </a>
-                    </li>                    
+                    </li>
+
+                    <li>
+                      <a href="{% url 'main:request_time_off' %}"
+                         class="nav-link py-3 px-2" title="Time Off Request"
+                         data-bs-toggle="tooltip" data-bs-placement="right"
+                         data-bs-original-title="Time Off Request">
+                            <i class="bi-calendar-x fs-5"> Time Off Request</i>
+                        </a>
+                    </li>
+
+                    {% if request.user.role != EMPLOYEE %}
+                    <li>
+                      <a href=""
+                         class="nav-link py-3 px-2" title="Check Requests"
+                         data-bs-toggle="tooltip" data-bs-placement="right"
+                         data-bs-original-title="Check Requests">
+                            <i class="bi-calendar-x fs-5"> Check Requests</i>
+                        </a>
+                    </li>
+                    {% endif %}
                     <li>
                         <a href="{% url 'main:expense_reports' %}"
                          class="nav-link py-3 px-2" title="Expenses"
@@ -88,29 +108,31 @@
                     </li>
                     {% endif %}
                 </ul>
-                <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center
-                     justify-content-center p-3 link-dark text-decoration-none
-                     dropdown-toggle" id="dropdownUser3"
-                     data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi-person-circle h4"> {{ user.username }} </i>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow"
-                        aria-labelledby="dropdownUser3">
-                        {% if user.is_authenticated %}
-                        <li><a class="dropdown-item"
-                             href="{% url 'account:logout' %}">Log Out</a></li>
-                        {% else %}
-                        <li><a class="dropdown-item"
-                               href="{% url 'account:login' %}">Log In</a></li>
-                        {% endif %}
-                        <li><a class="dropdown-item"
-                                href="#">Profile</a></li>
-                        {% if request.user.role == ADMINISTRATOR %}
-                        <li><a class="dropdown-item"
-                               href="{% url 'admin:index' %}">Admin</a></li>
-                        {% endif %}
-                    </ul>
+                <div class="fixed-bottom" style="left: 0; right: auto;">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center
+                         justify-content-center p-3 link-dark text-decoration-none
+                         dropdown-toggle" id="dropdownUser3"
+                         data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi-person-circle h4"> {{ user.username }} </i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow"
+                            aria-labelledby="dropdownUser3">
+                            {% if user.is_authenticated %}
+                            <li><a class="dropdown-item"
+                                 href="{% url 'account:logout' %}">Log Out</a></li>
+                            {% else %}
+                            <li><a class="dropdown-item"
+                                   href="{% url 'account:login' %}">Log In</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item"
+                                    href="#">Profile</a></li>
+                            {% if request.user.role == ADMINISTRATOR %}
+                            <li><a class="dropdown-item"
+                                   href="{% url 'admin:index' %}">Admin</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
