@@ -245,10 +245,16 @@ def add_report(request):
 @login_required(login_url='account/login/')
 def report_detail(request, report_id):
     report = get_object_or_404(ExpenseReport, pk=report_id)
-    if request.method == 'POST' and  request.user.is_staff:
-        report.status = request.POST.get('status')
-        report.save()
-    return render(request, 'main/report_detail.html', {'report': report})
+    is_requester = report.requester == request.user
+    if request.user.is_staff or is_requester:
+        if request.method == 'POST' and request.user.is_staff:
+            report.status = request.POST.get('status')
+            report.save()
+        return render(request, 'main/report_detail.html', {'report': report})
+    else:
+        reports = ExpenseReport.objects.filter(requester=request.user)
+        # Handle the case when the user is neither staff nor the requester
+        return render(request, 'main/expense_reports.html',{'reports': reports})
 
 
 @login_required(login_url='account/login/')
