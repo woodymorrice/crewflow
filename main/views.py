@@ -3,7 +3,7 @@ import os
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views import View
 
-from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment
+from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment, Notification
 from account.models import Employee
 from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm
 from django.shortcuts import render, redirect, get_object_or_404
@@ -21,8 +21,8 @@ def can_anno(user):
 def index(request):
     """Landing page for the main app
         of the project"""
-    return render(request, 'main/index.html')
-
+    notifications = Notification.objects.filter(user=request.user)  # Fetch unread notifications
+    return render(request, 'main/index.html', {'notifications': notifications})
 
 @login_required(login_url='account/login/')
 def announcement(request):
@@ -246,15 +246,28 @@ def add_report(request):
 def report_detail(request, report_id):
     report = get_object_or_404(ExpenseReport, pk=report_id)
     is_requester = report.requester == request.user
+
     if request.user.is_staff or is_requester:
         if request.method == 'POST' and request.user.is_staff:
-            report.status = request.POST.get('status')
+            new_status = request.POST.get('status')
+            report.status = new_status
             report.save()
+
+            # Create a notification for the requester
+            if new_status == 'APPROVED':
+                status_message = "approved"
+            elif new_status == 'DECLINED':
+                status_message = "declined"
+            else:
+                status_message = "updated"
+
+            message = f"Your report number: {report_id}, has been {status_message}"
+            Notification.objects.create(user=report.requester, message=message)
+
         return render(request, 'main/report_detail.html', {'report': report})
     else:
         reports = ExpenseReport.objects.filter(requester=request.user)
-        # Handle the case when the user is neither staff nor the requester
-        return render(request, 'main/expense_reports.html',{'reports': reports})
+        return render(request, 'main/expense_reports.html', {'reports': reports})
 
 
 @login_required(login_url='account/login/')
@@ -298,3 +311,11 @@ def request_time_off(request):
         'requests': requests,
     }
     return render(request, 'main/timeoff_request.html', context)
+
+@login_required(login_url='account/login/')
+def delete_notification(request, notification_id):
+    notification = get_object_or_404(Notification, pk=notification_id)
+    if notification.user == request.user:
+        notification.delete()
+    return redirect('main:index')
+

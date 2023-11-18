@@ -5,6 +5,7 @@
         {% if reports %}
             {% for report in reports %}
                 <div class="report-item">
+                    <h2>Report number: {{ report.id }}</h2>
                     <p class="report-detail">Requester: {{ report.requester.username }}</p>
                     <p class="report-detail">Date: {{ report.date_submitted | date:"F j, Y, g:i a" }}</p>
                     <p class="{% if report.status == 'IN_PROCESS' %}in-process{% elif report.status == 'APPROVED' %}approved{% elif report.status == 'DECLINED' %}declined{% endif %}">Status: {{ report.get_status_display }}</p>

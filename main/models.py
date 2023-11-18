@@ -121,3 +121,8 @@ class TimeOffRequest(models.Model):
 
     def __str__(self):
         return f"{self.employee}'s time-off request from {self.start_date} to {self.end_date}"
+
+class Notification(models.Model):
+    user = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    message = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
