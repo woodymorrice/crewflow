@@ -49,6 +49,7 @@
     color: #666;
     margin: 5px 0;
     margin-left: 10px;
+    word-wrap: break-word;
 }
 
 .announcement-content {
@@ -122,6 +123,7 @@
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    word-wrap: break-word;
 }
 
 h1 {
@@ -140,6 +142,7 @@ h1 {
     color: #333;
     margin-top: 20px;
     line-height: 1.5;
+    word-wrap: break-word;
 }
 
 /* Use a media query to adjust the layout for smaller screens */
