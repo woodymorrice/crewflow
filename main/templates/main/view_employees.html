@@ -87,6 +87,7 @@
                 <th>Position</th>
                 <th>D.O.E.</th>
                 <th>Postal Code</th>
+                <th>Action</th>
             </tr>
                 {% for item in employee_list %}
                 <tr>
@@ -98,6 +99,7 @@
                     <td>{{ item.position }}</td>
                     <td>{{ item.dateOfEmployment }}</td>
                     <td>{{ item.postalCode }}</td>
+                    <td><a href="{% url 'main:edit_employee' item.id %}">Edit</a></td>
                 </tr>
                 {% endfor %}
             </table>

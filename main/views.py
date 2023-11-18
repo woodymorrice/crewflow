@@ -1,6 +1,8 @@
 import os
 
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views import View
+
 from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment
 from account.models import Employee
 from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm
@@ -92,15 +94,18 @@ def view_employees(request):
     return render(request, 'main/view_employees.html', {'employee_list': employee_list})
 
 @login_required(login_url='account/login/')
-def edit_employee(request):
-    if request.method == "POST":
-        form = ChangeEmployeeForm(request.POST)
+def edit_employee(request, employee_id):
+    employee = get_object_or_404(Employee, id=employee_id)
+    if request.method == 'POST':
+        form = ChangeEmployeeForm(request.POST, instance=employee)
         if form.is_valid():
-            new_user = form.save()
+            form.save()
             return redirect('main:view_employees')
     else:
-        form = ChangeEmployeeForm()
-    return render(request, 'main/edit_employee.html', {'form': form})
+        form = ChangeEmployeeForm(instance=employee)
+    context = {'employee': employee, 'form': form}
+    return render(request, 'main/edit_employee.html', context)
+
 
 @login_required(login_url='account/login/')
 def blog_list(request):

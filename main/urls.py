@@ -6,7 +6,6 @@ from . import views
 
 from django.conf.urls.static import static
 
-
 # Define url patterns for the main app here
 app_name = 'main'
 urlpatterns = [
@@ -37,8 +36,8 @@ urlpatterns = [
 
         # Add Employees
         path('add_employee/', views.add_employee, name='add_employee'),
-        path('view_employees', views.view_employees, name='view_employees'),
-        path('edit_employee', views.edit_employee, name='edit_employee'),
+        path('view_employees/', views.view_employees, name='view_employees'),
+        path('edit_employee/<int:employee_id>/', views.edit_employee, name='edit_employee'),
 
         # expense report
         path('report_detail/<int:report_id>/', views.report_detail, name='report_detail'),
