@@ -92,5 +92,5 @@ class TimeOffRequestForm(forms.ModelForm):
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),
-            'reason': forms.Select(choices=TimeOffRequest.STATUS_CHOICES)
+            'reason': forms.Select(choices=TimeOffRequest.REASON_CHOICES)
         }

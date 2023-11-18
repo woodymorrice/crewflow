@@ -97,6 +97,21 @@ class TimeOffRequest(models.Model):
         ('denied', 'Denied')
     ]
 
+    REASON_CHOICES = [
+        ('choose', 'Choose'),
+        ('vacation', 'Vacation'),
+        ('health', 'Health'),
+        ('school', 'School'),
+        ('personal', 'Personal'),
+        ('other', 'Other'),
+    ]
+
+    reason_choices = models.CharField(
+        max_length=10,
+        choices=REASON_CHOICES,
+        default='choose'
+    )
+
     # Set the default status to pending
     status = models.CharField(
         max_length=10,
