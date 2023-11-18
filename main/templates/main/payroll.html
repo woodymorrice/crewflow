@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Payroll</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,23 +87,40 @@
                     <td>{{ payroll_period }}</td>
                     <td>
                         <span class="status">
-                            {% if payroll_status == 'Completed' %}
-                                Completed
-                            {% elif payroll_status == 'Pending Manager Approval' %}
-                                Pending Manager Approval
-                                    <button>Approve Payroll</button>
-                                {% endif %}
+                                <form id="approvePayrollForm" method="post" action="{% url 'main:add_announcement' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="title" value="Payroll Approved">
+                                    <input type="hidden" name="content" value="Hi, your payroll has been approved!">
+                                    <button type="submit" class="complete-button" onclick="submitForm(this)">Approve Payroll</button>
+                                </form>
                         </span>
                     </td>
                 </tr>
             </table>
         </section>
 
-        <section>
-            <h2>Payroll Analysis</h2>
-            <canvas id="payrollChart"></canvas>
-        </section>
     </main>
+    <script>
+        $(document).ready(function () {
+            var formSubmitted = false;
+
+            $('#approvePayrollForm').submit(function (e) {
+                // Check if the form has already been submitted
+                if (formSubmitted) {
+                    e.preventDefault(); // Prevent the form from submitting again
+                } else {
+                    // Change the button text to "Completed"
+                    $('.complete-button').text('Completed');
+
+                    // Disable the button to prevent multiple submissions
+                    $('.complete-button').prop('disabled', true);
+
+                    formSubmitted = true; // Set the flag to true after the first submission
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
 {% endblock content %}
