@@ -90,7 +90,8 @@ def add_employee(request):
 
 @login_required(login_url='account/login/')
 def view_employees(request):
-    employee_list = Employee.objects.all()
+    query = request.GET.get('search', '')
+    employee_list = Employee.objects.filter(first_name__icontains=query)
     return render(request, 'main/view_employees.html', {'employee_list': employee_list})
 
 @login_required(login_url='account/login/')
