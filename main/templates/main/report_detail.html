@@ -12,7 +12,7 @@
         <img src="{{ report.photo.url }}" alt="Expense photo">
     </div>
     <p>Status: {{ report.get_status_display }}</p>
-    {% if request.user.is_staff %}
+    {% if request.user.is_staff or request.user.is_manager %}
         <div class="center-text">
         <form method="post">
             {% csrf_token %}
@@ -36,7 +36,7 @@
 <a href="{% url 'main:expense_reports'%}">Back to Expense Report</a>
 </div>
 
-    {% if user.is_staff %}
+    {% if user.is_staff or user.is_manager %}
     <div class="center-text">
         <form method="post" action="{% url 'main:delete_report' report.id %}">
             {% csrf_token %}

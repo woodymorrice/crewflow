@@ -15,7 +15,10 @@ from django.http import HttpResponseRedirect
 
 def can_anno(user):
     """Defined user permission"""
-    return user.is_staff or user.can_announce
+    return user.is_staff or user.can_announce or user.is_manager
+
+def manager(user):
+    return user.is_staff or user.is_manager
 
 @login_required(login_url='account/login/')
 def index(request):
@@ -223,7 +226,7 @@ def employee_payroll(request):
 #expense report
 @login_required(login_url='account/login/')
 def expense_reports(request):
-    if request.user.is_staff:
+    if request.user.is_staff or request.user.is_manager():
         reports = ExpenseReport.objects.all()
     else:
         reports = ExpenseReport.objects.filter(requester=request.user)
@@ -247,8 +250,8 @@ def report_detail(request, report_id):
     report = get_object_or_404(ExpenseReport, pk=report_id)
     is_requester = report.requester == request.user
 
-    if request.user.is_staff or is_requester:
-        if request.method == 'POST' and request.user.is_staff:
+    if request.user.is_staff or is_requester or request.user.is_manager() :
+        if request.method == 'POST' and (request.user.is_staff or request.user.is_manager()):
             new_status = request.POST.get('status')
             report.status = new_status
             report.save()
@@ -275,7 +278,7 @@ def delete_report(request, report_id):
     report = get_object_or_404(ExpenseReport, pk=report_id)
 
     # Check if the current user has permission to delete this report
-    if request.user.is_staff or request.user == report.requester:
+    if request.user.is_staff or request.user == report.requester or request.user.is_manager():
         if request.method == 'POST':
             # Delete the associated photo file
             if report.photo:

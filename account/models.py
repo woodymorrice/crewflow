@@ -22,6 +22,9 @@ class Employee(AbstractUser):
     role = models.CharField(max_length=24, choices=Role.choices)
 
     def save(self, *arg, **kwargs):
-        if not self.pk:
-            self.role = self.base_role
+        # if not self.pk:
+        #     self.role = self.base_role
         return super().save(*arg, **kwargs)
+
+    def is_manager(self):
+        return self.role == self.Role.MANAGER
