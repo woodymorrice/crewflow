@@ -15,10 +15,7 @@ from django.http import HttpResponseRedirect
 
 def can_anno(user):
     """Defined user permission"""
-    return user.is_staff or user.can_announce or user.is_manager
-
-def manager(user):
-    return user.is_staff or user.is_manager
+    return user.is_staff or user.can_announce or user.is_manager()
 
 @login_required(login_url='account/login/')
 def index(request):
