@@ -333,6 +333,11 @@ def approve_request(request, request_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url='account/login/')
+def view_schedule(request):
+    return render(request, 'main/view_schedule.html', {'view_schedule': view_schedule})
+
+
+@login_required(login_url='account/login/')
 def decline_request(request, request_id):
     time_off_request = TimeOffRequest.objects.get(pk=request_id)
     time_off_request.status = 'denied'

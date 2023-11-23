@@ -38,6 +38,8 @@ INSTALLED_APPS = [
 
     # External Apps
     'bootstrap5',
+    'schedule',
+    'djangobower',
 
     # Default apps - DONT TOUCH    
     'django.contrib.admin',
@@ -125,6 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_FINDERS = 'djangobower.finders.BowerFinder',
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -146,3 +149,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # # Heroku settings
 # import django_heroku
 # django_heroku.settings(locals())
+
+# bower settings
+
+BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'jquery-ui',
+    'bootstrap'
+)
