@@ -319,3 +319,35 @@ def delete_notification(request, notification_id):
         notification.delete()
     return redirect('main:index')
 
+@login_required(login_url='account/login/')
+def check_time_off_requests(request):
+    requests = TimeOffRequest.objects.filter(status='pending')
+    return render(request, 'main/check_requests.html', {'requests':requests})
+
+@login_required(login_url='account/login/')
+def approve_request(request, request_id):
+    time_off_request = TimeOffRequest.objects.get(pk=request_id)
+    time_off_request.status = 'approved'
+    time_off_request.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required(login_url='account/login/')
+def decline_request(request, request_id):
+    time_off_request = TimeOffRequest.objects.get(pk=request_id)
+    time_off_request.status = 'denied'
+    time_off_request.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required(login_url='account/login/')
+def delete_request(request, request_id):
+    time_off_request = get_object_or_404(TimeOffRequest, id=request_id)
+    time_off_request.delete()
+    return redirect('main:request_time_off')
+
+@login_required(login_url='account/login/')
+def cancel_request(request, request_id):
+    time_off_request = get_object_or_404(TimeOffRequest, id=request_id, employee=request.user)
+    if time_off_request.status == 'pending':
+        time_off_request.status = 'canceled'
+        time_off_request.save()
+    return redirect('main:request_time_off')

@@ -53,23 +53,13 @@
                             <i class="bi-calendar2-week fs-5"> Schedule</i>
                         </a>
                     </li>
-
+                    {% if request.user.role == "EMPLOYEE" %}
                     <li>
                       <a href="{% url 'main:request_time_off' %}"
                          class="nav-link py-3 px-2" title="Time Off Request"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Time Off Request">
                             <i class="bi-calendar-x fs-5"> Time Off Request</i>
-                        </a>
-                    </li>
-
-                    {% if request.user.role != EMPLOYEE %}
-                    <li>
-                      <a href=""
-                         class="nav-link py-3 px-2" title="Check Requests"
-                         data-bs-toggle="tooltip" data-bs-placement="right"
-                         data-bs-original-title="Check Requests">
-                            <i class="bi-calendar-x fs-5"> Check Requests</i>
                         </a>
                     </li>
                     {% endif %}
@@ -89,7 +79,15 @@
                             <i class="bi-journal-text fs-5"> Blogs</i>
                         </a>
                     </li>
-                    {% if request.user.role != EMPLOYEE %}
+                    {% if request.user.role != "EMPLOYEE" %}
+                    <li>
+                      <a href="{% url 'main:check_time_off_requests' %}"
+                         class="nav-link py-3 px-2" title="Check Requests"
+                         data-bs-toggle="tooltip" data-bs-placement="right"
+                         data-bs-original-title="Check Requests">
+                            <i class="bi-calendar-x fs-5"> Check Requests</i>
+                        </a>
+                    </li>
                     <li>
                         <a href="{% url 'main:view_employees' %}"
                          class="nav-link py-3 px-2" title="Employees"

@@ -94,7 +94,8 @@ class TimeOffRequest(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('approved', 'Approved'),
-        ('denied', 'Denied')
+        ('denied', 'Denied'),
+        ('canceled', 'Canceled')
     ]
 
     REASON_CHOICES = [

@@ -47,9 +47,16 @@ urlpatterns = [
 
         # Time Off Request
         path('request_time_off/', views.request_time_off, name='request_time_off'),
+        path('delete_request/<int:request_id>/', views.delete_request, name="delete_request"),
+        path('cancel_request/<int:request_id>/', views.cancel_request, name="cancel_request"),
 
         # delete notification
         path('delete_notification/<int:notification_id>/', views.delete_notification, name='delete_notification'),
+
+        # Check requests
+        path('check_time_off_requests/', views.check_time_off_requests, name='check_time_off_requests'),
+        path('approve_request/<int:request_id>/', views.approve_request, name='approve_request'),
+        path('decline_request/<int:request_id>/', views.decline_request, name='decline_request'),
 
 ]
 urlpatterns += staticfiles_urlpatterns()

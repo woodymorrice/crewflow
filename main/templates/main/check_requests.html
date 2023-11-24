@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends "main/base.html" %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check Time Off Requests</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Check Time Off Requests</h2>
+        {% for request in requests %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Request by: {{ request.employee.username }}</h5>
+                    <p class="card-text">Start Date: {{ request.start_date }}</p>
+                    <p class="card-text">End Date: {{ request.end_date }}</p>
+                    <p class="card-text">Reason: {{ request.reason }}</p>
+                    <p class="card-text">Details: {{ request.details }}</p>
+                    <a href="{% url 'main:approve_request' request.id %}" class="btn btn-success">Approve</a>
+                    <a href="{% url 'main:decline_request' request.id %}" class="btn btn-danger">Decline</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No pending requests.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
+{% endblock content %}

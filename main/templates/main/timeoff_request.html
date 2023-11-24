@@ -34,7 +34,6 @@
 
         <div class="mt-5">
             <h3 class="mb-4 text-center"> View status of Your Requests</h3>
-            <!-- This table would be populated with data from the server -->
             <table class="table">
                 <thead>
                     <tr>
@@ -51,10 +50,12 @@
                             <td>{{ request.end_date }}</td>
                             <td>{{ request.reason }}</td>
                             <td>{{ request.get_status_display }}</td>
+                            <td><a href="{% url 'main:delete_request' request.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                            <td><a href="{% url 'main:cancel_request' request.id %}" class="btn btn-danger btn-sm">Cancel</a></td>
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">No requests have been made.</td>
+                            <td colspan="6">No requests have been made.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
