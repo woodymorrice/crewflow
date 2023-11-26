@@ -214,6 +214,7 @@ def employee_payroll(request):
         'payroll_period': payroll_period,
         'payroll_status': 'Pending Manager Approval',
         'user_is_manager': True,
+        'employee_list': employees,
     }
 
     return render(request, 'main/payroll.html', context)

@@ -72,19 +72,30 @@
     <main>
         <section>
             <h2>Payroll Information</h2>
+            <h2>Start data</h2>
+            <h2>{{ payroll_period }}</h2>
             <table>
                 <tr>
+                    <th>First Name:</th>
+                    <th>Last Name:</th>
+                    <th>Gross pay</th>
+                    <th>Deduction:</th>
+                    <th>Net Pay:</th>
                     <th>Total Payroll Expenses:</th>
                     <th>Net Payments:</th>
-                    <th>Number of Employees:</th>
-                    <th>Payroll Period:</th>
+
                     <th>Payroll Status:</th>
                 </tr>
+                {% for item in employee_list %}
+
                 <tr>
+                    <td>{{ item.first_name }}</td>
+                    <td>{{ item.last_name }}</td>
+                    <td>{{ item.salary }}</td>
+                    <td>{{ item.deduction }}</td>
+                    <td>{{ item.salary - item.deduction }}</td>
                     <td>${{ total_payroll_expenses }}</td>
                     <td>${{ total_payroll_expenses }}</td>
-                    <td>{{ number_of_employees }}</td>
-                    <td>{{ payroll_period }}</td>
                     <td>
                         <span class="status">
                                 <form id="approvePayrollForm" method="post" action="{% url 'main:add_announcement' %}">
@@ -96,6 +107,7 @@
                         </span>
                     </td>
                 </tr>
+                {% endfor %}
             </table>
         </section>
 
