@@ -23,5 +23,5 @@ urlpatterns = [
     # Include urls.py from new apps like this
     path('', include('main.urls')),
     path('account/', include('account.urls')),
-    path('schedule/', include('schedule.urls')),
+   #  path('schedule/', include('schedule.urls')),
 ]

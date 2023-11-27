@@ -1,9 +1,6 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-    {% load static %}
-    <!-- Add custom stylesheets, meta tags, etc. specific to this page -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
 
      {% if user.is_staff or user.can_announce or user.is_manager %}
 <div class="addLink">
@@ -74,4 +71,135 @@
     <p>No announcements available.</p>
 {% endif %}
 </div>
+
+    <style>
+    /* Styles for the Announcement Page */
+.announcement-list {
+    position: relative;
+    top: 60px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.announcement {
+    background-color: AliceBlue;
+    border: 1px solid black;
+    padding: 10px;
+    width: 80%;
+    margin: 10px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.announcement-title {
+    display: inline;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.read-status {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.unread-circle {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #00FF00;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.announcement-date, .announcement-content {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+    margin-left: 10px;
+    word-wrap: break-word;
+}
+
+.announcement-content {
+    line-height: 1.5;
+}
+
+.announcement-heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+
+
+/*Styles for filter */
+.announcement-filter {
+    position: fixed; /* Position the div relative to the viewport */
+    top: 30px; /* Adjust the distance from the top as needed */
+    right: 40px; /* Center horizontally */
+    background-color: lightsteelblue;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.announcement-filter form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow the form elements to wrap onto the next line */
+}
+
+.announcement-filter label, .announcement-filter select, .announcement-filter input, .announcement-filter input[type="submit"] {
+    margin-right: 10px;
+}
+
+/* Styles for the add announcement link */
+
+.addLink {
+    display: inline-block;
+    width: 200px; /* Adjust the width as needed */
+    float: left; /* Position the div to the left */
+    text-align: right; /* Right-align the text inside the div */
+    position: fixed; /* Position the div relative to the viewport */
+    bottom: 30px; /* Adjust the distance from the bottom as needed */
+    right: 20px; /* Adjust the distance from the left as needed */
+    z-index: 2;
+}
+
+.addLink a {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: lightsteelblue;
+    color: black;
+    border-radius: 40px;
+    text-decoration: none;
+}
+
+.addLink a:hover {
+    background-color: lightblue;
+}
+
+ /* Use a media query to adjust the layout for smaller screens */
+@media (max-width: 800px) {
+    .announcement-list {
+        top: 160px;
+    }
+    .announcement-filter form {
+        display: flex;
+        align-items: center;
+        flex-direction: column; /* Stack the form elements vertically */
+    }
+
+    .announcement-filter label, .announcement-filter select, .announcement-filter input, .announcement-filter input[type="submit"] {
+        margin-bottom: 10px; /* Add some vertical spacing between form elements */
+    }
+        }
+    </style>
 {% endblock content %}

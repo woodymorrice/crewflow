@@ -1,14 +1,15 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ announcement.title }}</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Include your CSS file -->
 </head>
+
 <body>
     <div class="announcement-detail">
         <h1>{{ announcement.title }}</h1>
@@ -38,5 +39,41 @@
 {% endif %}
 </body>
 </html>
+
+    <style>
+    /* Styles for the Announcement Detail Page */
+.announcement-detail {
+    width: 80%;
+    margin: 20px auto 0;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    word-wrap: break-word;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.author, .date {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.content {
+    font-size: 16px;
+    color: #333;
+    margin-top: 20px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.center-text {
+    text-align: center;
+}
+    </style>
 
 {% endblock content %}
