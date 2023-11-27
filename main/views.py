@@ -334,7 +334,7 @@ def approve_request(request, request_id):
 
 @login_required(login_url='account/login/')
 def view_schedule(request):
-    return render(request, 'scheduler/fullcanlendar.html', {'view_schedule': view_schedule})
+    return render(request, 'scheduler/view_schedule.html', {'view_schedule': view_schedule})
 
 
 @login_required(login_url='account/login/')

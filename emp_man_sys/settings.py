@@ -157,5 +157,5 @@ BOWER_COMPONENTS_ROOT = '/PROJECT_ROOT/components/'
 BOWER_INSTALLED_APPS = (
     'jquery',
     'jquery-ui',
-    'bootstrap'
+    'bootstrap',
 )
