@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # Employee Management System apps
     'main',
     'account',
+    'scheduler',
 
     # External Apps
     'bootstrap5',
