@@ -50,6 +50,14 @@
         <p class="announcement-title"> {{ announcement.title }} </p>
         </div>
 
+         <p class="announcement-content">Author:
+            {% if announcement.author.first_name and announcement.author.last_name %}
+                {{ announcement.author.first_name}} {{ announcement.author.last_name}}
+            {% else %}
+                {{ announcement.author}}
+            {% endif %}
+        </p>
+
         <p class="announcement-date">Date: {{ announcement.date_added | date:"F j, Y, g:i a" }}</p>
         <p class="announcement-content">
             {% if announcement.content|length > 100 %}

@@ -12,7 +12,15 @@
 <body>
     <div class="announcement-detail">
         <h1>{{ announcement.title }}</h1>
-        <p class="author">Author: {{ announcement.author }}</p>
+
+        <p class="author">Author:
+            {% if announcement.author.first_name and announcement.author.last_name %}
+                {{ announcement.author.first_name}} {{ announcement.author.last_name}}
+            {% else %}
+                {{ announcement.author}}
+            {% endif %}
+        </p>
+
         <p class="date">Date: {{ announcement.date_added | date:"F j, Y" }}</p>
         <div class="content">{{ announcement.content|safe }}</div>
     </div>

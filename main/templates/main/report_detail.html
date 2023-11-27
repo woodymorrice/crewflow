@@ -4,14 +4,22 @@
 
 <div class="expense-report-details">
     <h2>Report number: {{ report.id }}</h2>
-    <p>{{ report.requester.username }}</p>
+    <p class="report-detail">Requester:
+                        {% if report.requester.first_name and report.requester.last_name %}
+                            {{ report.requester.first_name}} {{ report.requester.last_name}}
+                        {% else %}
+                            {{ report.requester}}
+                        {% endif %}
+                    </p>
     <p class="report-detail">Date: {{ report.date_submitted | date:"F j, Y, g:i a" }}</p>
-    <p>{{ report.detail }}</p>
     <p>Amount: ${{report.amount }}</p>
+    <p>Report detail: {{ report.detail }}</p>
+
     <div class="expense-photo">
         <img src="{{ report.photo.url }}" alt="Expense photo">
     </div>
     <p>Status: {{ report.get_status_display }}</p>
+
     {% if request.user.is_staff or request.user.is_manager %}
         <div class="center-text">
         <form method="post">
