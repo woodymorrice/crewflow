@@ -4,13 +4,15 @@ Crewflow is a fully featured employee management system.
 
 ## Requirements
 
-Python 3.11 or higher. Git 2.39 or higher. A server or a webhost that supports
-Python Django. A cloud web service is highly recommended. A list of compatible
-webhosts can be found at https://djangofriendly.com.
+Python 3.11 or higher - https://www.python.org
+Git 2.39 or higher - https://git-scm.com/downloads
+A server or a webhost that supports Python Django. A cloud web service is
+highly recommended. A list of compatible webhosts can be found at
+https://djangofriendly.com.
 
 ## Installation
 
-Installation using a CLI (Command Line Interface):
+Installation by terminal/command line:
 
 Clone the project repository to your chosen folder:
 git clone https://git.cs.usask.ca/wam553/project370.git ./chosenfolder
@@ -20,6 +22,24 @@ cd chosenfolder
 
 Create a new python virtual environment named "env":
 python -m venv env
+
+Activate the virtual environment:
+source env/bin/activate
+
+Install the project requirements:
+pip install -r requirements.txt
+
+Create the database:
+python manage.py migrate
+
+Create the superuser(administrator):
+python manage.py createsuperuser
+
+Choose a username, enter an email, and choose a password.
+
+Run the server:
+python manage.py runserver
+
 
 
 
