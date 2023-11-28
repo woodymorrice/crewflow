@@ -4,8 +4,8 @@ Crewflow is a fully featured employee management system.
 
 ## Requirements
 
-Python 3.11 or higher - https://www.python.org
-Git 2.39 or higher - https://git-scm.com/downloads
+Python 3.11 or higher - https://www.python.org.
+Git 2.39 or higher - https://git-scm.com/downloads.
 A server or a webhost that supports Python Django. A cloud web service is
 highly recommended. A list of compatible webhosts can be found at
 https://djangofriendly.com.
