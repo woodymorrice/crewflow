@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Announcement, BlogPost, ExpenseReport, TimeOffRequest, Comment
+from .models import Announcement, BlogPost, ExpenseReport, TimeOffRequest, Comment, Availability
 from account.models import Employee
 
 
@@ -93,4 +93,33 @@ class TimeOffRequestForm(forms.ModelForm):
             'start_date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),
             'reason': forms.Select(choices=TimeOffRequest.REASON_CHOICES)
+        }
+
+
+class AvailabilityForm(forms.ModelForm):
+    class Meta:
+        model = Availability
+        fields = ['m_start_time',
+                  'm_end_time',
+                  't_start_time',
+                  't_end_time',
+                  'w_start_time',
+                  'w_end_time',
+                  'th_start_time',
+                  'th_end_time',
+                  'f_start_time',
+                  'f_end_time',
+                  ]
+
+        widgets = {
+            'm_start_time': forms.TimeInput(attrs={'type': 'time'}),
+            'm_end_time': forms.TimeInput(attrs={'type': 'time'}),
+            't_start_time': forms.TimeInput(attrs={'type': 'time'}),
+            't_end_time': forms.TimeInput(attrs={'type': 'time'}),
+            'w_start_time': forms.TimeInput(attrs={'type': 'time'}),
+            'w_end_time': forms.TimeInput(attrs={'type': 'time'}),
+            'th_start_time': forms.TimeInput(attrs={'type': 'time'}),
+            'th_end_time': forms.TimeInput(attrs={'type': 'time'}),
+            'f_start_time': forms.TimeInput(attrs={'type': 'time'}),
+            'f_end_time': forms.TimeInput(attrs={'type': 'time'}),
         }

@@ -11,6 +11,7 @@ from django.conf import settings
 
 admin.autodiscover()
 
+app_name = "scheduler"
 urlpatterns = [
     #path('scheduler/', include('scheduler.urls')),
     path('fullcalendar/', TemplateView.as_view(template_name="fullcalendar.html"), name='fullcalendar'),

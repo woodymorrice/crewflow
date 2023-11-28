@@ -5,7 +5,7 @@ from django.views import View
 
 from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment, Notification
 from account.models import Employee
-from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm, AvailabilityForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
@@ -334,7 +334,7 @@ def approve_request(request, request_id):
 
 @login_required(login_url='account/login/')
 def view_schedule(request):
-    return render(request, 'scheduler/view_schedule.html', {'view_schedule': view_schedule})
+    return render(request, 'main/view_schedule.html', {'view_schedule': view_schedule})
 
 
 @login_required(login_url='account/login/')
@@ -357,3 +357,20 @@ def cancel_request(request, request_id):
         time_off_request.status = 'canceled'
         time_off_request.save()
     return redirect('main:request_time_off')
+
+@login_required(login_url='account/login/')
+def add_availability(request):
+    if request.method == 'POST':
+        form = AvailabilityForm(request.POST)
+        if form.is_valid():
+            availability = form.save(commit=False)
+            availability.employee = request.user
+            availability.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = AvailabilityForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'main/add_availability.html', context)
