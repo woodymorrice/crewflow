@@ -12,7 +12,14 @@ webhosts can be found at https://djangofriendly.com.
 
 Installation using a CLI (Command Line Interface):
 
+Clone the project repository to your chosen folder:
+git clone https://git.cs.usask.ca/wam553/project370.git ./chosenfolder
 
+Enter the folder:
+cd chosenfolder
+
+Create a new python virtual environment named "env":
+python -m venv env
 
 
 
