@@ -1,121 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>View Employee(s)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        tr {
-            text-align: center;
-        }
-        tr:hover {
-            background-color: red;
-        }
-
-        td {
-            border-bottom: 1px solid #dddddd;
-            padding-bottom: 10px;
-            padding-top: 10px;
-            padding-right: 20px;
-            padding-left: 20px;
-        }
-
-        th {
-            border-bottom: 5px solid #dddddd;
-        }
-
-        .button {
-            background-color: red;
-            border: none;
-            color: white;
-            padding: 20px 34px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
-        main {
-            max-width: max-content;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-    </style>
-    <script>
-        function clearSearch() {
-            document.getElementById('search').value = '';
-            document.forms[0].submit();
-        }
-    </script>
-</head>
 {% extends "main/base.html" %}
 {% block content %}
+    <script>
+    function clearSearch() {
+        document.getElementById('search').value = '';
+        document.forms[0].submit();
+    }
+    </script>
 <body>
-    <header>
+    <header class="bg-blue text-white text-center py-3">
         <h1>View Employee(s)</h1>
     </header>
 
-    <div style="text-align: center">
-        <button type="button" class="button">
-            <a href="{% url 'main:add_employee' %}">Add a New Employee</a>
-        </button>
+    <div class="container text-center my-3">
+        <a href="{% url 'main:add_employee' %}" class="btn bg-blue text-white">
+            Add a New Employee
+        </a>
     </div>
 
-    <main>
+    <main class="container my-3">
         <div class="view_employees">
-            <form method="get" action="{% url 'main:view_employees' %}">
-                <label for="search">Search:</label>
-                <input type="text" id="search" name="search">
-                <button type="submit">Submit</button>
-                <button type="button" onclick="clearSearch()">Clear</button>
+            <form method="get" action="{% url 'main:view_employees' %}" class="mb-3">
+                <div class="input-group">
+                    <label for="search" class="visually-hidden">Search:</label>
+                    <input type="text" id="search" name="search" class="form-control" placeholder="Search">
+                    <button type="submit" class="btn bg-blue text-white">Submit</button>
+                    <button type="button" onclick="clearSearch()" class="btn btn-secondary">Clear</button>
+                </div>
             </form>
 
-
-            <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>Phone #</th>
-                <th>Email</th>
-                <th>Position</th>
-                <th>D.O.E.</th>
-                <th>Postal Code</th>
-                <th>Action</th>
-            </tr>
-                {% for item in employee_list %}
-                <tr>
-                    <td>{{ item.first_name }}</td>
-                    <td>{{ item.last_name }}</td>
-                    <td>{{ item.address }}</td>
-                    <td>{{ item.phone }}</td>
-                    <td>{{ item.email }}</td>
-                    <td>{{ item.position }}</td>
-                    <td>{{ item.date_of_employment }}</td>
-                    <td>{{ item.postal_code }}</td>
-                    <td><a href="{% url 'main:edit_employee' item.id %}">Edit</a></td>
-                </tr>
-                {% endfor %}
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Address</th>
+                        <th>Phone #</th>
+                        <th>Email</th>
+                        <th>Position</th>
+                        <th>D.O.E.</th>
+                        <th>Postal Code</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in employee_list %}
+                        <tr>
+                            <td>{{ item.first_name }}</td>
+                            <td>{{ item.last_name }}</td>
+                            <td>{{ item.address }}</td>
+                            <td>{{ item.phone }}</td>
+                            <td>{{ item.email }}</td>
+                            <td>{{ item.position }}</td>
+                            <td>{{ item.date_of_employment }}</td>
+                            <td>{{ item.postal_code }}</td>
+                            <td><a href="{% url 'main:edit_employee' item.id %}" class="btn btn-edit text-black">Edit</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
     </main>
