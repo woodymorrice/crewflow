@@ -1,4 +1,18 @@
-# project370
+# Crewflow
+
+Crewflow is a fully featured employee management system.
+
+## Requirements
+
+Python 3.11 or higher. Git 2.39 or higher. A server or a webhost that supports
+Python Django. A cloud web service is highly recommended. A list of compatible
+webhosts can be found at https://djangofriendly.com.
+
+## Installation
+
+Installation using a CLI (Command Line Interface):
+
+
 
 
 
