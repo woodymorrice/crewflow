@@ -14,24 +14,37 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     {% load static %}
+    <style>
+        .bg-blue {
+            background-color: royalblue;
+        }
+
+        .text-white {
+            color: #FFFFFF;
+        }
+
+        .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        <div class="col-sm-auto bg-light sticky-top">
+        <div class="col-sm-auto bg-blue sticky-top">
             <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light
                 align-items-center sticky-top">
                 <a href="/" class="d-block p-3 link-dark text-decoration-none"
                  title="" data-bs-toggle="tooltip" data-bs-placement="right"
                  data-bs-original-title="Icon-only">
                     <img src="{% static 'main/media/crewflow_small.jpg' %}"
-                     class="img-fluid" alt="Crewflow">
+                     class="img-fluid rounded" alt="Crewflow">
                 </a>
                 <ul class="nav nav-pills nav-flush flex-sm-column flex-row
-                 flex-nowrap mb-auto mx-auto text-center align-items-start">
+                 flex-nowrap mb-auto mx-auto text-center align-items-start bg-blue">
                     <li class="nav-item">
                       <a href="{% url 'main:index'  %}"
-                         class="nav-link py-3 px-2" title="Home"
+                         class="nav-link py-3 px-2 text-white" title="Home"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Home">
                             <i class="bi-house fs-5"> Home</i>
@@ -39,7 +52,7 @@
                     </li>
                     <li>
                       <a href="{% url 'main:announcement' %}"
-                         class="nav-link py-3 px-2" title="Announcements"
+                         class="nav-link py-3 px-2 text-white" title="Announcements"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Announcements">
                             <i class="bi-megaphone fs-5"> Announcements</i>
@@ -47,7 +60,7 @@
                     </li>
                     <li>
                       <a href="{% url 'main:view_schedule'%}"
-                         class="nav-link py-3 px-2" title="Schedule"
+                         class="nav-link py-3 px-2 text-white" title="Schedule"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Schedule">
                             <i class="bi-calendar2-week fs-5"> Schedule</i>
@@ -56,7 +69,7 @@
                     {% if request.user.role == "EMPLOYEE" %}
                     <li>
                       <a href="{% url 'main:request_time_off' %}"
-                         class="nav-link py-3 px-2" title="Time Off Request"
+                         class="nav-link py-3 px-2 text-white" title="Time Off Request"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Time Off Request">
                             <i class="bi-calendar-x fs-5"> Time Off Request</i>
@@ -65,7 +78,7 @@
                     {% endif %}
                     <li>
                         <a href="{% url 'main:expense_reports' %}"
-                         class="nav-link py-3 px-2" title="Expenses"
+                         class="nav-link py-3 px-2 text-white" title="Expenses"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Expenses">
                             <i class="bi-currency-dollar fs-5"> Expenses</i>
@@ -73,7 +86,7 @@
                     </li>
                     <li>
                       <a href="{% url 'main:blog_list' %}"
-                         class="nav-link py-3 px-2" title="Blogs"
+                         class="nav-link py-3 px-2 text-white" title="Blogs"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Blogs">
                             <i class="bi-journal-text fs-5"> Blogs</i>
@@ -82,7 +95,7 @@
                     {% if request.user.role != "EMPLOYEE" %}
                     <li>
                       <a href="{% url 'main:check_time_off_requests' %}"
-                         class="nav-link py-3 px-2" title="Check Requests"
+                         class="nav-link py-3 px-2 text-white" title="Check Requests"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Check Requests">
                             <i class="bi-calendar-x fs-5"> Check Requests</i>
@@ -90,7 +103,7 @@
                     </li>
                     <li>
                         <a href="{% url 'main:view_employees' %}"
-                         class="nav-link py-3 px-2" title="Employees"
+                         class="nav-link py-3 px-2 text-white" title="Employees"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Employees">
                             <i class="bi-people fs-5"> Employees</i>
@@ -98,7 +111,7 @@
                     </li>
                     <li>
                         <a href="{% url 'main:payroll' %}"
-                         class="nav-link py-3 px-2" title="Payroll"
+                         class="nav-link py-3 px-2 text-white" title="Payroll"
                          data-bs-toggle="tooltip" data-bs-placement="right"
                          data-bs-original-title="Payroll">
                             <i class="bi-bank fs-5"> Payroll</i>
@@ -110,9 +123,9 @@
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center
                          justify-content-center p-3 link-dark text-decoration-none
-                         dropdown-toggle" id="dropdownUser3"
+                         dropdown-toggle text-white" id="dropdownUser3"
                          data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi-person-circle h4"> {{ user.username }} </i>
+                            <i class="bi-person-circle h4 text-white"> {{ user.username }} </i>
                         </a>
                         <ul class="dropdown-menu text-small shadow"
                             aria-labelledby="dropdownUser3">
