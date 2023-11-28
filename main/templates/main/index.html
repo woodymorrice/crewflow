@@ -35,34 +35,16 @@ is a block named "content" -->
     <div class="container text-center">
         <div class="row">
             <div class="col-md-6 mb-3">
-                <a href="{% url 'main:schedule_landing' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        Schedule
-                    </button>
-                </a>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'main:view_schedule' %}" class="btn bg-blue text-white" role="button">Schedule</a>
+                    <a href="{% url 'main:index' %}" class="btn bg-blue text-white" role="button">Edit Personal Info (TEMP BROKEN)</a>
+                </div>
             </div>
             <div class="col-md-6 mb-3">
-                <a href="{% url 'main:expense_reports' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        Expense Reports
-                    </button>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <a href="{% url 'main:index' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        Edit Personal Info (TEMP BROKEN LINK)
-                    </button>
-                </a>
-            </div>
-            <div class="col-md-6 mb-3">
-                <a href="{% url 'main:announcement' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        View Announcements
-                    </button>
-                </a>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'main:expense_reports' %}" class="btn bg-blue text-white" role="button">Expense Reports</a>
+                    <a href="{% url 'main:announcement' %}" class="btn bg-blue text-white" role="button">View Announcements</a>
+                </div>
             </div>
         </div>
     </div>
