@@ -7,6 +7,10 @@ block like this one. Multiple blocks can be created
 in the base template for different things. This one
 is a block named "content" -->
 {% block content %}
+    <header class="bg-blue text-white text-center py-3 rounded-3">
+        <h1>Welcome to Crewflow, {{ user.first_name }}!</h1>
+        <h3>What would you like to do?</h3>
+    </header>
     <div class="notifications">
     <h3>Notifications</h3>
     {% if notifications %}
@@ -27,8 +31,5 @@ is a block named "content" -->
     {% endif %}
 
 </div>
-<p>
-    Welcome to home page
-<p>
 <a href="{% url 'main:expense_reports'%}">Expense report</a>
 {% endblock content %}
