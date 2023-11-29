@@ -6,152 +6,86 @@
     <meta charset="UTF-8">
     <title>Payroll</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        main {
-            max-width: max-content;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        h2 {
-            font-size: 24px;
-        }
-
-        tr {
-            text-align: center;
-        }
-        tr:hover {
-            background-color: red;
-        }
-
-        td {
-            border-bottom: 1px solid #dddddd;
-            padding-bottom: 10px;
-            padding-top: 10px;
-            padding-right: 20px;
-            padding-left: 20px;
-        }
-
-        th {
-            border-bottom: 5px solid #dddddd;
-        }
-
-        .status {
-            font-weight: bold;
-        }
-
-        .complete-button {
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .complete-button:hover {
-            background-color: #45a049;
-        }
-    </style>
 </head>
 <body>
-    <header>
+    <header class="bg-blue text-white text-center py-3 rounded-3">
         <h1>Payroll Information</h1>
     </header>
 
     <main>
         <div class="view_payroll">
             <div class="payroll-details">
-            <div class="payroll-period">
-                <h2>Payroll Period: {{ payroll_period }}</h2>
-                <th>Net Payments: ${{ total_payroll_expenses }}</th>
-            </div>
+                <div class="alert alert-info" role="alert">
+                    Payroll Period: November 1, 2023 - December 15, 2023
+                </div>
 
-            <table>
-                <tr>
-                    <th>First Name:</th>
-                    <th>Last Name:</th>
-                    <th>Email:</th>
-                    <th>Position:</th>
-                    <th>Gross pay</th>
-                    <th>Deduction:</th>
-                    <th>Net Pay:</th>
-                    <th>Payroll Status:</th>
-                </tr>
-                {% for item in employee_list %}
-
-
-            <tr>
-    <!-- ... other columns ... -->
-    <td>
-        <button class="edit-button" onclick="toggleEditForm('{{ item.id }}')">Edit</button>
-        <form method="post" action="{% url 'main:edit_employee_salary' item.id %}" id="editForm{{ item.id }}" style="display: none;">
-            {% csrf_token %}
-            <label for="new_salary{{ item.id }}">New Salary:</label>
-            <input type="text" name="new_salary" id="new_salary{{ item.id }}">
-            <label for="new_deduction{{ item.id }}">New Deduction:</label>
-            <input type="text" name="new_deduction" id="new_deduction{{ item.id }}">
-            <button type="submit" class="edit-button">Save</button>
-        </form>
-    </td>
-</tr>
-
-<script>
-    function toggleEditForm(employeeId) {
-        var form = document.getElementById('editForm' + employeeId);
-        form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    }
-</script>
-
-                <tr>
-                    <td>{{ item.first_name }}</td>
-                    <td>{{ item.last_name }}</td>
-                    <td>{{ item.email }}</td>
-                    <td>{{ item.position }}</td>
-                    <td>{{ item.salary }}</td>
-                    <td>{{ item.deduction }}</td>
-                    <td>${{ item.net_salary }}</td>
-
-                    <td>
-                         <span class="status">
-                             <form method="post" action="{% url 'main:approve_payroll' %}">
-                                  {% csrf_token %}
-                                 <input type="hidden" name="employee_name" value="{{ item.username }}">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th>First Name:</th>
+                        <th>Last Name:</th>
+                        <th>Email:</th>
+                        <th>Position:</th>
+                        <th>Salary</th>
+                        <th>Deduction:</th>
+                        <th>Net Pay:</th>
+                        <th>Payroll Status:</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in employee_list %}
+                    <script>
+                    function toggleEditForm(employeeId) {
+                        var form = document.getElementById('editForm' + employeeId);
+                            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                    }
+                    </script>
+                    <tr class="text-center">
+                        <td>{{ item.first_name }}</td>
+                        <td>{{ item.last_name }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.position }}</td>
+                        <td>{{ item.salary }}</td>
+                        <td>{{ item.deduction }}</td>
+                        <td>${{ item.net_salary }}</td>
+                        <td>
+                            <span class="status">
+                                <form method="post" action="{% url 'main:approve_payroll' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="employee_name" value="{{ item.username }}">
 {#                                 <button type="submit" class="complete-button">Approve Payroll</button>#}
-                                 {% if item.payroll_status == 'APPROVED' %}
-                                     <button type="submit" class="complete-button" disabled>Approved</button>
-                                 {% else %}
-                                     <button type="submit" class="complete-button">Pending Approval</button>
-                                 {% endif %}
-                             </form>
-                         </span>
-                     </td>
-                </tr>
-                {% endfor %}
+                                    {% if item.payroll_status == 'APPROVED' %}
+                                        <button type="submit" class="btn btn-success" disabled>Approved</button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-primary">Pending Approval</button>
+                                    {% endif %}
+                                </form>
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning" onclick="toggleEditForm('{{ item.id }}')">Edit</button>
+                                <form method="post" action="{% url 'main:edit_employee_salary' item.id %}" id="editForm{{ item.id }}" style="display: none;">
+                                    {% csrf_token %}
+                                    <div class=form-row"></div>
+                                    <div class="form-group col">
+                                        <label for="new_salary{{ item.id }}">New Salary:</label>
+                                        <input type="text" name="new_salary" id="new_salary{{ item.id }}">
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="new_deduction{{ item.id }}">New Deduction:</label>
+                                        <input type="text" name="new_deduction" id="new_deduction{{ item.id }}">
+                                    </div>
+                                    </div>
+                                        <button type="btn" class="btn btn-primary">Save</button>
+                                </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
             </div>
         </div>
-
     </main>
     <script>
         $(document).ready(function () {
@@ -173,7 +107,7 @@
             });
         });
     </script>
-
 </body>
 </html>
 {% endblock content %}
+
