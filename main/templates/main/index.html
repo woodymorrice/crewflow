@@ -11,6 +11,7 @@ is a block named "content" -->
         <h1>Welcome to Crewflow, {{ user.first_name }}!</h1>
         <h3>What would you like to do?</h3>
     </header>
+
     <div class="notifications">
     <h3>Notifications</h3>
     {% if notifications %}
@@ -18,7 +19,7 @@ is a block named "content" -->
             {% for notification in notifications %}
                 <li>
                     {{ notification.message }}
-                     <p>{{ notification.created_at | date:"F j, Y, g:i a" }}</p>
+                    <p>{{ notification.created_at | date:"F j, Y, g:i a" }}</p>
                     <form method="post" action="{% url 'main:delete_notification' notification.id %}">
                         {% csrf_token %}
                         <button type="submit">X</button>
@@ -29,8 +30,7 @@ is a block named "content" -->
     {% else %}
         <p>No notifications</p>
     {% endif %}
-
-    </div>
+</div>
 
     <div class="container text-center">
         <div class="row">
@@ -48,4 +48,64 @@ is a block named "content" -->
             </div>
         </div>
     </div>
+
+    <style>
+    .notifications {
+        font-family: Arial, sans-serif;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #f4f4f4; /* Light gray background */
+        border-radius: 8px;
+    }
+
+    .notifications h3 {
+        color: #3498db; /* Major color blue for the header */
+        text-align: center;
+        padding: 15px 0;
+        margin: 0;
+        border-bottom: 2px solid #3498db; /* Major color blue underline */
+    }
+
+    .notifications ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .notifications li {
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #fff; /* White background for each notification */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+        position: relative; /* Make the li position relative */
+    }
+
+    .notifications li button {
+        background-color: #3498db; /* Blue color for close button */
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 50%; /* Make it a circle */
+        cursor: pointer;
+        position: absolute; /* Position the button absolutely */
+        top: 5px;
+        right: 5px;
+    }
+
+    .notifications li button:hover {
+        background-color: #2980b9; /* Darker blue on hover */
+    }
+
+    .notifications li p {
+        color: #666; /* Dark gray for the timestamp */
+        margin-top: 5px;
+        font-size: 12px;
+    }
+
+    .notifications p {
+        text-align: center;
+        color: #555; /* Gray color for "No notifications" text */
+        margin: 15px 0;
+    }
+</style>
 {% endblock content %}

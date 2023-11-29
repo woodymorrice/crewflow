@@ -10,22 +10,24 @@
 
 <div class="announcement-filter">
     <form method="get" action="{% url 'main:announcement' %}">
-        <div>
-            <label for="sort_by">Sort by:</label>
-            <select name="sort_by" id="sort_by">
-                <option value="-date_added">Newest</option>
-                <option value="date_added">Oldest</option>
-                <!-- Add more sorting options if needed -->
-            </select>
-        </div>
 
         <div>
             <label for="search"></label>
             <input type="text" name="search" id="search" placeholder="Search announcements">
         </div>
 
-        <div>
-            <input type="submit" value="Apply">
+        <div class="sort-container">
+            <div>
+                <label for="sort_by"></label>
+                <select name="sort_by" id="sort_by">
+                    <option value="-date_added">Newest</option>
+                    <option value="date_added">Oldest</option>
+                </select>
+            </div>
+
+            <div>
+                <input type="submit" value="Apply">
+            </div>
         </div>
 
     </form>
@@ -34,7 +36,7 @@
 
 
 <div class="announcement-list">
-    <h1 class="announcement-heading">Announcement</h1>
+    <h5 class="announcement-heading">Announcement</h5>
 {% if announcements %}
     {% for announcement in announcements %}
 
@@ -86,13 +88,16 @@
 }
 
 .announcement {
-    background-color: AliceBlue;
-    border: 1px solid black;
-    padding: 10px;
+
     width: 80%;
     margin: 10px auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-decoration: none;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
 }
 
 .announcement-title {
@@ -130,7 +135,7 @@
 }
 
 .announcement-heading {
-    font-size: 24px;
+    font-size: 44px;
     color: #333;
     margin-bottom: 20px;
 }
@@ -142,7 +147,7 @@
     position: fixed; /* Position the div relative to the viewport */
     top: 30px; /* Adjust the distance from the top as needed */
     right: 40px; /* Center horizontally */
-    background-color: lightsteelblue;
+    background-color: #007BFF;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
@@ -156,9 +161,18 @@
     flex-wrap: wrap; /* Allow the form elements to wrap onto the next line */
 }
 
+.announcement-filter select {
+    height: 30px;
+}
+
+
 .announcement-filter label, .announcement-filter select, .announcement-filter input, .announcement-filter input[type="submit"] {
     margin-right: 10px;
 }
+
+.sort-container {
+        display: flex;
+    }
 
 /* Styles for the add announcement link */
 
@@ -174,16 +188,17 @@
 }
 
 .addLink a {
-    display: inline-block;
-    padding: 10px 20px; /* Adjust padding as needed */
-    background-color: lightsteelblue;
-    color: black;
-    border-radius: 40px;
-    text-decoration: none;
+        display: inline-block;
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-top: 10px;
 }
 
 .addLink a:hover {
-    background-color: lightblue;
+    background-color: #0056b3;
 }
 
  /* Use a media query to adjust the layout for smaller screens */
@@ -199,7 +214,11 @@
 
     .announcement-filter label, .announcement-filter select, .announcement-filter input, .announcement-filter input[type="submit"] {
         margin-bottom: 10px; /* Add some vertical spacing between form elements */
+        display: inline-block;
     }
-        }
+    .sort-container {
+        display: flex;
+    }
+}
     </style>
 {% endblock content %}
