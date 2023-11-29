@@ -3,6 +3,7 @@ import os
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views import View
 
+from django.db.models import Q
 from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment, Notification
 from account.models import Employee
 from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm, AvailabilityForm
@@ -92,7 +93,10 @@ def add_employee(request):
 @login_required(login_url='account/login/')
 def view_employees(request):
     query = request.GET.get('search', '')
-    employee_list = Employee.objects.filter(first_name__icontains=query)
+    employee_list = Employee.objects.filter(
+        Q(first_name__icontains=query) |
+        Q(last_name__icontains=query) |
+        Q(role__icontains=query))
     return render(request, 'main/view_employees.html', {'employee_list': employee_list})
 
 @login_required(login_url='account/login/')
