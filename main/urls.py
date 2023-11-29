@@ -31,7 +31,8 @@ urlpatterns = [
 
         # Payroll
         path('payroll/', views.employee_payroll, name='payroll'),
-
+        path('approve_payroll/', views.approve_payroll, name='approve_payroll'),
+        path('edit_employee_salary/<int:employee_id>/', views.edit_employee_salary, name='edit_employee_salary'),
         # Manager pages #
 
         # Add Employees

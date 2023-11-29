@@ -18,7 +18,9 @@
         {% load static %}
     </head>
     <body>
-        <h1>Edit Employee</h1>
+        <header class="bg-blue text-white text-center py-3 rounded-3">
+            <h1>View Employee(s)</h1>
+        </header>
         <form method="post" action="{% url 'main:edit_employee' employee.id %}">
         {% csrf_token %}
         {{ form.as_p }}

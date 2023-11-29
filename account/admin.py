@@ -29,6 +29,8 @@ class EmployeeAdmin(UserAdmin):
                     "address",
                     "postal_code",
                     "salary",
+                    "deduction",
+                    "payroll_status",
                 ),
             },
         ),

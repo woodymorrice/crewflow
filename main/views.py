@@ -11,6 +11,7 @@ from datetime import datetime, date
 from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseBadRequest
 
 
 def can_anno(user):
@@ -194,6 +195,8 @@ def employee_payroll(request):
     employees = Employee.objects.all()
 
     total_payroll_expenses = sum(employee.salary for employee in employees)
+    for employee in employees:
+        employee.net_salary = employee.salary - employee.deduction
 
     current_date = date.today()
     payroll_start_date = current_date.replace(day=1)
@@ -212,14 +215,52 @@ def employee_payroll(request):
         'total_payroll_expenses': total_payroll_expenses,
         'number_of_employees': len(employees),
         'payroll_period': payroll_period,
-        'payroll_status': 'Pending Manager Approval',
+        # 'payroll_status': 'Pending Manager Approval',
         'user_is_manager': True,
         'employee_list': employees,
     }
 
     return render(request, 'main/payroll.html', context)
 
+# helper function to approve individual payroll.
 
+def approve_payroll(request):
+    if request.method == 'POST':
+        employee_username = request.POST.get('employee_name')
+
+        # Retrieve the employee using the username (assuming username is unique)
+        employee = get_object_or_404(Employee, username=employee_username)
+
+        # Check if the payroll is already approved
+        if employee.payroll_status == Employee.PayrollStatus.APPROVED:
+            return HttpResponseBadRequest("Payroll already approved")
+
+        # Perform actions based on the employee (approve payroll for this employee)
+        employee.payroll_status = Employee.PayrollStatus.APPROVED
+        employee.save()
+
+        return redirect('main:payroll')
+
+
+from django.shortcuts import redirect
+
+#helper to edit employee salary and deduction.
+def edit_employee_salary(request, employee_id):
+    if request.method == 'POST':
+        new_salary = request.POST.get('new_salary')
+        new_deduction = request.POST.get('new_deduction')
+
+        # Validate and update the employee's salary and deduction
+        try:
+            employee = Employee.objects.get(id=employee_id)
+            employee.salary = new_salary
+            employee.deduction = new_deduction
+            employee.save()
+        except Employee.DoesNotExist:
+            # Handle the case where the employee doesn't exist
+            pass
+
+    return redirect('main:payroll')
 
 #expense report
 @login_required(login_url='account/login/')
