@@ -145,8 +145,8 @@
                                    href="{% url 'account:login' %}">Log In</a></li>
                             {% endif %}
                             <li><a class="dropdown-item"
-                                    href="#">Profile</a></li>
-                            {% if request.user.role == ADMINISTRATOR %}
+                                    href="{% url 'main:view_profile' %}">Profile</a></li>
+                            {% if request.user.role == "ADMIN" %}
                             <li><a class="dropdown-item"
                                    href="{% url 'admin:index' %}">Admin</a></li>
                             {% endif %}

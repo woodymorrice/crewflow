@@ -379,3 +379,7 @@ def add_availability(request):
 def schedule_landing(request):
     """Landing page for schedule-related things"""
     return render(request, 'main/schedule_landing.html', {'schedule_landing': schedule_landing})
+
+@login_required(login_url='account/login/')
+def view_profile(request):
+    return render(request, 'main/profile.html', {'user': request.user})

@@ -63,6 +63,9 @@ urlpatterns = [
         path('schedule/', views.schedule_landing, name='schedule_landing'),
         path('schedule/add_availability/', views.add_availability, name="add_availability"),
 
+        # Profile
+        path('view_profile/', views.view_profile, name='view_profile'),
+
 ]
 urlpatterns += staticfiles_urlpatterns()
 if settings.DEBUG:
