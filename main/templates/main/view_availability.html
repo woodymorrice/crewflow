@@ -16,7 +16,7 @@
 </style>
 
 <body>
-    {% for availability in availabilities %}
+    {% for item in availabilities %}
     <div class="container">
         <h2 class="mb-4 text-center">Availability</h2>
         <table class="table table-bordered">
@@ -30,7 +30,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for item in availabilities %}
                         <tr>
                             <td>
                                 <div>Start Time: {{ item.m_start_time }}</div>
@@ -53,10 +52,9 @@
                                 <div>End Time: {{ item.f_end_time }}</div>
                             </td>
                         </tr>
-                    {% endfor %}
                 </tbody>
             </table>
-        <a href="{% url 'main:add_availability' %}" class="btn btn-edit text-black">Edit</a>
+        <a href="{% url 'main:edit_availability' %}" class="btn btn-edit text-black">Edit</a>
     </div>
     {% endfor %}
 </body>

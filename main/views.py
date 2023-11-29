@@ -435,8 +435,24 @@ def add_availability(request):
 
 @login_required(login_url='account/login/')
 def view_availability(request):
+    print(Availability.objects.all())
+    if len(Availability.objects.all()) == 0:
+        redirect('main:add_availability')
+
     availabilities = Availability.objects.all()
     return render(request, 'main/view_availability.html', {'availabilities': availabilities})
+
+
+def edit_availability(request):
+    avail = Availability.objects.get(id=1)
+    if request.method == 'POST':
+        avail.content = request.POST.get("edit_availability")
+        avail.save()
+        return redirect('main:view_availability')
+    context = {
+        'availability': avail,
+    }
+    return render(request, 'main/edit_availability.html', context)
 
 
 @login_required(login_url='account/login/')
