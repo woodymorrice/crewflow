@@ -130,12 +130,13 @@ class Notification(models.Model):
     message = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
 class Availability(models.Model):
-    # Fields necessary for the request form
+    # Fields necessary for the availability form
     employee = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='availability'
+        related_name='availabilities'
     )
 
     m_start_time = models.TimeField()

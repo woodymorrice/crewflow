@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views import View
 
 from django.db.models import Q
-from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment, Notification
+from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment, Notification, Availability
 from account.models import Employee
 from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm, AvailabilityForm
 from django.shortcuts import render, redirect, get_object_or_404
@@ -392,10 +392,6 @@ def approve_request(request, request_id):
     time_off_request.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
-@login_required(login_url='account/login/')
-def view_schedule(request):
-    return render(request, 'main/view_schedule.html', {'view_schedule': view_schedule})
-
 
 @login_required(login_url='account/login/')
 def decline_request(request, request_id):
@@ -418,6 +414,7 @@ def cancel_request(request, request_id):
         time_off_request.save()
     return redirect('main:request_time_off')
 
+
 @login_required(login_url='account/login/')
 def add_availability(request):
     if request.method == 'POST':
@@ -426,7 +423,7 @@ def add_availability(request):
             availability = form.save(commit=False)
             availability.employee = request.user
             availability.save()
-            return HttpResponseRedirect(request.path_info)
+            return redirect('main:view_availability')
     else:
         form = AvailabilityForm()
 
@@ -435,10 +432,23 @@ def add_availability(request):
     }
     return render(request, 'main/add_availability.html', context)
 
+
+@login_required(login_url='account/login/')
+def view_availability(request):
+    availabilities = Availability.objects.all()
+    return render(request, 'main/view_availability.html', {'availabilities': availabilities})
+
+
 @login_required(login_url='account/login/')
 def schedule_landing(request):
     """Landing page for schedule-related things"""
     return render(request, 'main/schedule_landing.html', {'schedule_landing': schedule_landing})
+
+
+@login_required(login_url='account/login/')
+def view_schedule(request):
+    return render(request, 'main/view_schedule.html', {'view_schedule': view_schedule})
+
 
 @login_required(login_url='account/login/')
 def view_profile(request):

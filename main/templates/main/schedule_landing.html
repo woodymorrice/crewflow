@@ -10,33 +10,15 @@
 <div class="container text-center">
         <div class="row">
             <div class="col-md-6 mb-3">
-                <a href="{% url 'main:add_availability' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        Your Availability
-                    </button>
-                </a>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'main:view_availability' %}" class="btn bg-blue text-white" role="button">Your Availability</a>
+                    <a href="{% url 'main:schedule_landing' %}" class="btn bg-blue text-white" role="button">Your Schedule</a>
+                </div>
             </div>
             <div class="col-md-6 mb-3">
-                <a href="{% url 'main:schedule_landing' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        Your Schedule
-                    </button>
-                </a>
-            </div>
-            <div class="col-md-6 mb-3">
-                <a href="{% url 'main:schedule_landing' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        View All Schedules
-                    </button>
-                </a>
-            </div>
-            {% if request.user.role == "EMPLOYEE" %}
-            <div class="col-md-6 mb-3">
-                <a href="{% url 'main:request_time_off' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        Request Time Off
-                    </button>
-                </a>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'main:request_time_off' %}" class="btn bg-blue text-white" role="button">Request Time Off</a>
+                </div>
             </div>
             {% endif %}
 
