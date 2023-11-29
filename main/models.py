@@ -137,11 +137,6 @@ class Availability(models.Model):
         on_delete=models.CASCADE,
         related_name='availability'
     )
-    # days = ['M',
-    #         'T',
-    #         'W',
-    #         'Th',
-    #         'F']
 
     m_start_time = models.TimeField()
     m_end_time = models.TimeField()
