@@ -83,6 +83,9 @@ class ExpenseReportForm(forms.ModelForm):
         fields = ['detail', 'amount', 'photo']
 
 class TimeOffRequestForm(forms.ModelForm):
+    details = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 4, 'cols': 40})
+    )
     class Meta:
         model = TimeOffRequest
         fields = ['start_date',
