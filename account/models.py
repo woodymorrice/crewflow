@@ -13,6 +13,11 @@ class Employee(AbstractUser):
     salary = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     deduction = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
+    class PayrollStatus(models.TextChoices):
+        PENDING = "PENDING", "Pending Approval"
+        APPROVED = "APPROVED", "Approved"
+        DECLINED = "DECLINED", "Declined"
+
     class Role(models.TextChoices):
         ADMIN = "ADMIN", 'Admin'
         MANAGER = "MANAGER", 'Manager'
@@ -21,6 +26,7 @@ class Employee(AbstractUser):
     base_role = Role.EMPLOYEE
 
     role = models.CharField(max_length=24, choices=Role.choices)
+    payroll_status = models.CharField(max_length=24, choices=PayrollStatus.choices, default=PayrollStatus.PENDING)
 
     def save(self, *arg, **kwargs):
         # if not self.pk:
