@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends "main/base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -9,12 +10,22 @@
     <title>Blog List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        .heading {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 20px;
+        text-align: center;
+}
         .blog-post {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px 0;
             position: relative;
-
+            width: 90%;
+            margin: 10px auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
 
         .blog-post:hover {
@@ -51,17 +62,56 @@
 
         }
 
+         .image {
+            display: flex;
+            justify-content: center; /* Horizontal alignment */
+            align-items: center; /* Vertical alignment */
+        }
+
+        .image img {
+            max-width: 50%; /* Make the image responsive within its container */
+            height: auto; /* Maintain the aspect ratio of the image */
+        }
+
+        .addLink {
+    display: inline-block;
+    width: 200px; /* Adjust the width as needed */
+    float: left; /* Position the div to the left */
+    text-align: right; /* Right-align the text inside the div */
+    position: fixed; /* Position the div relative to the viewport */
+    bottom: 80px; /* Adjust the distance from the bottom as needed */
+    right: 20px; /* Adjust the distance from the left as needed */
+    z-index: 2;
+}
+
+.addLink a {
+        display: inline-block;
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-top: 10px;
+}
+
+.addLink a:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
 <body>
 
-<h1>Blog Posts</h1>
-<a class="create-blog-link" href="{% url 'main:create_blog_post' %}">Create a Blog</a>
-<a class="Home" href="{% url 'main:index' %}">Home</a>
+<h1 class = "heading">Blog Posts</h1>
 
+<div class="addLink">
+<a class="create-blog-link" href="{% url 'main:create_blog_post' %}">Create a Blog</a>
+</div>
+
+
+{% if blog_posts %}
 <ul>
     {% for post in blog_posts %}
-
         <ul>
               <div class="blog-post">
 
@@ -83,10 +133,22 @@
                 <p>{{ post.content }}</p>
                 <p>Created by: {{ post.author }}</p>
                 <p>Created at: {{ post.date_added }}</p>
+                  {% if post.is_custom_photo %}
+                      <div class="image">
+                        <img src="{{ post.photo.url }}" alt="Blog Image">
+                      </div>
+                    {% endif %}
+
             </div>
         </ul>
     {% endfor %}
 </ul>
+{% else %}
+            <p class = "heading">No Blog Available.</p>
+    <div class="image">
+            <img src="{% static 'main/media/crewflow.jpg' %}"  alt="Image">
+    </div>
+        {% endif %}
 
 </body>
 </html>

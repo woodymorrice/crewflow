@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Blog</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -87,7 +88,7 @@
 <div class="container">
     <h2>Add a New Blog</h2>
 
-    <form id="blog_form" method="POST" action="{% url 'main:create_blog_post' %}">
+    <form id="blog_form" method="POST" action="{% url 'main:create_blog_post' %}" enctype="multipart/form-data">
         <label for="title">Blog Title</label>
         <label>
             <input id="title" name="title" type="text">
@@ -96,6 +97,10 @@
         <label>
             <textarea id="content" style="height: 150px" name="content"></textarea>
         </label>
+
+        <label for="photo">Upload Photo</label>
+        <input id="photo" name="photo" type="file">
+
        {% csrf_token %}
         <button type="submit">Post</button>
     </form>

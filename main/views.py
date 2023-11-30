@@ -115,7 +115,7 @@ def edit_employee(request, employee_id):
 
 @login_required(login_url='account/login/')
 def blog_list(request):
-    blog_posts = BlogPost.objects.all()
+    blog_posts = BlogPost.objects.all().order_by('-date_added')
     return render(request, './main/blog_list.html', {'blog_posts': blog_posts})
 
 
@@ -140,13 +140,18 @@ def view_blog_details(request, post_id):
 @login_required(login_url='account/login/')
 def create_blog_post(request):
     if request.method == 'POST':
-        form = BlogPostForm(request.POST)
+        form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
             new_blog_post = form.save(commit=False)
-            # Set the author to the currently logged-in user's username
             new_blog_post.author = request.user
-            # Save the blog post with the author
+
+            # Check if a photo is uploaded
+            if 'photo' in request.FILES:
+                new_blog_post.photo = request.FILES['photo']
+                new_blog_post.is_custom_photo = True  # Set the flag for a custom photo
+
             new_blog_post.save()
+            return redirect('main:blog_list')  # Redirect to the blog list page after saving
     else:
         form = BlogPostForm()
 
@@ -185,8 +190,18 @@ def edit_blog_post(request, post_id):
 
 
 def delete_blog(request, post_id):
-    blog = BlogPost.objects.get(id=post_id)
-    BlogPost.objects.get(id=blog.id).delete()
+    blog = get_object_or_404(BlogPost, id=post_id)
+
+    # Check if the blog has a photo and delete it manually
+    if blog.photo:
+        # Get the path of the photo file
+        photo_path = os.path.join(settings.MEDIA_ROOT, str(blog.photo))
+
+        # Check if the file exists and delete it
+        if os.path.exists(photo_path):
+            os.remove(photo_path)
+
+    blog.delete()
     return redirect('main:blog_list')
 
 

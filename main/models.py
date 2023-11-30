@@ -48,6 +48,8 @@ class BlogPost(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
+    photo = models.ImageField(upload_to='blog/', default='default_photo.jpg')
+    is_custom_photo = models.BooleanField(default=False)
 
 class Comment(models.Model):
     to_reply = models.IntegerField(null=True, blank=True)

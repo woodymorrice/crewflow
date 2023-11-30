@@ -6,10 +6,12 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
+
             <div class="button-group">
                 <a href="{% url 'main:expense_reports' %}" class="cancel-link">Cancel</a>
                 <input type="submit" value="Submit">
             </div>
+
         </form>
     </div>
 
