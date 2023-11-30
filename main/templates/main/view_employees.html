@@ -53,7 +53,7 @@
                             <td>{{ item.role }}</td>
                             <td>{{ item.date_of_employment }}</td>
                             <td>{{ item.postal_code }}</td>
-                            <td><a href="{% url 'main:edit_employee' item.id %}" class="btn btn-edit text-black">Edit</a></td>
+                            <td><a href="{% url 'main:edit_employee' item.id %}" class="btn btn-warning">Edit</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
