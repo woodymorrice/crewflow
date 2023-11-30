@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crewflow</title>
     <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> -->
+     <!--<link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">-->
     <!-- Bootstrap Font Icon CSS -->
     <link rel="stylesheet"
      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -50,18 +50,31 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-sm-auto bg-blue sticky-top">
-            <div class="d-flex flex-sm-column flex-row flex-nowrap bg-blue
-                align-items-center sticky-top">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-12 bg-blue sticky-top">
+        <!-- Button to toggle the sidebar -->
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary d-block d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar" >
+                Sidebar
+            </button>
+        </div>
+
+             <!-- Sidebar -->
+            <div class="collapse d-md-block" id="sidebar">
+            <div class="d-flex justify-content-end">
+            <button class="btn btn-secondary d-block d-md-none" type="button" onclick="closeSidebar()">
+                    X
+            </button>
+            </div>
+
+            <div class="d-flex flex-column align-items-center">
                 <a href="/" class="d-block p-3 link-dark text-decoration-none"
                  title="" data-bs-toggle="tooltip" data-bs-placement="right"
                  data-bs-original-title="Icon-only">
                     <img src="{% static 'main/media/crewflow_small.jpg' %}"
                      class="img-fluid rounded" alt="Crewflow">
                 </a>
-                <ul class="nav nav-pills nav-flush flex-sm-column flex-row
-                 flex-nowrap mb-auto mx-auto text-center align-items-start bg-blue">
+                <ul class="nav flex-column">
                     <li class="nav-item">
                       <a href="{% url 'main:index'  %}"
                          class="nav-link py-3 px-2 text-white" title="Home"
@@ -166,12 +179,25 @@
                     </div>
                 </div>
             </div>
+
+            </div>
         </div>
-        <div class="col-sm p-3 min-vh-100">
+        <div class="col-lg-9 col-md-8 col-sm-12 p-3 min-vh-100">
           <!-- content -->
           {% block content %}{% endblock content %}
         </div>
     </div>
 </div>
+
+<script>
+    function closeSidebar() {
+        var sidebar = document.getElementById('sidebar');
+        var bsCollapse = new bootstrap.Collapse(sidebar);
+        bsCollapse.hide();
+    }
+</script>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

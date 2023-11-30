@@ -14,7 +14,7 @@
 
         <div>
             <label for="search"></label>
-            <input type="text" name="search" id="search" placeholder="Search announcements">
+            <input type="text" name="search" id="search" placeholder="Search:">
         </div>
 
         <div class="sort-container">
@@ -150,7 +150,7 @@
 .announcement-filter {
     position: fixed; /* Position the div relative to the viewport */
     top: 30px; /* Adjust the distance from the top as needed */
-    right: 40px; /* Center horizontally */
+    right: 30px; /* Center horizontally */
     background-color: #007BFF;
     border: 1px solid #ddd;
     padding: 10px;
@@ -167,6 +167,10 @@
 
 .announcement-filter select {
     height: 30px;
+}
+
+.announcement-filter input{
+    width:80px;
 }
 
 
@@ -206,23 +210,25 @@
 }
 
  /* Use a media query to adjust the layout for smaller screens */
-@media (max-width: 800px) {
+/*@media (max-width: 800px) {
     .announcement-list {
         top: 160px;
     }
     .announcement-filter form {
         display: flex;
         align-items: center;
-        flex-direction: column; /* Stack the form elements vertically */
+        flex-direction: column; /* Stack the form elements vertically
     }
 
     .announcement-filter label, .announcement-filter select, .announcement-filter input, .announcement-filter input[type="submit"] {
-        margin-bottom: 10px; /* Add some vertical spacing between form elements */
+        margin-bottom: 10px;
         display: inline-block;
     }
     .sort-container {
         display: flex;
     }
+    }*/
+
 
     .image {
             display: flex;
@@ -234,6 +240,6 @@
             max-width: 50%; /* Make the image responsive within its container */
             height: auto; /* Maintain the aspect ratio of the image */
         }
-}
+
     </style>
 {% endblock content %}
