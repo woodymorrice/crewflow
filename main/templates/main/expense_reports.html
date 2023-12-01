@@ -2,6 +2,35 @@
 {% load static %}
 
 {% block content %}
+    <button class="expense-search" id="filter-toggle-btn" >
+    &#128269;
+</button>
+
+    <div class="expense-filter" id="filter">
+    <form method="get" action="{% url 'main:expense_reports' %}">
+
+        <div>
+            <label for="status_filter"></label>
+            <select name="status_filter" id="status_filter">
+                <option value="">All</option>
+                <option value="IN_PROCESS">In Process</option>
+                <option value="APPROVED">Approved</option>
+                <option value="DECLINED">Declined</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="search_id"></label>
+            <input type="text" name="search_id" id="search_id" placeholder="Search:">
+        </div>
+
+        <div>
+            <input type="submit" value="Apply">
+        </div>
+
+    </form>
+</div>
+
     <div class="report-list">
     <header class="bg-blue text-white text-center py-3 rounded-3">
         <h1>Expense Reports</h1>
@@ -122,5 +151,74 @@
             height: auto; /* Maintain the aspect ratio of the image */
         }
 
+        /*Styles for filter */
+.expense-filter {
+    position: fixed; /* Position the div relative to the viewport */
+    top: 20px; /* Adjust the distance from the top as needed */
+    right: 20px; /* Center horizontally */
+    background-color: #007BFF;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.expense-search {
+    position: fixed; /* Position the div relative to the viewport */
+    top: 20px; /* Adjust the distance from the top as needed */
+    right: 20px; /* Center horizontally */
+    background-color: transparent; /* or background-color: initial; */
+    border: none;
+}
+
+.expense-filter form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow the form elements to wrap onto the next line */
+}
+
+.expense-filter select {
+    height: 30px;
+}
+
+.expense-filter input{
+    width:80px;
+}
+
+
+.expense-filter label, .expense-filter select, .expense-filter input, .expense-filter input[type="submit"] {
+    margin-right: 10px;
+}
+
+.sort-container {
+        display: flex;
+    }
+
+@media (max-width: 800px) {
+    .expense-filter,
+    .expense-search {
+        top:60px;
+    }
+}
     </style>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterToggleBtn = document.getElementById('filter-toggle-btn');
+    const announcementFilter = document.getElementById('filter');
+
+    // Hide the filter initially
+    announcementFilter.style.display = 'none';
+
+    // Toggle the filter visibility when the button is clicked
+    filterToggleBtn.addEventListener('click', function() {
+        if (announcementFilter.style.display === 'none') {
+            announcementFilter.style.display = 'block';
+        } else {
+            announcementFilter.style.display = 'none';
+        }
+    });
+});
+</script>
 {% endblock content %}

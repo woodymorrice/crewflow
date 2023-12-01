@@ -284,10 +284,20 @@ def edit_employee_salary(request, employee_id):
 #expense report
 @login_required(login_url='account/login/')
 def expense_reports(request):
+    status_filter = request.GET.get('status_filter')
+    search_id = request.GET.get('search_id')
+
     if request.user.is_staff or request.user.is_manager():
         reports = ExpenseReport.objects.all()
     else:
         reports = ExpenseReport.objects.filter(requester=request.user)
+
+    if status_filter:
+        reports = reports.filter(status=status_filter)
+
+    if search_id:
+        reports = reports.filter(id=search_id)
+
     return render(request, 'main/expense_reports.html', {'reports': reports})
 
 @login_required(login_url='account/login/')
