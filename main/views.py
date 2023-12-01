@@ -390,6 +390,8 @@ def approve_request(request, request_id):
     time_off_request = TimeOffRequest.objects.get(pk=request_id)
     time_off_request.status = 'approved'
     time_off_request.save()
+    message = f"Your time off request for {time_off_request.reason_choices}, date from {time_off_request.start_date} to {time_off_request.end_date}, has been approved."
+    Notification.objects.create(user=time_off_request.employee, message=message)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
@@ -398,6 +400,8 @@ def decline_request(request, request_id):
     time_off_request = TimeOffRequest.objects.get(pk=request_id)
     time_off_request.status = 'denied'
     time_off_request.save()
+    message = f"Your time off request for {time_off_request.reason_choices}, date from {time_off_request.start_date} to {time_off_request.end_date}, has been denied."
+    Notification.objects.create(user=time_off_request.employee, message=message)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required(login_url='account/login/')
