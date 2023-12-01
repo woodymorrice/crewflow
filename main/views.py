@@ -428,6 +428,7 @@ def add_availability(request):
         form = AvailabilityForm()
 
     context = {
+        'user': request.user,
         'form': form,
     }
     return render(request, 'main/add_availability.html', context)
@@ -435,10 +436,8 @@ def add_availability(request):
 
 @login_required(login_url='account/login/')
 def view_availability(request):
-    print(Availability.objects.all())
     if len(Availability.objects.all()) == 0:
         redirect('main:add_availability')
-
     availabilities = Availability.objects.all()
     return render(request, 'main/view_availability.html', {'availabilities': availabilities})
 
