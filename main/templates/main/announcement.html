@@ -13,7 +13,11 @@
         <h1>Announcements</h1>
         </header>
 
-<div class="announcement-filter">
+    <button class="announcement-search" id="filter-toggle-btn" >
+    &#128269;
+</button>
+
+<div class="announcement-filter" id="announcement-filter">
     <form method="get" action="{% url 'main:announcement' %}">
 
         <div>
@@ -153,14 +157,22 @@
 /*Styles for filter */
 .announcement-filter {
     position: fixed; /* Position the div relative to the viewport */
-    top: 110px; /* Adjust the distance from the top as needed */
-    right: 16px; /* Center horizontally */
+    top: 20px; /* Adjust the distance from the top as needed */
+    right: 20px; /* Center horizontally */
     background-color: #007BFF;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 2;
+}
+
+.announcement-search {
+    position: fixed; /* Position the div relative to the viewport */
+    top: 20px; /* Adjust the distance from the top as needed */
+    right: 20px; /* Center horizontally */
+    background-color: transparent; /* or background-color: initial; */
+    border: none;
 }
 
 .announcement-filter form {
@@ -233,7 +245,12 @@
     }
     }*/
 
-
+@media (max-width: 800px) {
+    .announcement-filter,
+    .announcement-search {
+        top:60px;
+    }
+}
     .image {
             display: flex;
             justify-content: center; /* Horizontal alignment */
@@ -246,4 +263,23 @@
         }
 
     </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterToggleBtn = document.getElementById('filter-toggle-btn');
+    const announcementFilter = document.getElementById('announcement-filter');
+
+    // Hide the filter initially
+    announcementFilter.style.display = 'none';
+
+    // Toggle the filter visibility when the button is clicked
+    filterToggleBtn.addEventListener('click', function() {
+        if (announcementFilter.style.display === 'none') {
+            announcementFilter.style.display = 'block';
+        } else {
+            announcementFilter.style.display = 'none';
+        }
+    });
+});
+</script>
 {% endblock content %}
