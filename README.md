@@ -1,6 +1,6 @@
 # Crewflow
 
-Crewflow is a fully featured employee management system.
+Crewflow is a fully featured employee management system that facilitates management of employee information, scheduling, and company communication.
 
 ## Requirements
 
