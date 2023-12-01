@@ -9,15 +9,9 @@
           rel="stylesheet">
 </head>
 
-<style>
-    fieldset {
-        align-items:center;
-    }
-</style>
-
 <body>
     {% for item in availabilities %}
-    <div class="container">
+    <div class="container text-center">
         <h2 class="mb-4 text-center">Availability</h2>
         <table class="table table-bordered">
                 <thead class="table-dark">
@@ -54,7 +48,9 @@
                         </tr>
                 </tbody>
             </table>
-        <a href="{% url 'main:edit_availability' %}" class="btn btn-edit text-black">Edit</a>
+        <div class="d-grid gap-2">
+            <a href="{% url 'main:edit_availability' %}" class="btn btn-warning">Edit</a>
+        </div>
     </div>
     {% endfor %}
 </body>

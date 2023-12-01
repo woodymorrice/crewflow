@@ -452,7 +452,7 @@ def edit_availability(request):
             form.save()
             return redirect('main:view_availability')
     else:
-        form = ChangeEmployeeForm(instance=avail)
+        form = ChangeAvailabilityForm(instance=avail)
     context = {'avail': avail, 'form': form}
     return render(request, 'main/edit_availability.html', context)
 
