@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends "main/base.html" %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Availability</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+
+<body>
+    {% for item in availabilities %}
+    <div class="container text-center">
+        <h2 class="mb-4 text-center">Availability</h2>
+        <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>
+                                <div>Start Time: {{ item.m_start_time }}</div>
+                                <div>End Time: {{ item.m_end_time }}</div>
+                            </td>
+                            <td>
+                                <div>Start Time: {{ item.t_start_time }}</div>
+                                <div>End Time: {{ item.t_end_time }}</div>
+                            </td>
+                            <td>
+                                <div>Start Time: {{ item.w_start_time }}</div>
+                                <div>End Time: {{ item.w_end_time }}</div>
+                            </td>
+                            <td>
+                                <div>Start Time: {{ item.th_start_time }}</div>
+                                <div>End Time: {{ item.th_end_time }}</div>
+                            </td>
+                            <td>
+                                <div>Start Time: {{ item.f_start_time }}</div>
+                                <div>End Time: {{ item.f_end_time }}</div>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        <div class="d-grid gap-2">
+            <a href="{% url 'main:edit_availability' %}" class="btn btn-warning">Edit</a>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>
+{% endblock content %}

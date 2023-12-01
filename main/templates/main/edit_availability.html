@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% extends "main/base.html" %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Availability</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+
+<style>
+    fieldset {
+        align-items:center;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h2 class="mb-4 text-center">Edit Availability</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm">
+                        <h4>Monday</h4>
+                        <div class="form-group">
+                            Start Time {{ form.m_start_time }}
+                        </div>
+                        <div class="form-group">
+                            End Time {{ form.m_end_time }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <h4>Tuesday</h4>
+                        <div class="form-group">
+                            Start Time {{ form.t_start_time }}
+                        </div>
+                        <div class="form-group">
+                            End Time {{ form.t_end_time }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <h4>Wednesday</h4>
+                        <div class="form-group">
+                            Start Time {{ form.w_start_time }}
+                        </div>
+                        <div class="form-group">
+                            End Time {{ form.w_end_time }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <h4>Thursday</h4>
+                        <div class="form-group">
+                            Start Time {{ form.th_start_time }}
+                        </div>
+                        <div class="form-group">
+                            End Time {{ form.th_end_time }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <h4>Friday</h4>
+                        <div class="form-group">
+                            Start Time {{ form.f_start_time }}
+                        </div>
+                        <div class="form-group">
+                            End Time {{ form.f_end_time }}
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+    </div>
+</body>
+</html>
+{% endblock content %}

@@ -130,26 +130,22 @@ class Notification(models.Model):
     message = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
 class Availability(models.Model):
-    # Fields necessary for the request form
+    # Fields necessary for the availability form
     employee = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='availability'
+        related_name='availabilities'
     )
-    # days = ['M',
-    #         'T',
-    #         'W',
-    #         'Th',
-    #         'F']
 
-    m_start_time = models.TimeField()
-    m_end_time = models.TimeField()
-    t_start_time = models.TimeField()
-    t_end_time = models.TimeField()
-    w_start_time = models.TimeField()
-    w_end_time = models.TimeField()
-    th_start_time = models.TimeField()
-    th_end_time = models.TimeField()
-    f_start_time = models.TimeField()
-    f_end_time = models.TimeField()
+    m_start_time = models.TimeField(default='08:00:00')
+    m_end_time = models.TimeField(default='16:00:00')
+    t_start_time = models.TimeField(default='16:00:00')
+    t_end_time = models.TimeField(default='08:00:00')
+    w_start_time = models.TimeField(default='16:00:00')
+    w_end_time = models.TimeField(default='08:00:00')
+    th_start_time = models.TimeField(default='16:00:00')
+    th_end_time = models.TimeField(default='08:00:00')
+    f_start_time = models.TimeField(default='16:00:00')
+    f_end_time = models.TimeField(default='08:00:00')
