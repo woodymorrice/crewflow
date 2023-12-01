@@ -26,7 +26,7 @@ cd chosenfolder
 
 Create a new python virtual environment named "env":
 ```
-python -m venv env
+python3 -m venv env
 ```
 
 Activate the virtual environment:
