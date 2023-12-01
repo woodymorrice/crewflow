@@ -11,16 +11,21 @@
             max-width: fit-content;
         }
     </style>
+    <header class="bg-blue text-white text-center py-3 rounded-3">
+        <h1>Add Employee</h1>
+    </header>
 
     <div class="add_employee">
         <form method="POST" action="{% url 'main:add_employee' %}">
             <fieldset>
-                <legend>Add Employee</legend>
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type="submit" class="btn btn-primary"> Add Employee to Database </button>
+                <button type="submit" class="btn btn-success"> Add Employee to Database </button>
             </fieldset>
         </form>
+    </div>
+    <div class="container text-center my-3">
+        <a href="{% url 'main:view_employees' %}" class="btn bg-blue text-white" role="button">Back to Employee List</a>
     </div>
 </html>
 
