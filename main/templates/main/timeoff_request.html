@@ -19,8 +19,10 @@
     </style>
 </head>
 <body>
+    <header class="bg-blue text-white text-center py-3 rounded-3">
+        <h1>Employee Time Off Request</h1>
+    </header>
     <div class="container mt-5">
-        <h2 class="mb-4 text-center">Employee Time Off Request</h2>
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
@@ -43,7 +45,7 @@
         </form>
 
         <div class="mt-5">
-            <h3 class="mb-4 text-center"> View status of Your Requests</h3>
+            <h3 class="mb-4 bg-blue text-white rounded-3 text-center">View Status of Your Requests</h3>
             <table class="table">
                 <thead>
                     <tr>
