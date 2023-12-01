@@ -2,30 +2,41 @@
 {% extends "main/base.html" %}
 {% block content %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Schedule</title>
-</head>
+<header class="bg-blue text-white text-center py-3 rounded-3">
+    <h1>Scheduling</h1>
+</header>
 
 <body>
-<div class="container text-center">
+    <div class="container text-center">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <div class="d-grid gap-2">
-                    <a href="{% url 'main:view_availability' %}" class="btn bg-blue text-white" role="button">Your Availability</a>
-                    <a href="{% url 'main:schedule_landing' %}" class="btn bg-blue text-white" role="button">Your Schedule</a>
+                    <a href="{% url 'main:view_availability' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Your Availability</a>
+                    {% if request.user.role != "EMPLOYEE" %}
+                        <a href="{% url 'main:view_availabilities' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">All Availabilities</a>
+                    {% endif %}
+
+<!--                    <a href="{% url 'main:schedule_landing' %}" class="btn secondary-colour text-white btn-lg homepg-btn d-flex align-items-center justify-content-center homepg-text" role="button">Your Schedule</a>-->
                 </div>
             </div>
             <div class="col-md-6 mb-3">
                 <div class="d-grid gap-2">
-                    <a href="{% url 'main:request_time_off' %}" class="btn bg-blue text-white" role="button">Request Time Off</a>
+                    <a href="{% url 'main:request_time_off' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Request Time Off</a>
                     {% if request.user.role != "EMPLOYEE" %}
-                    <a href="{% url 'main:check_time_off_requests' %}" class="btn bg-blue text-white" role="button">Check Requests</a>
+                    <a href="{% url 'main:check_time_off_requests' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Check Requests</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
+
+
+
+    <style>
+        .container {
+            padding: 10px;
+        }
+    </style>
 
 </body>
 </html>

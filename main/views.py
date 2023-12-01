@@ -428,7 +428,6 @@ def add_availability(request):
         form = AvailabilityForm()
 
     context = {
-        'user': request.user,
         'form': form,
     }
     return render(request, 'main/add_availability.html', context)
@@ -436,15 +435,24 @@ def add_availability(request):
 
 @login_required(login_url='account/login/')
 def view_availability(request):
-    if len(Availability.objects.all()) == 0:
-        redirect('main:add_availability')
-    availabilities = Availability.objects.all()
+    if len(Availability.objects.filter(employee=request.user)) == 0:
+        return redirect('main:add_availability')
+    else:
+        availabilities = Availability.objects.filter(employee=request.user)
+    return render(request, 'main/view_availability.html', {'availabilities': availabilities})
+
+@login_required(login_url='account/login/')
+def view_availabilities(request):
+    if len(Availability.objects.filter(employee=request.user)) == 0:
+        return redirect('main:add_availability')
+    else:
+        availabilities = Availability.objects.all()
     return render(request, 'main/view_availability.html', {'availabilities': availabilities})
 
 
 @login_required(login_url='account/login/')
-def edit_availability(request):
-    avail = get_object_or_404(Availability)
+def edit_availability(request, avail_id):
+    avail = get_object_or_404(Availability, id=avail_id)
     if request.method == 'POST':
         form = ChangeAvailabilityForm(request.POST, instance=avail)
         if form.is_valid():

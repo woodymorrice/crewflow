@@ -2,8 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 
-from main.forms import AddEmployeeForm, ChangeEmployeeForm
+from main.forms import AddEmployeeForm, ChangeEmployeeForm, AvailabilityForm, ChangeAvailabilityForm
 from .models import Employee
+from main.models import Availability
 
 class EmployeeAdmin(UserAdmin):
     add_form = AddEmployeeForm
@@ -55,4 +56,5 @@ class EmployeeAdmin(UserAdmin):
 
 # Register your models here.
 admin.site.register(Employee, EmployeeAdmin)
+admin.site.register(Availability)
 admin.site.unregister(Group)

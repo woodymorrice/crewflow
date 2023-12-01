@@ -9,13 +9,19 @@
           rel="stylesheet">
 </head>
 
+<header class="bg-blue text-white text-center py-3 rounded-3">
+    <h1>Availability</h1>
+</header>
+
 <body>
     {% for item in availabilities %}
     <div class="container text-center">
-        <h2 class="mb-4 text-center">Availability</h2>
         <table class="table table-bordered">
                 <thead class="table-dark">
                     <tr>
+                        {% if request.user.role != "EMPLOYEE"%}
+                            <th>Employee</th>
+                        {% endif %}
                         <th>Monday</th>
                         <th>Tuesday</th>
                         <th>Wednesday</th>
@@ -25,6 +31,11 @@
                 </thead>
                 <tbody>
                         <tr>
+                            {% if request.user.role != "EMPLOYEE" %}
+                            <td>
+                                {{ item.employee }}
+                            </td>
+                            {% endif %}
                             <td>
                                 <div>Start Time: {{ item.m_start_time }}</div>
                                 <div>End Time: {{ item.m_end_time }}</div>
@@ -49,10 +60,16 @@
                 </tbody>
             </table>
         <div class="d-grid gap-2">
-            <a href="{% url 'main:edit_availability' %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'main:edit_availability' item.id %}" class="btn btn-warning">Edit</a>
         </div>
     </div>
     {% endfor %}
+
+    <style>
+        .container {
+            padding: 10px;
+        }
+    </style>
 </body>
 </html>
 {% endblock content %}
