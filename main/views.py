@@ -6,7 +6,7 @@ from django.views import View
 from django.db.models import Q
 from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment, Notification, Availability
 from account.models import Employee
-from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm, AvailabilityForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm, AvailabilityForm, ChangeAvailabilityForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
@@ -443,15 +443,17 @@ def view_availability(request):
     return render(request, 'main/view_availability.html', {'availabilities': availabilities})
 
 
+@login_required(login_url='account/login/')
 def edit_availability(request):
-    avail = Availability.objects.get(id=1)
+    avail = get_object_or_404(Availability)
     if request.method == 'POST':
-        avail.content = request.POST.get("edit_availability")
-        avail.save()
-        return redirect('main:view_availability')
-    context = {
-        'availability': avail,
-    }
+        form = ChangeAvailabilityForm(request.POST, instance=avail)
+        if form.is_valid():
+            form.save()
+            return redirect('main:view_availability')
+    else:
+        form = ChangeEmployeeForm(instance=avail)
+    context = {'avail': avail, 'form': form}
     return render(request, 'main/edit_availability.html', context)
 
 

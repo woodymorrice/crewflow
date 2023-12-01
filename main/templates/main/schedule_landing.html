@@ -19,19 +19,11 @@
             <div class="col-md-6 mb-3">
                 <div class="d-grid gap-2">
                     <a href="{% url 'main:request_time_off' %}" class="btn bg-blue text-white" role="button">Request Time Off</a>
+                    {% if request.user.role != "EMPLOYEE" %}
+                    <a href="{% url 'main:check_time_off_requests' %}" class="btn bg-blue text-white" role="button">Check Requests</a>
+                    {% endif %}
                 </div>
             </div>
-            {% endif %}
-
-            {% if request.user.role != "EMPLOYEE" %}
-            <div class="col-md-6 mb-3">
-                <a href="{% url 'main:check_time_off_requests' %}">
-                    <button type="button" class="btn bg-blue text-white btn-block">
-                        Check Requests
-                    </button>
-                </a>
-            </div>
-            {% endif %}
         </div>
     </div>
 

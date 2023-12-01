@@ -131,7 +131,8 @@ class AvailabilityForm(forms.ModelForm):
             'f_end_time': forms.TimeInput(attrs={'type': 'time'}),
         }
 
-class AvailabilityForm(forms.ModelForm):
+
+class ChangeAvailabilityForm(forms.ModelForm):
     class Meta:
         model = Availability
         fields = ['m_start_time',
