@@ -9,6 +9,10 @@
 </div>
  {% endif %}
 
+        <header class="bg-blue text-white text-center py-3 rounded-3">
+        <h1>Announcements</h1>
+        </header>
+
 <div class="announcement-filter">
     <form method="get" action="{% url 'main:announcement' %}">
 
@@ -37,7 +41,7 @@
 
 
 <div class="announcement-list">
-    <h5 class="announcement-heading">Announcement</h5>
+    <!--<h5 class="announcement-heading">Announcement</h5>-->
 {% if announcements %}
     {% for announcement in announcements %}
 
@@ -149,8 +153,8 @@
 /*Styles for filter */
 .announcement-filter {
     position: fixed; /* Position the div relative to the viewport */
-    top: 30px; /* Adjust the distance from the top as needed */
-    right: 30px; /* Center horizontally */
+    top: 110px; /* Adjust the distance from the top as needed */
+    right: 16px; /* Center horizontally */
     background-color: #007BFF;
     border: 1px solid #ddd;
     padding: 10px;
