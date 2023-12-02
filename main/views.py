@@ -14,6 +14,9 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseBadRequest
 
+import calendar
+from calendar import HTMLCalendar
+
 
 def can_anno(user):
     """Defined user permission"""
@@ -461,7 +464,7 @@ def view_availabilities(request):
         return redirect('main:add_availability')
     else:
         availabilities = Availability.objects.all()
-    return render(request, 'main/view_availability.html', {'availabilities': availabilities})
+    return render(request, 'main/all_availabilities.html', {'availabilities': availabilities})
 
 
 @login_required(login_url='account/login/')
@@ -479,13 +482,35 @@ def edit_availability(request, avail_id):
 
 
 @login_required(login_url='account/login/')
-def schedule_landing(request):
+def schedule_landing(request, year=int(str(datetime.now().year)), month=int(datetime.now().month)):
     """Landing page for schedule-related things"""
-    return render(request, 'main/schedule_landing.html', {'schedule_landing': schedule_landing})
+
+    cal = HTMLCalendar().formatmonth(year, month)
+
+    context = {
+        'schedule_landing': schedule_landing,
+        'year': year,
+        'month': month,
+        'cal': cal,
+    }
+    return render(request, 'main/schedule_landing.html', context)
 
 
 @login_required(login_url='account/login/')
 def view_schedule(request):
+    # year = int(str(date.year))
+    # month = str(date.month)
+    # month_num = int(list(calendar.month_name).index(month.title()))
+    #
+    # cal = HTMLCalendar().formatmonth(year, month_num)
+    #
+    # context = {
+    #     'view_schedule': view_schedule,
+    #     'year': year,
+    #     'month': month,
+    #     'month_num': month_num,
+    #     'cal': cal,
+    # }
     return render(request, 'main/view_schedule.html', {'view_schedule': view_schedule})
 
 

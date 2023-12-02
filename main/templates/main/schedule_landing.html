@@ -16,7 +16,7 @@
                         <a href="{% url 'main:view_availabilities' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">All Availabilities</a>
                     {% endif %}
 
-<!--                    <a href="{% url 'main:schedule_landing' %}" class="btn secondary-colour text-white btn-lg homepg-btn d-flex align-items-center justify-content-center homepg-text" role="button">Your Schedule</a>-->
+<!--                    <a href="{% url 'main:view_schedule' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Your Schedule</a>-->
                 </div>
             </div>
             <div class="col-md-6 mb-3">
@@ -30,7 +30,9 @@
         </div>
     </div>
 
-
+    <div>
+        {{ cal|safe }}
+    </div>
 
     <style>
         .container {
