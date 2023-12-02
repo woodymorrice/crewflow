@@ -62,6 +62,7 @@ class ChangeEmployeeForm(UserChangeForm):
                   "can_announce",
                   "can_blog",
                   "salary",
+                  "role",
                   ]
         labels = {'username': "Username",
                   'email': "Email",
@@ -73,6 +74,7 @@ class ChangeEmployeeForm(UserChangeForm):
                   'can_announce': "Post Announcements?",
                   'can_blog': "Post Blogs?",
                   'salary': "Salary",
+                  'role': "Role",
                   }
 
 

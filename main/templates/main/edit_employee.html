@@ -60,6 +60,11 @@
             </div>
 
             <div class="mb-3">
+                <label for="{{ form.role.id_for_label }}" class="bg-black text-white rounded-top p-1">Role:</label>
+                {{ form.role }}
+            </div>
+
+            <div class="mb-3">
                 <label for="{{ form.can_announce.id_for_label }}" class="bg-black text-white rounded-top p-1">Post Announcements?</label>
                 {{ form.can_announce }}
             </div>
