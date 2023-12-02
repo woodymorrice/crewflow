@@ -27,7 +27,9 @@ def index(request):
     """Landing page for the main app
         of the project"""
     notifications = Notification.objects.filter(user=request.user)  # Fetch unread notifications
-    return render(request, 'main/index.html', {'notifications': notifications})
+    blog_posts = BlogPost.objects.all().order_by('-date_added')
+    context = {'notifications': notifications, 'blog_posts': blog_posts}
+    return render(request, 'main/index.html', context)
 
 @login_required(login_url='account/login/')
 def announcement(request):

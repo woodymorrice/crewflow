@@ -1,6 +1,7 @@
 <!-- Pages inherit from the base template by
 declaring extends "base" like this: -->
 {% extends "main/base.html" %}
+{% load static %}
 
 <!-- Content unique to this page lives inside a 
 block like this one. Multiple blocks can be created
@@ -33,7 +34,7 @@ is a block named "content" -->
 </div>
 
     <!-- Grid for each main page button -->
-    <div class="container text-center">
+    <div class="container text-center border-bottom pb-3">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <div class="d-grid gap-2">
@@ -46,6 +47,31 @@ is a block named "content" -->
                     <a href="{% url 'main:expense_reports' %}" class="btn secondary-colour text-white btn-lg homepg-btn d-flex align-items-center justify-content-center homepg-text" role="button"><i class="bi-currency-dollar fs-8 me-3"></i>Expense Reports</a>
                     <a href="{% url 'main:announcement' %}" class="btn secondary-colour text-white btn-lg homepg-btn d-flex align-items-center justify-content-center homepg-text" role="button"><i class="bi-megaphone fs-8 me-3"></i>View Announcements</a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="secondary-colour text-white text-center py-3 rounded-3">
+        <h3>Recent Blog Posts</h3>
+    </header>
+
+    <div class="container" style="max-height: 400px; overflow-y: auto;">
+        <div class="row">
+            <div class="col-sm-12">
+                {% if blog_posts %}
+                    {% for post in blog_posts %}
+                        <div class="blog-post">
+                            <h3>{{ post.title }}</h3>
+                            <p>{{ post.content }}</p>
+                            <p>Created by: {{ post.author }}</p>
+                            {% if post.is_custom_photo and post.photo %}
+                                <div class="image">
+                                    <img src="{{ post.photo.url }}" alt="Blog Image">
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -107,6 +133,21 @@ is a block named "content" -->
         text-align: center;
         color: #555; /* Gray color for "No notifications" text */
         margin: 15px 0;
+    }
+
+    /*.vertical-scrollable>.row {
+        overflow-y: scroll;
+    }*/
+    .blog-post {
+        margin: 10px auto;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;   /* Hide content that overflows */
+        white-space: nowrap; /* Do not wrap text */
+        text-overflow: ellipsis;
     }
 </style>
 {% endblock content %}
