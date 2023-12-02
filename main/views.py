@@ -86,6 +86,7 @@ def delete_announcement(request, announcement_id):
 @login_required(login_url='account/login/')
 def add_employee(request):
     if request.method == "POST":
+        # creates employee form
         form = AddEmployeeForm(request.POST)
         if form.is_valid():
             new_user = form.save()

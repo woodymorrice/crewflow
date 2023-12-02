@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Announcement, BlogPost, ExpenseReport, TimeOffRequest, Comment, Availability
+from .models import Announcement, BlogPost, ExpenseReport, TimeOffRequest, Comment, Availability, Schedule
 from account.models import Employee
 
 
@@ -161,3 +161,13 @@ class ChangeAvailabilityForm(forms.ModelForm):
             'f_start_time': forms.TimeInput(attrs={'type': 'time'}),
             'f_end_time': forms.TimeInput(attrs={'type': 'time'}),
         }
+
+
+class ScheduleCreationForm(forms.ModelForm):
+    class Meta:
+        model = Schedule
+        fields = ['photo']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['photo'].required = False

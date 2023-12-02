@@ -26,21 +26,6 @@ class AnnouncementReadStatus(models.Model):
         unique_together = ('user', 'announcement')
 
 
-# class Employee(models.Model):
-# address = models.CharField(max_length=255)
-# phone = models.CharField(max_length=20)
-# position = models.CharField(max_length=255)
-# date_of_employment = models.DateTimeField(auto_now_add=True)
-# postal_code = models.CharField(max_length=10)
-
-# def __str__(self):
-# return self.first_name + self.last_name
-
-
-# class Manager(Employee):
-# pass
-
-
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -50,6 +35,7 @@ class BlogPost(models.Model):
     thumbs_down = models.IntegerField(default=0)
     photo = models.ImageField(upload_to='blog/', default='default_photo.jpg')
     is_custom_photo = models.BooleanField(default=False)
+
 
 class Comment(models.Model):
     to_reply = models.IntegerField(null=True, blank=True)
@@ -149,3 +135,8 @@ class Availability(models.Model):
     th_end_time = models.TimeField(default='16:00:00')
     f_start_time = models.TimeField(default='08:00:00')
     f_end_time = models.TimeField(default='16:00:00')
+
+
+class Schedule(models.Model):
+    photo = models.ImageField(upload_to='schedule_landing/', default='default_photo.jpg')
+    is_custom_photo = models.BooleanField(default=False)
