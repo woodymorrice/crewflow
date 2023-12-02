@@ -13,52 +13,53 @@
     </form>
     -->
 
-    <div class="container text-center my-3">
+    <div class="container my-3 text-left">
         <form method="post" action="{% url 'main:edit_employee' employee.id %}" class="mb-4">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="{{ form.username.id_for_label }}">Username:</label>
+                <label for="{{ form.username.id_for_label }}" class="bg-black text-white rounded-top p-1">Username:</label>
                 {{ form.username }}
             </div>
             <div class="mb-3">
-                <label for="{{ form.first_name.id_for_label }}">First Name:</label>
+                <label for="{{ form.first_name.id_for_label }}" class="bg-black text-white rounded-top p-1">First Name:</label>
                 {{ form.first_name }}
             </div>
             <div class="mb-3">
-                <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
+                <label for="{{ form.last_name.id_for_label }}" class="bg-black text-white rounded-top p-1">Last Name:</label>
                 {{ form.last_name }}
             </div>
             <div class="mb-3">
-                <label for="{{ form.email.id_for_label }}">Email:</label>
+                <label for="{{ form.email.id_for_label }}" class="bg-black text-white rounded-top p-1">Email:</label>
                 {{ form.email }}
             </div>
             <div class="mb-3">
-                <label for="{{ form.address.id_for_label }}">Home Address:</label>
+                <label for="{{ form.address.id_for_label }}" class="bg-black text-white rounded-top p-1">Home Address:</label>
                 {{ form.address }}
             </div>
             <div class="mb-3">
-                <label for="{{ form.phone.id_for_label }}">Phone Number:</label>
+                <label for="{{ form.phone.id_for_label }}" class="bg-black text-white rounded-top p-1">Phone Number:</label>
                 {{ form.phone }}
             </div>
             <div class="mb-3">
-                <label for="{{ form.postal_code.id_for_label }}">Postal Code:</label>
+                <label for="{{ form.postal_code.id_for_label }}" class="bg-black text-white rounded-top p-1">Postal Code:</label>
                 {{ form.postal_code }}
             </div>
             <div class="mb-3">
-                <label for="{{ form.can_announce.id_for_label }}">Post Announcements?</label>
+                <label for="{{ form.salary.id_for_label }}" class="bg-black text-white rounded-top p-1">Salary:</label>
+                {{ form.salary }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.can_announce.id_for_label }}" class="bg-black text-white rounded-top p-1">Post Announcements?</label>
                 {{ form.can_announce }}
             </div>
             <div class="mb-3">
-                <label for="{{ form.can_blog.id_for_label }}">Post Blogs?</label>
+                <label for="{{ form.can_blog.id_for_label }}" class="bg-black text-white rounded-top p-1">Post Blogs?</label>
                 {{ form.can_blog }}
             </div>
-            <div class="mb-3">
-                <label for="{{ form.salary.id_for_label }}">Salary:</label>
-                {{ form.salary }}
-            </div>
-                <!-- Add more fields as needed -->
 
-            <button type="submit" class="btn btn-success">Save Changes</button>
+            <div class="container text-center my-3">
+                <button type="submit" class="btn btn-success">Save Changes</button>
+            </div>
         </form>
     </div>
 
