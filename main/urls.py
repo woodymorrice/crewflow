@@ -60,9 +60,8 @@ urlpatterns = [
         path('decline_request/<int:request_id>/', views.decline_request, name='decline_request'),
 
         # Schedule
-        path('view_schedule/', views.view_schedule, name='view_schedule'),
         path('schedule/', views.schedule_landing, name='schedule_landing'),
-        path('schedule/<int:year>/<int:month>', views.schedule_landing, name="schedule_landing"),
+        path('edit_schedule/', views.edit_schedule, name='edit_schedule'),
         path('schedule/add_availability/', views.add_availability, name="add_availability"),
         path('schedule/availability/', views.view_availability, name="view_availability"),
         path('schedule/availabilities/', views.view_availabilities, name="view_availabilities"),

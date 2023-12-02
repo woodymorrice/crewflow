@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends "main/base.html" %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule</title>
+</head>
+
+<header class="bg-blue text-white text-center py-3 rounded-3">
+        <h1>Upload Schedule</h1>
+</header>
+<body>
+    <div class="container text-center">
+        <form id="blog_form" method="POST" action="{% url 'main:edit_schedule' %}" enctype="multipart/form-data">
+            <input id="photo" name="photo" type="file">
+            <br>
+            <br>
+            {% csrf_token %}
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success">Post</button>
+            </div>
+        </form>
+        <br>
+        <div class="d-grid gap-2">
+            <a href="{% url 'main:schedule_landing' %}" class="btn bg-blue text-white" role="button">Back</a>
+        </div>
+    </div>
+
+</body>
+
+<style>
+    .container {
+        padding: 10px;
+    }
+</style>
+
+</html>
+
+{% endblock content %}

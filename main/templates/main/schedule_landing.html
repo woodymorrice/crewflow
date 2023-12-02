@@ -15,8 +15,6 @@
                     {% if request.user.role != "EMPLOYEE" %}
                         <a href="{% url 'main:view_availabilities' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">All Availabilities</a>
                     {% endif %}
-
-<!--                    <a href="{% url 'main:view_schedule' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Your Schedule</a>-->
                 </div>
             </div>
             <div class="col-md-6 mb-3">
@@ -26,14 +24,16 @@
                     {% endif %}
                     {% if request.user.role != "EMPLOYEE" %}
                     <a href="{% url 'main:check_time_off_requests' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Check Requests</a>
+                    <a href="{% url 'main:edit_schedule' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Edit Schedule</a>
                     {% endif %}
                 </div>
             </div>
+            {% for image in schedules %}
+            <div class="image">
+                <img src="{{ image.photo.url }}" alt="Schedule Image">
+            </div>
+            {% endfor %}
         </div>
-    </div>
-
-    <div>
-        {{ cal|safe }}
     </div>
 
     <style>

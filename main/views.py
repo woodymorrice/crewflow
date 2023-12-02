@@ -4,9 +4,11 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views import View
 
 from django.db.models import Q
-from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment, Notification, Availability
+from .models import Announcement, BlogPost, AnnouncementReadStatus, ExpenseReport, TimeOffRequest, Comment, \
+    Notification, Availability, Schedule
 from account.models import Employee
-from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, ChangeEmployeeForm, BlogCommentForm, AvailabilityForm, ChangeAvailabilityForm
+from .forms import BlogPostForm, AddEmployeeForm, AnnouncementForm, ExpenseReportForm, TimeOffRequestForm, \
+    ChangeEmployeeForm, BlogCommentForm, AvailabilityForm, ChangeAvailabilityForm, ScheduleCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
@@ -455,18 +457,19 @@ def add_availability(request):
 
 @login_required(login_url='account/login/')
 def view_availability(request):
+    # if the employee hasn't added their availability, take them to the add_availability page
     if len(Availability.objects.filter(employee=request.user)) == 0:
         return redirect('main:add_availability')
     else:
+        # otherwise, show them their availability
         availabilities = Availability.objects.filter(employee=request.user)
     return render(request, 'main/view_availability.html', {'availabilities': availabilities})
 
+
 @login_required(login_url='account/login/')
 def view_availabilities(request):
-    if len(Availability.objects.filter(employee=request.user)) == 0:
-        return redirect('main:add_availability')
-    else:
-        availabilities = Availability.objects.all()
+    # shows managers/admins all employee availabilities
+    availabilities = Availability.objects.all()
     return render(request, 'main/all_availabilities.html', {'availabilities': availabilities})
 
 
@@ -485,36 +488,36 @@ def edit_availability(request, avail_id):
 
 
 @login_required(login_url='account/login/')
-def schedule_landing(request, year=int(str(datetime.now().year)), month=int(datetime.now().month)):
+def schedule_landing(request):
     """Landing page for schedule-related things"""
-
-    cal = HTMLCalendar().formatmonth(year, month)
-
-    context = {
-        'schedule_landing': schedule_landing,
-        'year': year,
-        'month': month,
-        'cal': cal,
-    }
-    return render(request, 'main/schedule_landing.html', context)
+    # shows the schedule
+    schedules = Schedule.objects.all()
+    return render(request, 'main/schedule_landing.html', {'schedules': schedules})
 
 
 @login_required(login_url='account/login/')
-def view_schedule(request):
-    # year = int(str(date.year))
-    # month = str(date.month)
-    # month_num = int(list(calendar.month_name).index(month.title()))
-    #
-    # cal = HTMLCalendar().formatmonth(year, month_num)
-    #
-    # context = {
-    #     'view_schedule': view_schedule,
-    #     'year': year,
-    #     'month': month,
-    #     'month_num': month_num,
-    #     'cal': cal,
-    # }
-    return render(request, 'main/view_schedule.html', {'view_schedule': view_schedule})
+def edit_schedule(request):
+    if request.method == 'POST':
+        # clears the list of uploads on each upload so there's only ever one viewable schedule
+        for s in Schedule.objects.all():
+            s.delete()
+
+        form = ScheduleCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            schedule = form.save(commit=False)
+
+            # Check if schedule file has been added
+            if 'photo' in request.FILES:
+                schedule.photo = request.FILES['photo']
+                schedule.is_custom_photo = True
+
+            schedule.save()
+            # send user back to sched landing
+            return redirect('main:schedule_landing')
+    else:
+        form = ScheduleCreationForm()
+
+    return render(request, 'main/edit_schedule.html', {'form': form})
 
 
 @login_required(login_url='account/login/')
