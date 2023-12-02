@@ -21,7 +21,9 @@
             </div>
             <div class="col-md-6 mb-3">
                 <div class="d-grid gap-2">
+                    {% if request.user.role == "EMPLOYEE" %}
                     <a href="{% url 'main:request_time_off' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Request Time Off</a>
+                    {% endif %}
                     {% if request.user.role != "EMPLOYEE" %}
                     <a href="{% url 'main:check_time_off_requests' %}" class="btn secondary-colour text-white btn-lg d-flex align-items-center justify-content-center" role="button">Check Requests</a>
                     {% endif %}
