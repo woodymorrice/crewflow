@@ -15,7 +15,7 @@ Installation by terminal/command line:
 Clone the project repository to your chosen folder:
 
 ```plaintext
-git clone https://git.cs.usask.ca/wam553/project370.git ./chosenfolder
+git clone https://github.com/woodymorrice/crewflow.git ./chosenfolder
 ```
 
 Enter the folder:
